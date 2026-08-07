@@ -7,8 +7,22 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>📚 Faisal Kutub Khana - Islamic Bookstore</title>
+    
+    <!-- ===== JAMEEL NOORI KASHIDA FONT ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Arial', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* ===== FONT SETTING ===== */
+        body, input, textarea, select, button, .header, .footer, .product-card, .admin-panel, .cart-sidebar {
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Jameel Noori Kashida', 'Segoe UI', Arial, sans-serif;
+        }
+        
+        /* ===== NUMBERS ENGLISH MEIN ===== */
+        .num, .price, .cart-total, .btn, input[type="number"], .payment-options button {
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
         body { background: #f5f0e8; padding: 15px; direction: rtl; }
         .container { max-width: 1200px; margin: auto; }
         .header {
@@ -59,13 +73,13 @@
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 10px;
-            font-size: 14px;
+            font-size: 16px;
             border: 1px solid #ffd700;
             text-align: center;
         }
         .contact-bar span { font-weight: bold; }
         .contact-bar .name { color: #ffffff; }
-        .contact-bar .num { color: #ffd700; direction: ltr; display: inline-block; }
+        .contact-bar .num { color: #ffd700; direction: ltr; display: inline-block; font-family: 'Segoe UI', Arial, sans-serif; }
         .search-section {
             background: white;
             padding: 20px;
@@ -213,8 +227,8 @@
         }
         .product-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; }
         .product-card h3 { margin: 12px 0 5px; color: #1a472a; font-size: 18px; }
-        .product-card .price { color: #c0392b; font-size: 22px; font-weight: bold; margin: 8px 0; }
-        .product-card .old-price { color: #999; font-size: 14px; text-decoration: line-through; margin-right: 8px; }
+        .product-card .price { color: #c0392b; font-size: 22px; font-weight: bold; margin: 8px 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        .product-card .old-price { color: #999; font-size: 14px; text-decoration: line-through; margin-right: 8px; font-family: 'Segoe UI', Arial, sans-serif; }
         .product-card .rating { color: #ffd700; font-size: 18px; margin: 5px 0; }
         .product-card .stock { font-size: 12px; color: #27ae60; margin: 5px 0; }
         .product-card .stock.out { color: #c0392b; }
@@ -268,7 +282,7 @@
             font-size: 16px;
             font-weight: bold;
         }
-        .cart-total { font-size: 24px; font-weight: bold; color: #1a472a; margin: 20px 0; }
+        .cart-total { font-size: 24px; font-weight: bold; color: #1a472a; margin: 20px 0; font-family: 'Segoe UI', Arial, sans-serif; }
         .close-cart { position: absolute; top: 15px; left: 20px; font-size: 28px; cursor: pointer; color: #999; }
         .close-cart:hover { color: #333; }
         .payment-options {
@@ -358,7 +372,7 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            font-size: 14px;
+            font-size: 16px;
             color: #1a472a;
             margin: 10px 0;
         }
@@ -368,7 +382,7 @@
             border-radius: 20px;
             border: 1px solid #ffd700;
         }
-        .footer .contact-info .item .num { direction: ltr; display: inline-block; color: #c0392b; font-weight: bold; }
+        .footer .contact-info .item .num { direction: ltr; display: inline-block; color: #c0392b; font-weight: bold; font-family: 'Segoe UI', Arial, sans-serif; }
         .order-history {
             background: white;
             padding: 20px;
@@ -417,7 +431,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: admin123</div>
+        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana</div>
     </div>
 </div>
 
@@ -437,7 +451,7 @@
         </div>
     </div>
 
-    <!-- ===== CONTACT BAR (UPDATED) ===== -->
+    <!-- CONTACT BAR -->
     <div class="contact-bar">
         <span><span class="name">حمد فیصل</span> <span class="num">0317-3363333</span></span>
         <span><span class="name">سعید رحمان</span> <span class="num">0316-1800312</span></span>
@@ -490,7 +504,7 @@
             <input type="text" id="imageURL" placeholder="🖼️ تصویر کا لنک (Image URL)" style="flex:2;">
         </div>
         <button class="btn btn-gold" onclick="addProduct()" style="width:100%;">➕ کتاب شامل کریں</button>
-        
+
         <hr style="margin:25px 0;border-color:#ffd700;">
         <h3>📋 کتابیں منظم کریں (Manage Books) <span style="font-size:14px;color:#666;">- ✏️ Edit • 🗑️ Delete</span></h3>
         <div id="adminProductList"></div>
@@ -524,7 +538,7 @@
     <h2>🛒 آپ کی کارٹ (Your Cart)</h2>
     <div id="cartItems"></div>
     <div class="cart-total">کل (Total): Rs. <span id="cartTotal">0</span></div>
-    
+
     <div class="payment-options">
         <button onclick="selectPayment('whatsapp')" id="pay-whatsapp" class="selected">📱 WhatsApp</button>
         <button onclick="selectPayment('jazzcash')" id="pay-jazzcash">💰 JazzCash</button>
@@ -556,7 +570,7 @@
 // ============================================================
 // ========== PASSWORD =========================================
 // ============================================================
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_PASSWORD = 'hamad123';
 
 // ============================================================
 // ========== DATA =============================================
@@ -725,25 +739,25 @@ function editProduct(id) {
         openAdmin();
         return;
     }
-    
+
     const product = products.find(p => p.id === id);
     if (!product) {
         showToast('❌ کتاب نہیں ملی!', true);
         return;
     }
-    
+
     const newName = prompt('📖 نیا نام (New Name):', product.name);
     if (newName === null) return;
-    
+
     const newPrice = prompt('💰 نئی قیمت (New Price Rs.):', product.price);
     if (newPrice === null) return;
-    
+
     const newStock = prompt('📦 نئی تعداد (New Stock):', product.stock);
     if (newStock === null) return;
-    
+
     const newRating = prompt('⭐ نئی ریٹنگ (New Rating 1-5):', product.rating);
     if (newRating === null) return;
-    
+
     const changeImage = confirm('🖼️ کیا آپ تصویر بھی تبدیل کرنا چاہتے ہیں؟');
     if (changeImage) {
         const fileInput = document.createElement('input');
@@ -773,7 +787,7 @@ function updateProduct(product, newName, newPrice, newStock, newRating) {
     if (newPrice.trim()) product.price = parseFloat(newPrice.trim());
     if (newStock.trim()) product.stock = parseInt(newStock.trim());
     if (newRating.trim()) product.rating = parseFloat(newRating.trim());
-    
+
     saveProducts();
     renderAll();
     showToast('✅ کتاب اپڈیٹ کر دی گئی!');
@@ -892,9 +906,9 @@ function renderOrders() {
     `).join('');
 }
 
-function renderAll() { 
-    renderProducts(); 
-    renderAdmin(); 
+function renderAll() {
+    renderProducts();
+    renderAdmin();
     renderOrders();
     updateCartCount();
 }
@@ -908,8 +922,7 @@ function buyNow(id) {
         showToast('❌ یہ کتاب دستیاب نہیں ہے!', true);
         return;
     }
-    
-    // Clear cart and add this product
+
     cart = [];
     cart.push({ ...product, qty: 1 });
     saveCart();
@@ -936,15 +949,15 @@ function filterProducts() {
 // ============================================================
 function addToCart(id) {
     const product = products.find(p => p.id === id);
-    if (!product || product.stock < 1) { 
-        showToast('❌ یہ کتاب دستیاب نہیں ہے!', true); 
-        return; 
+    if (!product || product.stock < 1) {
+        showToast('❌ یہ کتاب دستیاب نہیں ہے!', true);
+        return;
     }
     const existing = cart.find(item => item.id === id);
     if (existing) {
-        if (existing.qty >= product.stock) { 
-            showToast('❌ مزید کاپیاں دستیاب نہیں!', true); 
-            return; 
+        if (existing.qty >= product.stock) {
+            showToast('❌ مزید کاپیاں دستیاب نہیں!', true);
+            return;
         }
         existing.qty += 1;
     } else {
@@ -1015,12 +1028,12 @@ function selectPayment(method) {
     selectedPayment = method;
     document.querySelectorAll('.payment-options button').forEach(b => b.classList.remove('selected'));
     document.getElementById(`pay-${method}`).classList.add('selected');
-    
+
     const details = {
         whatsapp: '📱 آرڈر WhatsApp پر بھیجا جائے گا',
-        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 Hammad Faisal`,
-        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 Hammad Faisal`,
-        meezan: `🏦 Meezan Bank\n🏦 0781-0100230230\n👤 Shah Faisal`
+        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حمد فیصل`,
+        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حمد فیصل`,
+        meezan: `🏦 Meezan Bank\n🏦 0781-0100230230\n👤 شاہ فیصل`
     };
     document.getElementById('paymentInfo').innerHTML = details[method] || details.whatsapp;
 }
@@ -1034,12 +1047,12 @@ function uploadScreenshot() {
         showToast('❌ براہ کرم کوئی تصویر منتخب کریں!', true);
         return;
     }
-    
+
     if (file.size > 2 * 1024 * 1024) {
         showToast('❌ تصویر کا سائز 2MB سے کم ہونا چاہیے!', true);
         return;
     }
-    
+
     const reader = new FileReader();
     reader.onload = function(e) {
         screenshotDataURL = e.target.result;
@@ -1054,7 +1067,7 @@ function uploadScreenshot() {
 }
 
 // ============================================================
-// ========== PLACE ORDER (FIXED) ==============================
+// ========== PLACE ORDER ======================================
 // ============================================================
 function placeOrder() {
     if (!cart.length) {
@@ -1084,7 +1097,6 @@ function placeOrder() {
 
     message += `\n\n📞 براہ کرم آرڈر کی تصدیق کریں۔`;
 
-    // ===== SAVE ORDER =====
     orders.push({
         id: Date.now().toString(),
         date: new Date().toISOString(),
@@ -1097,27 +1109,20 @@ function placeOrder() {
     saveOrders();
     renderOrders();
 
-    // ===== WHATSAPP NUMBER =====
     const phone = '923173363333';
-
-    // ===== SCREENSHOT CHECK =====
     let whatsappUrl;
     if (screenshotDataURL) {
-        // Agar screenshot hai toh image attach karne ka guide add karein
         const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
-        // Screenshot ko localStorage mein save karein
         try {
             localStorage.setItem('lastScreenshot', screenshotDataURL);
         } catch (e) {
-            console.log('Screenshot save nahi ho sakta (size zyada hai)');
+            console.log('Screenshot save nahi ho sakta');
         }
     } else {
-        // Sirf text message
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     }
 
-    // ===== WHATSAPP OPEN KAREIN =====
     try {
         window.open(whatsappUrl, '_blank');
         showToast('✅ آرڈر بھیج دیا گیا!');
@@ -1126,7 +1131,6 @@ function placeOrder() {
         console.error(e);
     }
 
-    // ===== CART CLEAR KAREIN =====
     cart = [];
     screenshotDataURL = '';
     document.getElementById('screenshotPreview').style.display = 'none';

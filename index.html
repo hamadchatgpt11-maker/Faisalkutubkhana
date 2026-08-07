@@ -470,10 +470,10 @@
         </div>
     </div>
 
-    <!-- ===== CONTACT BAR WITH WHATSAPP ICONS & LINKS (FIXED NAMES + NUMBERS) ===== -->
+    <!-- ===== CONTACT BAR WITH WHATSAPP ICONS & LINKS ===== -->
     <div class="contact-bar">
         <span>
-            <span class="name">حماد فیصل</span>
+            <span class="name">حمد فیصل</span>
             <span class="num">0317-3363333</span>
             <a href="https://wa.me/923173363333" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
                 <i class="fab fa-whatsapp"></i>
@@ -561,7 +561,7 @@
         <div class="dua">🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</div>
         <div class="contact-info">
             <span class="item">
-                📞 <span class="name">حماد فیصل</span>
+                📞 <span class="name">حمد فیصل</span>
                 <span class="num">0317-3363333</span>
                 <a href="https://wa.me/923173363333" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
                     <i class="fab fa-whatsapp"></i>
@@ -611,7 +611,7 @@
         <div class="screenshot-preview" id="screenshotPreview">
             <img id="screenshotImg" src="#" alt="Screenshot">
             <p>✅ تصویر اپ لوڈ ہو گئی!</p>
-            <p style="font-size:12px;color:#666;margin-top:5px;">💡 آرڈر کریں بٹن دبائیں، تصویر خودکار WhatsApp پر بھیج دی جائے گی</p>
+            <p style="font-size:12px;color:#666;margin-top:5px;">💡 آرڈر کریں بٹن دبائیں، WhatsApp کھل جائے گا</p>
         </div>
     </div>
 
@@ -1126,8 +1126,8 @@ function selectPayment(method) {
 
     const details = {
         whatsapp: '📱 آرڈر WhatsApp پر بھیجا جائے گا',
-        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حماد فیصل`,
-        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حماد فیصل`,
+        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حمد فیصل`,
+        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حمد فیصل`,
         meezan: `🏦 Meezan Bank\n🏦 0781-0100230230\n👤 شاہ فیصل`
     };
     document.getElementById('paymentInfo').innerHTML = details[method] || details.whatsapp;
@@ -1162,7 +1162,7 @@ function uploadScreenshot() {
 }
 
 // ============================================================
-// ========== PLACE ORDER ======================================
+// ========== PLACE ORDER (FIXED) ==============================
 // ============================================================
 function placeOrder() {
     if (!cart.length) {
@@ -1205,16 +1205,14 @@ function placeOrder() {
     saveOrders();
     renderOrders();
 
-    // ===== WHATSAPP NUMBER (Hammad Faisal) =====
+    // ===== WHATSAPP NUMBER =====
     const phone = '923173363333';
 
-    // ===== SCREENSHOT WITH WHATSAPP =====
+    // ===== CREATE WHATSAPP URL =====
     let whatsappUrl;
     if (screenshotDataURL) {
-        // Convert screenshot to base64 for WhatsApp
         const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
-        // Save screenshot to localStorage for reference
         try {
             localStorage.setItem('lastScreenshot', screenshotDataURL);
         } catch (e) {
@@ -1227,7 +1225,7 @@ function placeOrder() {
     // ===== OPEN WHATSAPP =====
     try {
         window.open(whatsappUrl, '_blank');
-        showToast('✅ آرڈر بھیج دیا گیا! تصویر WhatsApp پر attach کریں');
+        showToast('✅ آرڈر بھیج دیا گیا!');
     } catch (e) {
         showToast('❌ WhatsApp open karne mein error!', true);
         console.error(e);

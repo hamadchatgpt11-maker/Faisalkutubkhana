@@ -8,10 +8,10 @@
     <meta http-equiv="Expires" content="0" />
     <title>📚 Faisal Kutub Khana - Islamic Bookstore</title>
     <style>
+        /* ===== SAME STYLES AS BEFORE (space save karne ke liye nahi likh raha) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Arial', sans-serif; }
         body { background: #f5f0e8; padding: 15px; direction: rtl; }
         .container { max-width: 1200px; margin: auto; }
-
         .header {
             background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 50%, #1a472a 100%);
             color: #ffd700;
@@ -50,7 +50,6 @@
             font-weight: bold;
             margin-right: 10px;
         }
-
         .search-section {
             background: white;
             padding: 20px;
@@ -92,7 +91,6 @@
             transition: 0.3s;
         }
         .search-section .btn-search:hover { background: #1a472a; transform: scale(1.02); }
-
         .password-modal {
             position: fixed;
             top: 0;
@@ -114,10 +112,7 @@
             width: 90%;
             box-shadow: 0 10px 50px rgba(0,0,0,0.3);
         }
-        .password-modal .modal-box h2 {
-            color: #1a472a;
-            margin-bottom: 15px;
-        }
+        .password-modal .modal-box h2 { color: #1a472a; margin-bottom: 15px; }
         .password-modal .modal-box input {
             width: 100%;
             padding: 14px;
@@ -127,27 +122,10 @@
             margin: 15px 0;
             text-align: center;
         }
-        .password-modal .modal-box input:focus {
-            outline: none;
-            border-color: #ffd700;
-        }
-        .password-modal .modal-box .btn {
-            width: 100%;
-            padding: 14px;
-            font-size: 18px;
-        }
-        .password-modal .modal-box .error-msg {
-            color: #c0392b;
-            font-size: 14px;
-            margin-top: 10px;
-            display: none;
-        }
-        .password-modal .modal-box .hint {
-            font-size: 12px;
-            color: #999;
-            margin-top: 10px;
-        }
-
+        .password-modal .modal-box input:focus { outline: none; border-color: #ffd700; }
+        .password-modal .modal-box .btn { width: 100%; padding: 14px; font-size: 18px; }
+        .password-modal .modal-box .error-msg { color: #c0392b; font-size: 14px; margin-top: 10px; display: none; }
+        .password-modal .modal-box .hint { font-size: 12px; color: #999; margin-top: 10px; }
         .admin-panel {
             background: white;
             padding: 25px;
@@ -168,7 +146,6 @@
         }
         .admin-panel textarea { height: 80px; }
         .admin-panel .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-
         .btn {
             background: #2d6a4f;
             color: white;
@@ -187,13 +164,8 @@
         .btn-danger:hover { background: #a93226; }
         .btn-success { background: #27ae60; }
         .btn-success:hover { background: #1e8449; }
-        .btn-whatsapp { background: #25D366; }
-        .btn-whatsapp:hover { background: #1da851; }
         .btn-edit { background: #f39c12; color: white; }
         .btn-edit:hover { background: #d68910; }
-        .btn-image { background: #8e44ad; color: white; }
-        .btn-image:hover { background: #732d91; }
-
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -229,7 +201,6 @@
         .product-card .btn { width: 100%; margin-top: 8px; font-size: 14px; }
         .product-card .stock { font-size: 12px; color: #27ae60; margin: 5px 0; }
         .product-card .stock.out { color: #c0392b; }
-
         .cart-sidebar {
             position: fixed;
             left: -420px;
@@ -272,22 +243,26 @@
         .cart-total { font-size: 24px; font-weight: bold; color: #1a472a; margin: 20px 0; }
         .close-cart { position: absolute; top: 15px; left: 20px; font-size: 28px; cursor: pointer; color: #999; }
         .close-cart:hover { color: #333; }
-
-        .payment-options { display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0; }
+        .payment-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
         .payment-options button {
             flex: 1;
-            min-width: 120px;
-            padding: 12px;
+            min-width: 100px;
+            padding: 12px 8px;
             border: 2px solid #ddd;
             border-radius: 10px;
             background: white;
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
+            font-size: 13px;
         }
         .payment-options button:hover { border-color: #2d6a4f; background: #f5f0e8; }
         .payment-options button.selected { border-color: #ffd700; background: #fff8e1; }
-
         .payment-details-box {
             background: #f9f9f9;
             padding: 15px;
@@ -296,14 +271,34 @@
             text-align: right;
             font-size: 14px;
             border-right: 3px solid #ffd700;
+            line-height: 1.8;
             white-space: pre-line;
-            direction: ltr;
         }
-        .payment-details-box p {
-            direction: rtl;
-            text-align: right;
+        .screenshot-area {
+            margin: 10px 0;
+            text-align: center;
         }
-
+        .screenshot-area label {
+            display: block;
+            background: #2d6a4f;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .screenshot-area label:hover { background: #1a472a; }
+        .screenshot-preview {
+            margin-top: 10px;
+            display: none;
+        }
+        .screenshot-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+        }
+        .screenshot-preview p { font-size: 12px; color: #27ae60; }
         .toast {
             position: fixed;
             bottom: 20px;
@@ -318,7 +313,6 @@
             font-weight: bold;
         }
         .toast.error { background: #c0392b; }
-
         .footer {
             text-align: center;
             padding: 30px;
@@ -327,7 +321,6 @@
             border-top: 2px solid #ffd700;
         }
         .footer .dua { font-size: 20px; color: #1a472a; margin-bottom: 10px; }
-
         .order-history {
             background: white;
             padding: 20px;
@@ -353,30 +346,13 @@
         }
         .order-item .status.pending { background: #ffd700; color: #1a472a; }
         .order-item .status.delivered { background: #27ae60; color: white; }
-
-        /* Screenshot preview */
-        .screenshot-preview {
-            margin-top: 10px;
-            display: none;
-            text-align: center;
-        }
-        .screenshot-preview img {
-            max-width: 100%;
-            max-height: 150px;
-            border-radius: 8px;
-            border: 2px solid #ffd700;
-        }
-        .screenshot-preview p {
-            font-size: 12px;
-            color: #27ae60;
-        }
-
         @media (max-width: 768px) {
             .header { flex-direction: column; text-align: center; }
             .cart-sidebar { width: 100%; left: -100%; }
             .admin-panel .row-2 { grid-template-columns: 1fr; }
             .search-section { flex-direction: column; }
             .search-section input, .search-section select { width: 100%; }
+            .payment-options button { min-width: 70px; font-size: 11px; padding: 8px 4px; }
         }
     </style>
 </head>
@@ -390,7 +366,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khan </div>
+        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana</div>
     </div>
 </div>
 
@@ -458,7 +434,7 @@
         <button class="btn btn-gold" onclick="addProduct()" style="width:100%;">➕ کتاب شامل کریں</button>
         
         <hr style="margin:25px 0;border-color:#ffd700;">
-        <h3>📋 کتابیں منظم کریں (Manage Books) <span style="font-size:14px;color:#666;">- ✏️ Edit • 🖼️ Image • 🗑️ Delete</span></h3>
+        <h3>📋 کتابیں منظم کریں (Manage Books) <span style="font-size:14px;color:#666;">- ✏️ Edit • 🗑️ Delete</span></h3>
         <div id="adminProductList"></div>
     </div>
 
@@ -493,14 +469,12 @@
         <button onclick="selectPayment('meezan')" id="pay-meezan">🏦 Meezan Bank</button>
     </div>
 
-    <div class="payment-details-box">
-        <p id="paymentInfo">📱 آرڈر WhatsApp پر بھیجا جائے گا</p>
+    <div class="payment-details-box" id="paymentInfo">
+        📱 آرڈر WhatsApp پر بھیجا جائے گا
     </div>
 
-    <div style="margin:10px 0;text-align:center;">
-        <label for="screenshotUpload" style="display:block;background:#2d6a4f;color:white;padding:10px;border-radius:8px;cursor:pointer;font-weight:bold;">
-            📸 ادائیگی کی تصویر اپ لوڈ کریں
-        </label>
+    <div class="screenshot-area">
+        <label for="screenshotUpload">📸 ادائیگی کی تصویر اپ لوڈ کریں</label>
         <input type="file" id="screenshotUpload" accept="image/*" style="display:none;" onchange="uploadScreenshot()">
         <div class="screenshot-preview" id="screenshotPreview">
             <img id="screenshotImg" src="#" alt="Screenshot">
@@ -515,12 +489,9 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ============================================================ -->
-<!-- ========== JAVASCRIPT ======================================== -->
-<!-- ============================================================ -->
 <script>
 // ============================================================
-// ========== PASSWORD CONFIG ===================================
+// ========== PASSWORD =========================================
 // ============================================================
 const ADMIN_PASSWORD = 'hamad123';
 
@@ -582,9 +553,7 @@ function closePasswordModal() {
 }
 
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closePasswordModal();
-    }
+    if (e.key === 'Escape') { closePasswordModal(); }
 });
 
 // ============================================================
@@ -622,6 +591,11 @@ function closeCart() {
 }
 
 // ============================================================
+// ========== DEFAULT IMAGE (WORKING) ==========================
+// ============================================================
+const DEFAULT_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f5f0e8"/%3E%3Ctext x="150" y="100" font-family="Arial" font-size="18" fill="%23666" text-anchor="middle" dominant-baseline="central"%3E📚 Islamic Book%3C/text%3E%3C/svg%3E';
+
+// ============================================================
 // ========== ADD PRODUCT ======================================
 // ============================================================
 function addProduct() {
@@ -647,7 +621,7 @@ function addProduct() {
 
     const saveBook = (image) => {
         products.push({
-            id: Date.now().toString(),
+            id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
             name,
             price: parseFloat(price),
             oldPrice: oldPrice ? parseFloat(oldPrice) : null,
@@ -655,7 +629,7 @@ function addProduct() {
             category: category,
             stock: stock ? parseInt(stock) : 99,
             rating: rating ? parseFloat(rating) : 0,
-            image: image || 'https://via.placeholder.com/300x200?text=Islamic+Book'
+            image: image || DEFAULT_IMAGE
         });
         saveProducts();
         renderAll();
@@ -675,7 +649,7 @@ function addProduct() {
         reader.onload = (e) => saveBook(e.target.result);
         reader.readAsDataURL(file);
     } else {
-        saveBook(url || 'https://via.placeholder.com/300x200?text=Islamic+Book');
+        saveBook(url || DEFAULT_IMAGE);
     }
 }
 
@@ -707,6 +681,31 @@ function editProduct(id) {
     const newRating = prompt('⭐ نئی ریٹنگ (New Rating 1-5):', product.rating);
     if (newRating === null) return;
     
+    const changeImage = confirm('🖼️ کیا آپ تصویر بھی تبدیل کرنا چاہتے ہیں؟');
+    if (changeImage) {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.onchange = function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    product.image = ev.target.result;
+                    updateProduct(product, newName, newPrice, newStock, newRating);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                updateProduct(product, newName, newPrice, newStock, newRating);
+            }
+        };
+        fileInput.click();
+    } else {
+        updateProduct(product, newName, newPrice, newStock, newRating);
+    }
+}
+
+function updateProduct(product, newName, newPrice, newStock, newRating) {
     if (newName.trim()) product.name = newName.trim();
     if (newPrice.trim()) product.price = parseFloat(newPrice.trim());
     if (newStock.trim()) product.stock = parseInt(newStock.trim());
@@ -715,42 +714,6 @@ function editProduct(id) {
     saveProducts();
     renderAll();
     showToast('✅ کتاب اپڈیٹ کر دی گئی!');
-}
-
-// ============================================================
-// ========== CHANGE IMAGE =====================================
-// ============================================================
-function changeImage(id) {
-    if (!isAdminAuthenticated) {
-        showToast('❌ براہ کرم پہلے Admin پاس ورڈ درج کریں!', true);
-        openAdmin();
-        return;
-    }
-    
-    const product = products.find(p => p.id === id);
-    if (!product) {
-        showToast('❌ کتاب نہیں ملی!', true);
-        return;
-    }
-    
-    // Create file input
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            product.image = event.target.result;
-            saveProducts();
-            renderAll();
-            showToast('✅ تصویر تبدیل کر دی گئی!');
-        };
-        reader.readAsDataURL(file);
-    };
-    input.click();
 }
 
 // ============================================================
@@ -798,10 +761,12 @@ function renderProducts(filtered = null) {
     }
     grid.innerHTML = list.map(p => {
         const stars = '⭐'.repeat(Math.floor(p.rating || 0)) + (p.rating % 1 >= 0.5 ? '⭐' : '');
+        // Use DEFAULT_IMAGE if image is placeholder or broken
+        const imgSrc = (p.image && !p.image.includes('via.placeholder.com')) ? p.image : DEFAULT_IMAGE;
         return `
             <div class="product-card">
                 <span class="category-badge">${getCategoryName(p.category)}</span>
-                <img src="${p.image}" onerror="this.src='https://via.placeholder.com/300x200?text=Islamic+Book'">
+                <img src="${imgSrc}" onerror="this.src='${DEFAULT_IMAGE}'">
                 <h3>${p.name}</h3>
                 <p style="color:#666;font-size:13px;">${p.desc}</p>
                 <div class="price">Rs. ${p.price} ${p.oldPrice ? `<span class="old-price">Rs. ${p.oldPrice}</span>` : ''}</div>
@@ -821,20 +786,22 @@ function renderAdmin() {
         container.innerHTML = '<p style="color:#999;">ابھی کوئی کتاب شامل نہیں کی گئی</p>';
         return;
     }
-    container.innerHTML = products.map(p => `
-        <div style="display:flex;align-items:center;gap:15px;padding:12px;border-bottom:1px solid #eee;flex-wrap:wrap;">
-            <img src="${p.image}" width="50" height="50" style="object-fit:cover;border-radius:8px;" onerror="this.src='https://via.placeholder.com/50'">
-            <div style="flex:1;min-width:150px;">
-                <strong>${p.name}</strong> - Rs. ${p.price}
-                <br><small style="color:#666;">${getCategoryName(p.category)} • 📦 ${p.stock} • ⭐ ${p.rating}</small>
+    container.innerHTML = products.map(p => {
+        const imgSrc = (p.image && !p.image.includes('via.placeholder.com')) ? p.image : DEFAULT_IMAGE;
+        return `
+            <div style="display:flex;align-items:center;gap:15px;padding:12px;border-bottom:1px solid #eee;flex-wrap:wrap;">
+                <img src="${imgSrc}" width="50" height="50" style="object-fit:cover;border-radius:8px;" onerror="this.src='${DEFAULT_IMAGE}'">
+                <div style="flex:1;min-width:150px;">
+                    <strong>${p.name}</strong> - Rs. ${p.price}
+                    <br><small style="color:#666;">${getCategoryName(p.category)} • 📦 ${p.stock} • ⭐ ${p.rating}</small>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="btn btn-edit" onclick="editProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">✏️ ترمیم کریں</button>
+                    <button class="btn btn-danger" onclick="deleteProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">🗑️ حذف کریں</button>
+                </div>
             </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <button class="btn btn-edit" onclick="editProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">✏️ ترمیم کریں</button>
-                <button class="btn btn-image" onclick="changeImage('${p.id}')" style="padding:5px 15px;font-size:14px;">🖼️ تصویر تبدیل کریں</button>
-                <button class="btn btn-danger" onclick="deleteProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">🗑️ حذف کریں</button>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 function renderOrders() {
@@ -908,21 +875,24 @@ function renderCart() {
         document.getElementById('cartTotal').innerText = '0';
         return;
     }
-    container.innerHTML = cart.map((item, index) => `
-        <div class="cart-item">
-            <img src="${item.image}" onerror="this.src='https://via.placeholder.com/60'">
-            <div class="info">
-                <strong>${item.name}</strong>
-                <div style="color:#666;">Rs. ${item.price}</div>
-                <div class="qty">
-                    <button onclick="updateQty(${index}, -1)">−</button>
-                    <span style="font-weight:bold;min-width:20px;text-align:center;">${item.qty}</span>
-                    <button onclick="updateQty(${index}, 1)">+</button>
+    container.innerHTML = cart.map((item, index) => {
+        const imgSrc = (item.image && !item.image.includes('via.placeholder.com')) ? item.image : DEFAULT_IMAGE;
+        return `
+            <div class="cart-item">
+                <img src="${imgSrc}" onerror="this.src='${DEFAULT_IMAGE}'">
+                <div class="info">
+                    <strong>${item.name}</strong>
+                    <div style="color:#666;">Rs. ${item.price}</div>
+                    <div class="qty">
+                        <button onclick="updateQty(${index}, -1)">−</button>
+                        <span style="font-weight:bold;min-width:20px;text-align:center;">${item.qty}</span>
+                        <button onclick="updateQty(${index}, 1)">+</button>
+                    </div>
                 </div>
+                <div style="font-weight:bold;color:#1a472a;">Rs. ${(item.price * item.qty).toFixed(0)}</div>
             </div>
-            <div style="font-weight:bold;color:#1a472a;">Rs. ${(item.price * item.qty).toFixed(0)}</div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
     const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
     document.getElementById('cartTotal').innerText = total.toFixed(0);
 }
@@ -969,7 +939,7 @@ function selectPayment(method) {
 }
 
 // ============================================================
-// ========== SCREENSHOT UPLOAD ================================
+// ========== SCREENSHOT =======================================
 // ============================================================
 function uploadScreenshot() {
     const file = document.getElementById('screenshotUpload').files[0];
@@ -1043,14 +1013,12 @@ function placeOrder() {
     let whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     
     if (screenshotDataURL) {
-        // Save screenshot in localStorage for reference
-        localStorage.setItem('lastScreenshot', screenshotDataURL);
         const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
-        const finalUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
-        window.open(finalUrl, '_blank');
-    } else {
-        window.open(whatsappUrl, '_blank');
+        whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
+        localStorage.setItem('lastScreenshot', screenshotDataURL);
     }
+    
+    window.open(whatsappUrl, '_blank');
     
     cart = [];
     screenshotDataURL = '';

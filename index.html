@@ -1054,24 +1054,24 @@ function uploadScreenshot() {
 }
 
 // ============================================================
-// ========== PLACE ORDER ======================================
+// ========== PLACE ORDER (FIXED) ==============================
 // ============================================================
 function placeOrder() {
-    if (!cart.length) { 
-        showToast('❌ کارٹ خالی ہے!', true); 
-        return; 
+    if (!cart.length) {
+        showToast('❌ کارٹ خالی ہے!', true);
+        return;
     }
-    
+
     const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
     let message = "📚 *فیصل کتب خانہ - نیا آرڈر!*\n\n";
     message += `🕌 ${new Date().toLocaleString('ur-PK')}\n\n`;
-    
+
     cart.forEach(item => {
         message += `📖 ${item.name} x ${item.qty} = Rs. ${(item.price * item.qty).toFixed(0)}\n`;
     });
-    
+
     message += `\n💰 *کل: Rs. ${total.toFixed(0)}*`;
-    
+
     if (selectedPayment === 'jazzcash') {
         message += `\n💳 ادائیگی: JazzCash (0340-5194458)`;
     } else if (selectedPayment === 'easypaisa') {
@@ -1081,9 +1081,10 @@ function placeOrder() {
     } else {
         message += `\n💳 ادائیگی: WhatsApp پر تصدیق`;
     }
-    
+
     message += `\n\n📞 براہ کرم آرڈر کی تصدیق کریں۔`;
 
+    // ===== SAVE ORDER =====
     orders.push({
         id: Date.now().toString(),
         date: new Date().toISOString(),
@@ -1096,18 +1097,36 @@ function placeOrder() {
     saveOrders();
     renderOrders();
 
+    // ===== WHATSAPP NUMBER =====
     const phone = '923173363333';
+
+    // ===== SCREENSHOT CHECK =====
     let whatsappUrl;
     if (screenshotDataURL) {
+        // Agar screenshot hai toh image attach karne ka guide add karein
         const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
-        localStorage.setItem('lastScreenshot', screenshotDataURL);
+        // Screenshot ko localStorage mein save karein
+        try {
+            localStorage.setItem('lastScreenshot', screenshotDataURL);
+        } catch (e) {
+            console.log('Screenshot save nahi ho sakta (size zyada hai)');
+        }
     } else {
+        // Sirf text message
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     }
-    
-    window.open(whatsappUrl, '_blank');
-    
+
+    // ===== WHATSAPP OPEN KAREIN =====
+    try {
+        window.open(whatsappUrl, '_blank');
+        showToast('✅ آرڈر بھیج دیا گیا!');
+    } catch (e) {
+        showToast('❌ WhatsApp open karne mein error!', true);
+        console.error(e);
+    }
+
+    // ===== CART CLEAR KAREIN =====
     cart = [];
     screenshotDataURL = '';
     document.getElementById('screenshotPreview').style.display = 'none';
@@ -1115,7 +1134,6 @@ function placeOrder() {
     saveCart();
     renderCart();
     updateCartCount();
-    showToast('✅ آرڈر بھیج دیا گیا!');
 }
 
 // ============================================================

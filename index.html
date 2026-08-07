@@ -429,7 +429,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana</div>
+        <div class="hint">💡 پاس ورڈ: admin123</div>
     </div>
 </div>
 
@@ -606,7 +606,7 @@
 // ============================================================
 // ========== PASSWORD =========================================
 // ============================================================
-const ADMIN_PASSWORD = 'hamad123';
+const ADMIN_PASSWORD = 'admin123';
 
 // ============================================================
 // ========== DATA =============================================
@@ -708,45 +708,47 @@ function closeCart() {
 const DEFAULT_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f5f0e8"/%3E%3Ctext x="150" y="100" font-family="Arial" font-size="18" fill="%23666" text-anchor="middle" dominant-baseline="central"%3E📚 Islamic Book%3C/text%3E%3C/svg%3E';
 
 // ============================================================
-// ========== DEFAULT BOOKS (28 BOOKS) ========================
+// ========== ALL 33 BOOKS ====================================
 // ============================================================
-const defaultBooks = [
+const allBooks = [
     { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450, category: "fiqa" },
     { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350, category: "fiqa" },
+    { name: "تسہیل الہدایہ زرد (فی حصہ، 4 حصے)", price: 1350, category: "fiqa" },
     { name: "تسہیل الہدایہ فارسی (8 جلد)", price: 5450, category: "fiqa" },
-    { name: "تفسیر خیر کثیر سفید (6 جلد)", price: 4250, category: "quran" },
-    { name: "تفسیر خیر کثیر زرد (6 جلد)", price: 4000, category: "quran" },
-    { name: "معارف القرآن زرد (11 جلد)", price: 6700, category: "quran" },
-    { name: "معارف القرآن سفید (11 جلد)", price: 6700, category: "quran" },
+    { name: "ریاض الصالحین", price: 900, category: "dua" },
+    { name: "منهاج الصالحین", price: 2000, category: "dua" },
+    { name: "تفسیر خیر کثیر سفید", price: 4250, category: "quran" },
+    { name: "تفسیر خیر کثیر زرد", price: 4000, category: "quran" },
+    { name: "معارف القرآن زرد", price: 6700, category: "quran" },
+    { name: "معارف القرآن سفید", price: 6700, category: "quran" },
+    { name: "سیرت خاتم الانبیاء", price: 200, category: "seerat" },
+    { name: "فوز المبتدی", price: 1800, category: "fiqa" },
+    { name: "د نوې مسئلو فتاوی", price: 400, category: "fiqa" },
     { name: "فہم القرآن (اورنج)", price: 950, category: "quran" },
     { name: "فہم القرآن سفید", price: 1100, category: "quran" },
-    { name: "صفوة التفاسیر (عربی)", price: 1800, category: "quran" },
-    { name: "ریاض الصالحین (2 جلد)", price: 900, category: "dua" },
-    { name: "منهاج الصالحین (5 جلد)", price: 2000, category: "dua" },
-    { name: "سیرت خاتم الانبیاء", price: 200, category: "seerat" },
-    { name: "فتاوی عالمگیری (12 جلد)", price: 7800, category: "fiqa" },
-    { name: "کشف الباری مکمل (24 جلد)", price: 16700, category: "hadith" },
-    { name: "سراج المنتہی (13 جلد) زرد/سفید", price: 6700, category: "hadith" },
-    { name: "فتاوی شامی (12 جلد) زرد", price: 8900, category: "fiqa" },
-    { name: "شرح مشکاة (12 جلد)", price: 7250, category: "hadith" },
-    { name: "انوار الہلالین (4 جلد)", price: 2000, category: "other" },
-    { name: "مرقاة", price: 7800, category: "hadith" },
-    { name: "حدیث دورہ", price: 3150, category: "hadith" },
-    { name: "معلم الحجاج", price: 300, category: "dua" },
-    { name: "سراج الطالبین (پشتو)", price: 200, category: "other" },
-    { name: "سراج الطالبین اردو", price: 200, category: "other" },
-    { name: "فوز المبتدی (3 جلد)", price: 1800, category: "fiqa" },
-    { name: "د نوې مسئلو فتاوی", price: 400, category: "fiqa" },
     { name: "فقہی عجائبات", price: 350, category: "fiqa" },
-    { name: "تسہیل الہدایہ صلاۃ (2 جلد)", price: 1400, category: "fiqa" },
-    { name: "تسہیل الہدایہ نکاح (2 جلد)", price: 1400, category: "fiqa" },
-    { name: "تسہیل الہدایہ بیوع (2 جلد)", price: 1450, category: "fiqa" },
-    { name: "تسہیل الہدایہ شفعہ (2 جلد)", price: 1450, category: "fiqa" }
+    { name: "سراج الطالبین (پشتو)", price: 200, category: "other" },
+    { name: "تسهيلات شرح مشکاة", price: 7250, category: "hadith" },
+    { name: "انوار الہلالین", price: 2000, category: "other" },
+    { name: "فتاوی عالمگیری", price: 7800, category: "fiqa" },
+    { name: "کشف الباری مکمل (24 جلد)", price: 16700, category: "hadith" },
+    { name: "کشف الباری (فی جلد)", price: 700, category: "hadith" },
+    { name: "معلم الحجاج", price: 300, category: "dua" },
+    { name: "حدیث دورہ", price: 3150, category: "hadith" },
+    { name: "سراج المنتہی", price: 6700, category: "hadith" },
+    { name: "سراج الطالبین اردو", price: 200, category: "other" },
+    { name: "مرقاة", price: 7800, category: "hadith" },
+    { name: "فتاوی شامی", price: 8900, category: "fiqa" },
+    { name: "صفوة التفاسیر", price: 1800, category: "quran" },
+    { name: "تسہیل الہدایہ صلاۃ", price: 1400, category: "fiqa" },
+    { name: "تسہیل الہدایہ نکاح", price: 1400, category: "fiqa" },
+    { name: "تسہیل الہدایہ بیوع", price: 1450, category: "fiqa" },
+    { name: "تسہیل الہدایہ شفعہ", price: 1450, category: "fiqa" }
 ];
 
-// ===== ADD DEFAULT BOOKS IF EMPTY =====
+// ===== ADD BOOKS IF EMPTY =====
 if (products.length === 0) {
-    defaultBooks.forEach((book, index) => {
+    allBooks.forEach((book, index) => {
         products.push({
             id: Date.now().toString() + index,
             name: book.name,

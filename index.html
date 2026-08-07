@@ -431,7 +431,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana</div>
+        <div class="hint">💡 پاس ورڈ: </div>
     </div>
 </div>
 
@@ -453,7 +453,7 @@
 
     <!-- CONTACT BAR -->
     <div class="contact-bar">
-        <span><span class="name">حمد فیصل</span> <span class="num">0317-3363333</span></span>
+        <span><span class="name">حماد فیصل</span> <span class="num">0317-3363333</span></span>
         <span><span class="name">سعید رحمان</span> <span class="num">0316-1800312</span></span>
         <span><span class="name">کاشف نمائنده (کابل)</span> <span class="num">+93 749 337 269</span></span>
     </div>
@@ -523,7 +523,7 @@
     <div class="footer">
         <div class="dua">🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</div>
         <div class="contact-info">
-            <span class="item">📞 <span class="name">حمد فیصل</span> <span class="num">0317-3363333</span></span>
+            <span class="item">📞 <span class="name">حماد فیصل</span> <span class="num">0317-3363333</span></span>
             <span class="item">📞 <span class="name">سعید رحمان</span> <span class="num">0316-1800312</span></span>
             <span class="item">📞 <span class="name">کاشف نمائنده (کابل)</span> <span class="num">+93 749 337 269</span></span>
         </div>
@@ -671,6 +671,45 @@ function closeCart() {
 // ========== DEFAULT IMAGE ====================================
 // ============================================================
 const DEFAULT_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f5f0e8"/%3E%3Ctext x="150" y="100" font-family="Arial" font-size="18" fill="%23666" text-anchor="middle" dominant-baseline="central"%3E📚 Islamic Book%3C/text%3E%3C/svg%3E';
+
+// ============================================================
+// ========== DEFAULT BOOKS ====================================
+// ============================================================
+const defaultBooks = [
+    { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450, category: "fiqa" },
+    { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350, category: "fiqa" },
+    { name: "تفسیر خیر کثیر سفید (6 جلد)", price: 4250, category: "quran" },
+    { name: "تفسیر خیر کثیر زرد (6 جلد)", price: 4000, category: "quran" },
+    { name: "معارف القرآن زرد (11 جلد)", price: 6700, category: "quran" },
+    { name: "معارف القرآن سفید (11 جلد)", price: 6700, category: "quran" },
+    { name: "ریاض الصالحین (2 جلد)", price: 900, category: "dua" },
+    { name: "منهاج الصالحین (5 جلد)", price: 2000, category: "dua" },
+    { name: "سیرت خاتم الانبیاء", price: 200, category: "seerat" },
+    { name: "فتاوی عالمگیری (12 جلد)", price: 7800, category: "fiqa" },
+    { name: "کشف الباری مکمل (24 جلد)", price: 16700, category: "hadith" },
+    { name: "سراج المنتہی (13 جلد) زرد/سفید", price: 6700, category: "hadith" },
+    { name: "فتاوی شامی (12 جلد) زرد", price: 8900, category: "fiqa" }
+];
+
+// ============================================================
+// ========== ADD DEFAULT BOOKS IF EMPTY ======================
+// ============================================================
+if (products.length === 0) {
+    defaultBooks.forEach((book, index) => {
+        products.push({
+            id: Date.now().toString() + index,
+            name: book.name,
+            price: book.price,
+            oldPrice: null,
+            desc: `📚 ${book.name}`,
+            category: book.category,
+            stock: 99,
+            rating: 4.5,
+            image: DEFAULT_IMAGE
+        });
+    });
+    saveProducts();
+}
 
 // ============================================================
 // ========== ADD PRODUCT ======================================
@@ -1031,8 +1070,8 @@ function selectPayment(method) {
 
     const details = {
         whatsapp: '📱 آرڈر WhatsApp پر بھیجا جائے گا',
-        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حمد فیصل`,
-        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حمد فیصل`,
+        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حماد فیصل`,
+        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حماد فیصل`,
         meezan: `🏦 Meezan Bank\n🏦 0781-0100230230\n👤 شاہ فیصل`
     };
     document.getElementById('paymentInfo').innerHTML = details[method] || details.whatsapp;

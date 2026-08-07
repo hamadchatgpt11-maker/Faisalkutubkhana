@@ -325,47 +325,22 @@
             line-height: 1.8;
             white-space: pre-line;
         }
-        .screenshot-area {
-            margin: 10px 0;
-            text-align: center;
-        }
-        .screenshot-area label {
-            display: block;
-            background: #2d6a4f;
-            color: white;
+        
+        /* ===== CUSTOMER GUIDE ===== */
+        .customer-guide {
+            background: #fff8e1;
             padding: 15px;
             border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            text-align: center;
-            font-size: 16px;
-            border: 2px solid #ffd700;
-            transition: 0.3s;
-        }
-        .screenshot-area label:hover { background: #1a472a; }
-        .screenshot-preview {
-            margin-top: 10px;
-            display: none;
-        }
-        .screenshot-preview img {
-            max-width: 100%;
-            max-height: 150px;
-            border-radius: 8px;
-            border: 2px solid #ffd700;
-        }
-        .screenshot-preview p { font-size: 12px; color: #27ae60; }
-        .screenshot-preview .copy-btn {
-            margin-top: 8px;
-            padding: 8px 15px;
-            background: #8e44ad;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
+            margin: 10px 0;
+            border-right: 4px solid #ffd700;
             font-size: 14px;
+            line-height: 1.8;
+            color: #1a472a;
         }
-        .screenshot-preview .copy-btn:hover { background: #6c3483; }
+        .customer-guide strong {
+            color: #c0392b;
+        }
+        
         .toast {
             position: fixed;
             bottom: 20px;
@@ -462,7 +437,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khan</div>
+        <div class="hint">💡 پاس ورڈ: admin123</div>
     </div>
 </div>
 
@@ -599,13 +574,14 @@
     </div>
 </div>
 
-<!-- CART SIDEBAR -->
+<!-- ===== CART SIDEBAR ===== -->
 <div class="cart-sidebar" id="cartSidebar">
     <span class="close-cart" onclick="closeCart()">✕</span>
     <h2>🛒 آپ کی کارٹ (Your Cart)</h2>
     <div id="cartItems"></div>
     <div class="cart-total">کل (Total): Rs. <span id="cartTotal">0</span></div>
 
+    <!-- ===== PAYMENT OPTIONS ===== -->
     <div class="payment-options">
         <button onclick="selectPayment('whatsapp')" id="pay-whatsapp" class="selected">📱 WhatsApp</button>
         <button onclick="selectPayment('jazzcash')" id="pay-jazzcash">💰 JazzCash</button>
@@ -613,21 +589,23 @@
         <button onclick="selectPayment('meezan')" id="pay-meezan">🏦 Meezan Bank</button>
     </div>
 
+    <!-- ===== PAYMENT DETAILS ===== -->
     <div class="payment-details-box" id="paymentInfo">
         📱 آرڈر WhatsApp پر بھیجا جائے گا
     </div>
 
-    <div class="screenshot-area">
-        <label for="screenshotUpload">📸 اپنی ادائیگی کی تصویر بھیجنے کے لیے اس بٹن پر کلک کریں</label>
-        <input type="file" id="screenshotUpload" accept="image/*" style="display:none;" onchange="uploadScreenshot()">
-        <div class="screenshot-preview" id="screenshotPreview">
-            <img id="screenshotImg" src="#" alt="Screenshot">
-            <p>✅ تصویر اپ لوڈ ہو گئی!</p>
-            <button class="copy-btn" onclick="copyScreenshot()">📋 تصویر کاپی کریں (Copy Image)</button>
-            <p style="font-size:12px;color:#666;margin-top:5px;">💡 تصویر کاپی کرنے کے بعد WhatsApp پر Paste (Ctrl+V) کریں</p>
-        </div>
+    <!-- ===== CUSTOMER GUIDE (NEW) ===== -->
+    <div class="customer-guide">
+        <strong>📋 براہ کرم نوٹ کریں:</strong><br>
+        1️⃣ اپنی منتخب کردہ کتابوں کی کل قیمت کا حساب لگائیں<br>
+        2️⃣ اوپر دیے گئے <strong>پیمنٹ کے طریقوں</strong> میں سے کسی ایک کو منتخب کریں<br>
+        3️⃣ منتخب کردہ اکاؤنٹ میں <strong>رقم جمع</strong> کروائیں<br>
+        4️⃣ نیچے <strong>"📱 آرڈر کریں"</strong> بٹن دبائیں<br>
+        5️⃣ WhatsApp پر <strong>اپنا نام، پتہ، اور ادائیگی کی تصویر (Screenshot)</strong> بھیجیں<br>
+        6️⃣ ہم آپ کے آرڈر کی تصدیق کر کے ڈیلیوری کا بندوبست کریں گے ✅
     </div>
 
+    <!-- ===== ORDER BUTTON ===== -->
     <button class="btn btn-success" onclick="placeOrder()" style="width:100%;">📱 آرڈر کریں (Place Order)</button>
     <button class="btn btn-danger" onclick="clearCart()" style="width:100%;margin-top:10px;">🗑️ کارٹ صاف کریں</button>
 </div>
@@ -639,7 +617,7 @@
 // ============================================================
 // ========== PASSWORD =========================================
 // ============================================================
-const ADMIN_PASSWORD = 'hamad123';
+const ADMIN_PASSWORD = 'admin123';
 
 // ============================================================
 // ========== DATA =============================================
@@ -649,7 +627,6 @@ let cart = JSON.parse(localStorage.getItem('faisalCart')) || [];
 let orders = JSON.parse(localStorage.getItem('faisalOrders')) || [];
 let selectedPayment = 'whatsapp';
 let isAdminAuthenticated = false;
-let screenshotDataURL = '';
 
 // ============================================================
 // ========== SAVE FUNCTIONS ===================================
@@ -1139,67 +1116,11 @@ function selectPayment(method) {
 
     const details = {
         whatsapp: '📱 آرڈر WhatsApp پر بھیجا جائے گا',
-        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حماد فیصل`,
-        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حماد فیصل`,
-        meezan: `🏦 Meezan Bank\n🏦 0781-0100230230\n👤 شاہ فیصل`
+        jazzcash: `💰 *JazzCash*\n📞 0340-5194458\n👤 حماد فیصل`,
+        easypaisa: `💰 *EasyPaisa*\n📞 0340-5194458\n👤 حماد فیصل`,
+        meezan: `🏦 *Meezan Bank*\n🏦 0781-0100230230\n👤 شاہ فیصل`
     };
     document.getElementById('paymentInfo').innerHTML = details[method] || details.whatsapp;
-}
-
-// ============================================================
-// ========== SCREENSHOT UPLOAD ================================
-// ============================================================
-function uploadScreenshot() {
-    const file = document.getElementById('screenshotUpload').files[0];
-    if (!file) {
-        showToast('❌ براہ کرم کوئی تصویر منتخب کریں!', true);
-        return;
-    }
-
-    if (file.size > 2 * 1024 * 1024) {
-        showToast('❌ تصویر کا سائز 2MB سے کم ہونا چاہیے!', true);
-        return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        screenshotDataURL = e.target.result;
-        document.getElementById('screenshotImg').src = screenshotDataURL;
-        document.getElementById('screenshotPreview').style.display = 'block';
-        showToast('✅ تصویر اپ لوڈ ہو گئی! اب تصویر کاپی کریں اور WhatsApp پر Paste کریں');
-    };
-    reader.onerror = function() {
-        showToast('❌ تصویر اپ لوڈ کرنے میں خرابی!', true);
-    };
-    reader.readAsDataURL(file);
-}
-
-// ============================================================
-// ========== COPY SCREENSHOT ==================================
-// ============================================================
-function copyScreenshot() {
-    if (!screenshotDataURL) {
-        showToast('❌ پہلے تصویر اپ لوڈ کریں!', true);
-        return;
-    }
-
-    fetch(screenshotDataURL)
-        .then(res => res.blob())
-        .then(blob => {
-            const item = new ClipboardItem({
-                [blob.type]: blob
-            });
-            navigator.clipboard.write([item])
-                .then(() => {
-                    showToast('✅ تصویر کاپی ہو گئی! WhatsApp پر Paste (Ctrl+V) کریں');
-                })
-                .catch(() => {
-                    showToast('❌ تصویر کاپی کرنے میں خرابی!', true);
-                });
-        })
-        .catch(() => {
-            showToast('❌ تصویر کاپی کرنے میں خرابی!', true);
-        });
 }
 
 // ============================================================
@@ -1231,7 +1152,8 @@ function placeOrder() {
         message += `\n💳 ادائیگی: WhatsApp پر تصدیق`;
     }
 
-    message += `\n\n📸 *براہ کرم ادائیگی کی تصویر (Screenshot) ضرور attach کریں*`;
+    message += `\n\n📸 *براہ کرم ادائیگی کی تصویر (Screenshot) ضرور بھیجیں*`;
+    message += `\n👤 *اپنا نام اور پتہ بھی ضرور تحریر کریں*`;
     message += `\n\n📞 براہ کرم آرڈر کی تصدیق کریں۔`;
 
     // ===== SAVE ORDER =====
@@ -1241,7 +1163,6 @@ function placeOrder() {
         items: JSON.parse(JSON.stringify(cart)),
         total: total,
         payment: selectedPayment,
-        screenshot: screenshotDataURL || '',
         status: 'pending'
     });
     saveOrders();
@@ -1251,23 +1172,12 @@ function placeOrder() {
     const phone = '923173363333';
 
     // ===== CREATE WHATSAPP URL =====
-    let whatsappUrl;
-    if (screenshotDataURL) {
-        const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (اوپر Copy Image بٹن سے کاپی کریں اور یہاں Paste کریں)";
-        whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
-        try {
-            localStorage.setItem('lastScreenshot', screenshotDataURL);
-        } catch (e) {
-            console.log('Screenshot save nahi ho sakta');
-        }
-    } else {
-        whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    }
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     // ===== OPEN WHATSAPP =====
     try {
         window.open(whatsappUrl, '_blank');
-        showToast('✅ آرڈر بھیج دیا گیا! تصویر کاپی کر کے WhatsApp پر Paste کریں');
+        showToast('✅ WhatsApp کھل گیا! براہ کرم اپنی payment details اور screenshot بھیجیں');
     } catch (e) {
         showToast('❌ WhatsApp open karne mein error!', true);
         console.error(e);

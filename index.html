@@ -450,7 +450,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: admin123</div>
+        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana</div>
     </div>
 </div>
 
@@ -470,10 +470,10 @@
         </div>
     </div>
 
-    <!-- ===== CONTACT BAR WITH WHATSAPP ICONS & LINKS ===== -->
+    <!-- ===== CONTACT BAR ===== -->
     <div class="contact-bar">
         <span>
-            <span class="name">حمد فیصل</span>
+            <span class="name">حماد فیصل</span>
             <span class="num">0317-3363333</span>
             <a href="https://wa.me/923173363333" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
                 <i class="fab fa-whatsapp"></i>
@@ -561,7 +561,7 @@
         <div class="dua">🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</div>
         <div class="contact-info">
             <span class="item">
-                📞 <span class="name">حمد فیصل</span>
+                📞 <span class="name">حماد فیصل</span>
                 <span class="num">0317-3363333</span>
                 <a href="https://wa.me/923173363333" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
                     <i class="fab fa-whatsapp"></i>
@@ -626,7 +626,7 @@
 // ============================================================
 // ========== PASSWORD =========================================
 // ============================================================
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_PASSWORD = 'hamad123';
 
 // ============================================================
 // ========== DATA =============================================
@@ -1126,8 +1126,8 @@ function selectPayment(method) {
 
     const details = {
         whatsapp: '📱 آرڈر WhatsApp پر بھیجا جائے گا',
-        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حمد فیصل`,
-        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حمد فیصل`,
+        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 حماد فیصل`,
+        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 حماد فیصل`,
         meezan: `🏦 Meezan Bank\n🏦 0781-0100230230\n👤 شاہ فیصل`
     };
     document.getElementById('paymentInfo').innerHTML = details[method] || details.whatsapp;
@@ -1162,7 +1162,7 @@ function uploadScreenshot() {
 }
 
 // ============================================================
-// ========== PLACE ORDER (FIXED) ==============================
+// ========== PLACE ORDER ======================================
 // ============================================================
 function placeOrder() {
     if (!cart.length) {
@@ -1233,10 +1233,6 @@ function placeOrder() {
 
     // ===== CART CLEAR =====
     cart = [];
-    // Keep screenshot for reference
-    // screenshotDataURL = '';
-    // document.getElementById('screenshotPreview').style.display = 'none';
-    // document.getElementById('screenshotUpload').value = '';
     saveCart();
     renderCart();
     updateCartCount();

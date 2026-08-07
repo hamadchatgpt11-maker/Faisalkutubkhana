@@ -14,17 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* ===== FONT SETTING ===== */
         body, input, textarea, select, button, .header, .footer, .product-card, .admin-panel, .cart-sidebar {
             font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Jameel Noori Kashida', 'Segoe UI', Arial, sans-serif;
         }
-        
-        /* ===== NUMBERS ENGLISH MEIN ===== */
         .num, .price, .cart-total, .btn, input[type="number"], .payment-options button {
             font-family: 'Segoe UI', Arial, sans-serif;
         }
-        
         body { background: #f5f0e8; padding: 15px; direction: rtl; }
         .container { max-width: 1200px; margin: auto; }
         .header {
@@ -325,8 +320,6 @@
             line-height: 1.8;
             white-space: pre-line;
         }
-        
-        /* ===== CUSTOMER GUIDE ===== */
         .customer-guide {
             background: #fff8e1;
             padding: 15px;
@@ -340,7 +333,6 @@
         .customer-guide strong {
             color: #c0392b;
         }
-        
         .toast {
             position: fixed;
             bottom: 20px;
@@ -457,7 +449,7 @@
         </div>
     </div>
 
-    <!-- ===== CONTACT BAR ===== -->
+    <!-- CONTACT BAR -->
     <div class="contact-bar">
         <span>
             <span class="name">حماد فیصل</span>
@@ -575,14 +567,13 @@
     </div>
 </div>
 
-<!-- ===== CART SIDEBAR ===== -->
+<!-- CART SIDEBAR -->
 <div class="cart-sidebar" id="cartSidebar">
     <span class="close-cart" onclick="closeCart()">✕</span>
     <h2>🛒 آپ کی کارٹ (Your Cart)</h2>
     <div id="cartItems"></div>
     <div class="cart-total">کل (Total): Rs. <span id="cartTotal">0</span></div>
 
-    <!-- ===== PAYMENT OPTIONS ===== -->
     <div class="payment-options">
         <button onclick="selectPayment('whatsapp')" id="pay-whatsapp" class="selected">📱 WhatsApp</button>
         <button onclick="selectPayment('jazzcash')" id="pay-jazzcash">💰 JazzCash</button>
@@ -590,12 +581,10 @@
         <button onclick="selectPayment('meezan')" id="pay-meezan">🏦 Meezan Bank</button>
     </div>
 
-    <!-- ===== PAYMENT DETAILS ===== -->
     <div class="payment-details-box" id="paymentInfo">
         📱 آرڈر WhatsApp پر بھیجا جائے گا
     </div>
 
-    <!-- ===== CUSTOMER GUIDE ===== -->
     <div class="customer-guide">
         <strong>📋 براہ کرم نوٹ کریں:</strong><br>
         1️⃣ اپنی منتخب کردہ کتابوں کی کل قیمت کا حساب لگائیں<br>
@@ -606,7 +595,6 @@
         6️⃣ ہم آپ کے آرڈر کی تصدیق کر کے ڈیلیوری کا بندوبست کریں گے ✅
     </div>
 
-    <!-- ===== ORDER BUTTON ===== -->
     <button class="btn btn-success" onclick="placeOrder()" style="width:100%;">📱 آرڈر کریں (Place Order)</button>
     <button class="btn btn-danger" onclick="clearCart()" style="width:100%;margin-top:10px;">🗑️ کارٹ صاف کریں</button>
 </div>
@@ -720,6 +708,61 @@ function closeCart() {
 const DEFAULT_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f5f0e8"/%3E%3Ctext x="150" y="100" font-family="Arial" font-size="18" fill="%23666" text-anchor="middle" dominant-baseline="central"%3E📚 Islamic Book%3C/text%3E%3C/svg%3E';
 
 // ============================================================
+// ========== DEFAULT BOOKS (28 BOOKS) ========================
+// ============================================================
+const defaultBooks = [
+    { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450, category: "fiqa" },
+    { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350, category: "fiqa" },
+    { name: "تسہیل الہدایہ فارسی (8 جلد)", price: 5450, category: "fiqa" },
+    { name: "تفسیر خیر کثیر سفید (6 جلد)", price: 4250, category: "quran" },
+    { name: "تفسیر خیر کثیر زرد (6 جلد)", price: 4000, category: "quran" },
+    { name: "معارف القرآن زرد (11 جلد)", price: 6700, category: "quran" },
+    { name: "معارف القرآن سفید (11 جلد)", price: 6700, category: "quran" },
+    { name: "فہم القرآن (اورنج)", price: 950, category: "quran" },
+    { name: "فہم القرآن سفید", price: 1100, category: "quran" },
+    { name: "صفوة التفاسیر (عربی)", price: 1800, category: "quran" },
+    { name: "ریاض الصالحین (2 جلد)", price: 900, category: "dua" },
+    { name: "منهاج الصالحین (5 جلد)", price: 2000, category: "dua" },
+    { name: "سیرت خاتم الانبیاء", price: 200, category: "seerat" },
+    { name: "فتاوی عالمگیری (12 جلد)", price: 7800, category: "fiqa" },
+    { name: "کشف الباری مکمل (24 جلد)", price: 16700, category: "hadith" },
+    { name: "سراج المنتہی (13 جلد) زرد/سفید", price: 6700, category: "hadith" },
+    { name: "فتاوی شامی (12 جلد) زرد", price: 8900, category: "fiqa" },
+    { name: "شرح مشکاة (12 جلد)", price: 7250, category: "hadith" },
+    { name: "انوار الہلالین (4 جلد)", price: 2000, category: "other" },
+    { name: "مرقاة", price: 7800, category: "hadith" },
+    { name: "حدیث دورہ", price: 3150, category: "hadith" },
+    { name: "معلم الحجاج", price: 300, category: "dua" },
+    { name: "سراج الطالبین (پشتو)", price: 200, category: "other" },
+    { name: "سراج الطالبین اردو", price: 200, category: "other" },
+    { name: "فوز المبتدی (3 جلد)", price: 1800, category: "fiqa" },
+    { name: "د نوې مسئلو فتاوی", price: 400, category: "fiqa" },
+    { name: "فقہی عجائبات", price: 350, category: "fiqa" },
+    { name: "تسہیل الہدایہ صلاۃ (2 جلد)", price: 1400, category: "fiqa" },
+    { name: "تسہیل الہدایہ نکاح (2 جلد)", price: 1400, category: "fiqa" },
+    { name: "تسہیل الہدایہ بیوع (2 جلد)", price: 1450, category: "fiqa" },
+    { name: "تسہیل الہدایہ شفعہ (2 جلد)", price: 1450, category: "fiqa" }
+];
+
+// ===== ADD DEFAULT BOOKS IF EMPTY =====
+if (products.length === 0) {
+    defaultBooks.forEach((book, index) => {
+        products.push({
+            id: Date.now().toString() + index,
+            name: book.name,
+            price: book.price,
+            oldPrice: null,
+            desc: `📚 ${book.name}`,
+            category: book.category || 'other',
+            stock: 99,
+            rating: 4.5,
+            image: DEFAULT_IMAGE
+        });
+    });
+    saveProducts();
+}
+
+// ============================================================
 // ========== ADD PRODUCT ======================================
 // ============================================================
 function addProduct() {
@@ -778,7 +821,7 @@ function addProduct() {
 }
 
 // ============================================================
-// ========== EDIT PRODUCT (WITH IMAGE UPLOAD) =================
+// ========== EDIT PRODUCT =====================================
 // ============================================================
 function editProduct(id) {
     if (!isAdminAuthenticated) {
@@ -805,7 +848,6 @@ function editProduct(id) {
     const newRating = prompt('⭐ نئی ریٹنگ (New Rating 1-5):', product.rating);
     if (newRating === null) return;
 
-    // ===== IMAGE CHANGE OPTION =====
     const changeImage = confirm('🖼️ کیا آپ تصویر بھی تبدیل کرنا چاہتے ہیں؟');
     if (changeImage) {
         const fileInput = document.createElement('input');
@@ -1172,6 +1214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderAll();
     updateCartCount();
     console.log('✅ Faisal Kutub Khana Loaded Successfully!');
+    console.log(`📚 Total Books: ${products.length}`);
 });
 </script>
 </body>

@@ -8,7 +8,6 @@
     <meta http-equiv="Expires" content="0" />
     <title>📚 Faisal Kutub Khana - Islamic Bookstore</title>
     <style>
-        /* ===== SAME STYLES AS BEFORE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Arial', sans-serif; }
         body { background: #f5f0e8; padding: 15px; direction: rtl; }
         .container { max-width: 1200px; margin: auto; }
@@ -94,7 +93,6 @@
         }
         .search-section .btn-search:hover { background: #1a472a; transform: scale(1.02); }
 
-        /* ===== PASSWORD MODAL ===== */
         .password-modal {
             position: fixed;
             top: 0;
@@ -191,6 +189,8 @@
         .btn-success:hover { background: #1e8449; }
         .btn-whatsapp { background: #25D366; }
         .btn-whatsapp:hover { background: #1da851; }
+        .btn-edit { background: #f39c12; color: white; }
+        .btn-edit:hover { background: #d68910; }
 
         .product-grid {
             display: grid;
@@ -347,7 +347,7 @@
 </head>
 <body>
 
-<!-- ===== PASSWORD MODAL ===== -->
+<!-- PASSWORD MODAL -->
 <div class="password-modal" id="passwordModal">
     <div class="modal-box">
         <h2>🔐 Admin Panel</h2>
@@ -355,7 +355,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana </div>
+        <div class="hint">💡 پاس ورڈ: admin123</div>
     </div>
 </div>
 
@@ -423,7 +423,7 @@
         <button class="btn btn-gold" onclick="addProduct()" style="width:100%;">➕ کتاب شامل کریں</button>
         
         <hr style="margin:25px 0;border-color:#ffd700;">
-        <h3>📋 کتابیں منظم کریں (Manage Books)</h3>
+        <h3>📋 کتابیں منظم کریں (Manage Books) <span style="font-size:14px;color:#666;">- ✏️ Edit • 🗑️ Delete</span></h3>
         <div id="adminProductList"></div>
     </div>
 
@@ -472,8 +472,7 @@
 // ============================================================
 // ========== PASSWORD CONFIG ===================================
 // ============================================================
-// ⚡ CHANGE THIS PASSWORD TO YOUR OWN
-const ADMIN_PASSWORD = 'hamad123';
+const ADMIN_PASSWORD = 'admin123';
 
 // ============================================================
 // ========== DATA =============================================
@@ -531,7 +530,6 @@ function closePasswordModal() {
     document.getElementById('passwordModal').style.display = 'none';
 }
 
-// Close modal on ESC key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closePasswordModal();
@@ -631,6 +629,44 @@ function addProduct() {
 }
 
 // ============================================================
+// ========== EDIT PRODUCT =====================================
+// ============================================================
+function editProduct(id) {
+    if (!isAdminAuthenticated) {
+        showToast('❌ براہ کرم پہلے Admin پاس ورڈ درج کریں!', true);
+        openAdmin();
+        return;
+    }
+    
+    const product = products.find(p => p.id === id);
+    if (!product) {
+        showToast('❌ کتاب نہیں ملی!', true);
+        return;
+    }
+    
+    const newName = prompt('📖 نیا نام (New Name):', product.name);
+    if (newName === null) return;
+    
+    const newPrice = prompt('💰 نئی قیمت (New Price Rs.):', product.price);
+    if (newPrice === null) return;
+    
+    const newStock = prompt('📦 نئی تعداد (New Stock):', product.stock);
+    if (newStock === null) return;
+    
+    const newRating = prompt('⭐ نئی ریٹنگ (New Rating 1-5):', product.rating);
+    if (newRating === null) return;
+    
+    if (newName.trim()) product.name = newName.trim();
+    if (newPrice.trim()) product.price = parseFloat(newPrice.trim());
+    if (newStock.trim()) product.stock = parseInt(newStock.trim());
+    if (newRating.trim()) product.rating = parseFloat(newRating.trim());
+    
+    saveProducts();
+    renderAll();
+    showToast('✅ کتاب اپڈیٹ کر دی گئی!');
+}
+
+// ============================================================
 // ========== DELETE ===========================================
 // ============================================================
 function deleteProduct(id) {
@@ -699,13 +735,16 @@ function renderAdmin() {
         return;
     }
     container.innerHTML = products.map(p => `
-        <div style="display:flex;align-items:center;gap:15px;padding:12px;border-bottom:1px solid #eee;">
+        <div style="display:flex;align-items:center;gap:15px;padding:12px;border-bottom:1px solid #eee;flex-wrap:wrap;">
             <img src="${p.image}" width="50" height="50" style="object-fit:cover;border-radius:8px;" onerror="this.src='https://via.placeholder.com/50'">
-            <div style="flex:1;">
+            <div style="flex:1;min-width:150px;">
                 <strong>${p.name}</strong> - Rs. ${p.price}
-                <br><small style="color:#666;">${getCategoryName(p.category)} • ${p.desc}</small>
+                <br><small style="color:#666;">${getCategoryName(p.category)} • 📦 ${p.stock} • ⭐ ${p.rating}</small>
             </div>
-            <button class="btn btn-danger" onclick="deleteProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">حذف کریں</button>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn btn-edit" onclick="editProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">✏️ ترمیم کریں</button>
+                <button class="btn btn-danger" onclick="deleteProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">🗑️ حذف کریں</button>
+            </div>
         </div>
     `).join('');
 }
@@ -868,7 +907,6 @@ function placeOrder() {
     saveOrders();
     renderOrders();
 
-    // ⚡ CHANGE THIS TO YOUR WHATSAPP NUMBER (without +)
     const phone = '923001234567';
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
     
@@ -899,10 +937,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     console.log('✅ Faisal Kutub Khana Loaded Successfully!');
 });
-
-// ============================================================
-// ========== CLOSE ALL TAGS ===================================
-// ============================================================
 </script>
 </body>
 </html>

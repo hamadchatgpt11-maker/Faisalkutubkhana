@@ -191,6 +191,8 @@
         .btn-whatsapp:hover { background: #1da851; }
         .btn-edit { background: #f39c12; color: white; }
         .btn-edit:hover { background: #d68910; }
+        .btn-image { background: #8e44ad; color: white; }
+        .btn-image:hover { background: #732d91; }
 
         .product-grid {
             display: grid;
@@ -286,6 +288,22 @@
         .payment-options button:hover { border-color: #2d6a4f; background: #f5f0e8; }
         .payment-options button.selected { border-color: #ffd700; background: #fff8e1; }
 
+        .payment-details-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: right;
+            font-size: 14px;
+            border-right: 3px solid #ffd700;
+            white-space: pre-line;
+            direction: ltr;
+        }
+        .payment-details-box p {
+            direction: rtl;
+            text-align: right;
+        }
+
         .toast {
             position: fixed;
             bottom: 20px;
@@ -336,6 +354,23 @@
         .order-item .status.pending { background: #ffd700; color: #1a472a; }
         .order-item .status.delivered { background: #27ae60; color: white; }
 
+        /* Screenshot preview */
+        .screenshot-preview {
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+        }
+        .screenshot-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+        }
+        .screenshot-preview p {
+            font-size: 12px;
+            color: #27ae60;
+        }
+
         @media (max-width: 768px) {
             .header { flex-direction: column; text-align: center; }
             .cart-sidebar { width: 100%; left: -100%; }
@@ -355,7 +390,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub khana </div>
+        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khan </div>
     </div>
 </div>
 
@@ -423,7 +458,7 @@
         <button class="btn btn-gold" onclick="addProduct()" style="width:100%;">➕ کتاب شامل کریں</button>
         
         <hr style="margin:25px 0;border-color:#ffd700;">
-        <h3>📋 کتابیں منظم کریں (Manage Books) <span style="font-size:14px;color:#666;">- ✏️ Edit • 🗑️ Delete</span></h3>
+        <h3>📋 کتابیں منظم کریں (Manage Books) <span style="font-size:14px;color:#666;">- ✏️ Edit • 🖼️ Image • 🗑️ Delete</span></h3>
         <div id="adminProductList"></div>
     </div>
 
@@ -445,14 +480,12 @@
 </div>
 
 <!-- CART SIDEBAR -->
-<!-- ===== CART SIDEBAR (UPDATED) ===== -->
 <div class="cart-sidebar" id="cartSidebar">
     <span class="close-cart" onclick="closeCart()">✕</span>
     <h2>🛒 آپ کی کارٹ (Your Cart)</h2>
     <div id="cartItems"></div>
     <div class="cart-total">کل (Total): Rs. <span id="cartTotal">0</span></div>
     
-    <!-- ===== PAYMENT OPTIONS WITH NUMBERS ===== -->
     <div class="payment-options">
         <button onclick="selectPayment('whatsapp')" id="pay-whatsapp" class="selected">📱 WhatsApp</button>
         <button onclick="selectPayment('jazzcash')" id="pay-jazzcash">💰 JazzCash</button>
@@ -460,27 +493,25 @@
         <button onclick="selectPayment('meezan')" id="pay-meezan">🏦 Meezan Bank</button>
     </div>
 
-    <!-- ===== PAYMENT DETAILS ===== -->
-    <div id="paymentDetails" style="background:#f9f9f9;padding:15px;border-radius:10px;margin:10px 0;text-align:right;font-size:14px;border-right:3px solid #ffd700;">
+    <div class="payment-details-box">
         <p id="paymentInfo">📱 آرڈر WhatsApp پر بھیجا جائے گا</p>
     </div>
 
-    <!-- ===== SCREENSHOT UPLOAD ===== -->
     <div style="margin:10px 0;text-align:center;">
         <label for="screenshotUpload" style="display:block;background:#2d6a4f;color:white;padding:10px;border-radius:8px;cursor:pointer;font-weight:bold;">
             📸 ادائیگی کی تصویر اپ لوڈ کریں
         </label>
         <input type="file" id="screenshotUpload" accept="image/*" style="display:none;" onchange="uploadScreenshot()">
-        <div id="screenshotPreview" style="margin-top:10px;display:none;">
-            <img id="screenshotImg" src="#" alt="Screenshot" style="max-width:100%;max-height:150px;border-radius:8px;border:2px solid #ffd700;">
-            <p style="font-size:12px;color:#27ae60;">✅ تصویر اپ لوڈ ہو گئی!</p>
+        <div class="screenshot-preview" id="screenshotPreview">
+            <img id="screenshotImg" src="#" alt="Screenshot">
+            <p>✅ تصویر اپ لوڈ ہو گئی!</p>
         </div>
     </div>
 
-    <!-- ===== ORDER BUTTONS ===== -->
     <button class="btn btn-success" onclick="placeOrder()" style="width:100%;">📱 آرڈر کریں (Place Order)</button>
     <button class="btn btn-danger" onclick="clearCart()" style="width:100%;margin-top:10px;">🗑️ کارٹ صاف کریں</button>
 </div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -501,6 +532,7 @@ let cart = JSON.parse(localStorage.getItem('faisalCart')) || [];
 let orders = JSON.parse(localStorage.getItem('faisalOrders')) || [];
 let selectedPayment = 'whatsapp';
 let isAdminAuthenticated = false;
+let screenshotDataURL = '';
 
 // ============================================================
 // ========== SAVE FUNCTIONS ===================================
@@ -686,6 +718,42 @@ function editProduct(id) {
 }
 
 // ============================================================
+// ========== CHANGE IMAGE =====================================
+// ============================================================
+function changeImage(id) {
+    if (!isAdminAuthenticated) {
+        showToast('❌ براہ کرم پہلے Admin پاس ورڈ درج کریں!', true);
+        openAdmin();
+        return;
+    }
+    
+    const product = products.find(p => p.id === id);
+    if (!product) {
+        showToast('❌ کتاب نہیں ملی!', true);
+        return;
+    }
+    
+    // Create file input
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            product.image = event.target.result;
+            saveProducts();
+            renderAll();
+            showToast('✅ تصویر تبدیل کر دی گئی!');
+        };
+        reader.readAsDataURL(file);
+    };
+    input.click();
+}
+
+// ============================================================
 // ========== DELETE ===========================================
 // ============================================================
 function deleteProduct(id) {
@@ -762,6 +830,7 @@ function renderAdmin() {
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
                 <button class="btn btn-edit" onclick="editProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">✏️ ترمیم کریں</button>
+                <button class="btn btn-image" onclick="changeImage('${p.id}')" style="padding:5px 15px;font-size:14px;">🖼️ تصویر تبدیل کریں</button>
                 <button class="btn btn-danger" onclick="deleteProduct('${p.id}')" style="padding:5px 15px;font-size:14px;">🗑️ حذف کریں</button>
             </div>
         </div>
@@ -883,7 +952,7 @@ function clearCart() {
 }
 
 // ============================================================
-// ========== PAYMENT WITH NUMBERS =============================
+// ========== PAYMENT ==========================================
 // ============================================================
 function selectPayment(method) {
     selectedPayment = method;
@@ -892,9 +961,9 @@ function selectPayment(method) {
     
     const details = {
         whatsapp: '📱 آرڈر WhatsApp پر بھیجا جائے گا',
-        jazzcash: `💰 JazzCash نمبر: <strong>0340-5194458</strong><br>نام: <strong>Hammad Faisal</strong>`,
-        easypaisa: `💰 EasyPaisa نمبر: <strong>0340-5194458</strong><br>نام: <strong>Hammad Faisal</strong>`,
-        meezan: `🏦 Meezan Bank<br>اکاؤنٹ نمبر: <strong>0781-0100230230</strong><br>نام: <strong>Shah Faisal</strong>`
+        jazzcash: `💰 JazzCash\n📞 0340-5194458\n👤 Hammad Faisal`,
+        easypaisa: `💰 EasyPaisa\n📞 0340-5194458\n👤 Hammad Faisal`,
+        meezan: `🏦 Meezan Bank\n🏦 0781-0100230230\n👤 Shah Faisal`
     };
     document.getElementById('paymentInfo').innerHTML = details[method] || details.whatsapp;
 }
@@ -902,11 +971,17 @@ function selectPayment(method) {
 // ============================================================
 // ========== SCREENSHOT UPLOAD ================================
 // ============================================================
-let screenshotDataURL = '';
-
 function uploadScreenshot() {
     const file = document.getElementById('screenshotUpload').files[0];
-    if (!file) return;
+    if (!file) {
+        showToast('❌ براہ کرم کوئی تصویر منتخب کریں!', true);
+        return;
+    }
+    
+    if (file.size > 2 * 1024 * 1024) {
+        showToast('❌ تصویر کا سائز 2MB سے کم ہونا چاہیے!', true);
+        return;
+    }
     
     const reader = new FileReader();
     reader.onload = function(e) {
@@ -915,11 +990,14 @@ function uploadScreenshot() {
         document.getElementById('screenshotPreview').style.display = 'block';
         showToast('✅ تصویر اپ لوڈ ہو گئی!');
     };
+    reader.onerror = function() {
+        showToast('❌ تصویر اپ لوڈ کرنے میں خرابی!', true);
+    };
     reader.readAsDataURL(file);
 }
 
 // ============================================================
-// ========== PLACE ORDER (UPDATED) ============================
+// ========== PLACE ORDER ======================================
 // ============================================================
 function placeOrder() {
     if (!cart.length) { 
@@ -937,7 +1015,6 @@ function placeOrder() {
     
     message += `\n💰 *کل: Rs. ${total.toFixed(0)}*`;
     
-    // Payment details
     if (selectedPayment === 'jazzcash') {
         message += `\n💳 ادائیگی: JazzCash (0340-5194458)`;
     } else if (selectedPayment === 'easypaisa') {
@@ -948,14 +1025,8 @@ function placeOrder() {
         message += `\n💳 ادائیگی: WhatsApp پر تصدیق`;
     }
     
-    // Add screenshot if uploaded
-    if (screenshotDataURL) {
-        message += `\n📸 ادائیگی کی تصویر: (attach kar di gayi hai)`;
-    }
-    
     message += `\n\n📞 براہ کرم آرڈر کی تصدیق کریں۔`;
 
-    // Save order
     orders.push({
         id: Date.now().toString(),
         date: new Date().toISOString(),
@@ -968,14 +1039,19 @@ function placeOrder() {
     saveOrders();
     renderOrders();
 
-    // WhatsApp link with screenshot
-    const phone = '923405194458'; // Your number
+    const phone = '923405194458';
     let whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
+    if (screenshotDataURL) {
+        // Save screenshot in localStorage for reference
+        localStorage.setItem('lastScreenshot', screenshotDataURL);
+        const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
+        const finalUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
+        window.open(finalUrl, '_blank');
+    } else {
+        window.open(whatsappUrl, '_blank');
+    }
     
-    // Clear cart
     cart = [];
     screenshotDataURL = '';
     document.getElementById('screenshotPreview').style.display = 'none';
@@ -985,6 +1061,7 @@ function placeOrder() {
     updateCartCount();
     showToast('✅ آرڈر بھیج دیا گیا!');
 }
+
 // ============================================================
 // ========== TOAST ============================================
 // ============================================================

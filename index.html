@@ -1106,7 +1106,7 @@ function uploadScreenshot() {
 }
 
 // ============================================================
-// ========== PLACE ORDER ======================================
+// ========== PLACE ORDER (FIXED) ==============================
 // ============================================================
 function placeOrder() {
     if (!cart.length) {
@@ -1136,6 +1136,7 @@ function placeOrder() {
 
     message += `\n\n📞 براہ کرم آرڈر کی تصدیق کریں۔`;
 
+    // ===== SAVE ORDER =====
     orders.push({
         id: Date.now().toString(),
         date: new Date().toISOString(),
@@ -1148,20 +1149,27 @@ function placeOrder() {
     saveOrders();
     renderOrders();
 
+    // ===== WHATSAPP NUMBER =====
     const phone = '923173363333';
+
+    // ===== SCREENSHOT CHECK =====
     let whatsappUrl;
     if (screenshotDataURL) {
+        // Agar screenshot hai toh image attach karne ka guide add karein
         const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
+        // Screenshot ko localStorage mein save karein
         try {
             localStorage.setItem('lastScreenshot', screenshotDataURL);
         } catch (e) {
-            console.log('Screenshot save nahi ho sakta');
+            console.log('Screenshot save nahi ho sakta (size zyada hai)');
         }
     } else {
+        // Sirf text message
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     }
 
+    // ===== WHATSAPP OPEN KAREIN =====
     try {
         window.open(whatsappUrl, '_blank');
         showToast('✅ آرڈر بھیج دیا گیا!');
@@ -1170,6 +1178,7 @@ function placeOrder() {
         console.error(e);
     }
 
+    // ===== CART CLEAR KAREIN =====
     cart = [];
     screenshotDataURL = '';
     document.getElementById('screenshotPreview').style.display = 'none';
@@ -1178,7 +1187,6 @@ function placeOrder() {
     renderCart();
     updateCartCount();
 }
-
 // ============================================================
 // ========== TOAST ============================================
 // ============================================================

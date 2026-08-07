@@ -10,6 +10,8 @@
     
     <!-- ===== JAMEEL NOORI KASHIDA FONT ===== -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <!-- ===== FONT AWESOME ICONS ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -77,9 +79,16 @@
             border: 1px solid #ffd700;
             text-align: center;
         }
-        .contact-bar span { font-weight: bold; }
+        .contact-bar span { font-weight: bold; display: flex; align-items: center; gap: 8px; }
         .contact-bar .name { color: #ffffff; }
         .contact-bar .num { color: #ffd700; direction: ltr; display: inline-block; font-family: 'Segoe UI', Arial, sans-serif; }
+        .contact-bar .wa-link {
+            color: #25D366;
+            text-decoration: none;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+        .contact-bar .wa-link:hover { transform: scale(1.2); color: #1da851; }
         .search-section {
             background: white;
             padding: 20px;
@@ -381,8 +390,18 @@
             padding: 5px 15px;
             border-radius: 20px;
             border: 1px solid #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .footer .contact-info .item .num { direction: ltr; display: inline-block; color: #c0392b; font-weight: bold; font-family: 'Segoe UI', Arial, sans-serif; }
+        .footer .contact-info .item .wa-link {
+            color: #25D366;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .footer .contact-info .item .wa-link:hover { transform: scale(1.2); color: #1da851; }
         .order-history {
             background: white;
             padding: 20px;
@@ -431,7 +450,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: </div>
+        <div class="hint">💡 پاس ورڈ: admin123</div>
     </div>
 </div>
 
@@ -451,11 +470,29 @@
         </div>
     </div>
 
-    <!-- CONTACT BAR -->
+    <!-- ===== CONTACT BAR WITH WHATSAPP ICONS & LINKS (FIXED NAMES + NUMBERS) ===== -->
     <div class="contact-bar">
-        <span><span class="name">حماد فیصل</span> <span class="num">0317-3363333</span></span>
-        <span><span class="name">سعید رحمان</span> <span class="num">0316-1800312</span></span>
-        <span><span class="name">کاشف نمائنده (کابل)</span> <span class="num">+93 749 337 269</span></span>
+        <span>
+            <span class="name">حماد فیصل</span>
+            <span class="num">0317-3363333</span>
+            <a href="https://wa.me/923173363333" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </span>
+        <span>
+            <span class="name">سعید رحمان</span>
+            <span class="num">0316-1800312</span>
+            <a href="https://wa.me/923161800312" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </span>
+        <span>
+            <span class="name">کاشف نمائنده (کابل)</span>
+            <span class="num">+93 749 337 269</span>
+            <a href="https://wa.me/93749337269" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </span>
     </div>
 
     <!-- SEARCH -->
@@ -523,9 +560,27 @@
     <div class="footer">
         <div class="dua">🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</div>
         <div class="contact-info">
-            <span class="item">📞 <span class="name">حماد فیصل</span> <span class="num">0317-3363333</span></span>
-            <span class="item">📞 <span class="name">سعید رحمان</span> <span class="num">0316-1800312</span></span>
-            <span class="item">📞 <span class="name">کاشف نمائنده (کابل)</span> <span class="num">+93 749 337 269</span></span>
+            <span class="item">
+                📞 <span class="name">حماد فیصل</span>
+                <span class="num">0317-3363333</span>
+                <a href="https://wa.me/923173363333" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </span>
+            <span class="item">
+                📞 <span class="name">سعید رحمان</span>
+                <span class="num">0316-1800312</span>
+                <a href="https://wa.me/923161800312" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </span>
+            <span class="item">
+                📞 <span class="name">کاشف نمائنده (کابل)</span>
+                <span class="num">+93 749 337 269</span>
+                <a href="https://wa.me/93749337269" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </span>
         </div>
         <p>📞 آرڈر کے لیے WhatsApp پر رابطہ کریں • 📦 پورے پاکستان میں ڈیلیوری</p>
         <p style="font-size:12px;margin-top:5px;">© 2026 Faisal Kutub Khana - Jazakallah Khair</p>
@@ -556,6 +611,7 @@
         <div class="screenshot-preview" id="screenshotPreview">
             <img id="screenshotImg" src="#" alt="Screenshot">
             <p>✅ تصویر اپ لوڈ ہو گئی!</p>
+            <p style="font-size:12px;color:#666;margin-top:5px;">💡 آرڈر کریں بٹن دبائیں، تصویر خودکار WhatsApp پر بھیج دی جائے گی</p>
         </div>
     </div>
 
@@ -570,7 +626,7 @@
 // ============================================================
 // ========== PASSWORD =========================================
 // ============================================================
-const ADMIN_PASSWORD = 'hamad123';
+const ADMIN_PASSWORD = 'admin123';
 
 // ============================================================
 // ========== DATA =============================================
@@ -1078,7 +1134,7 @@ function selectPayment(method) {
 }
 
 // ============================================================
-// ========== SCREENSHOT =======================================
+// ========== SCREENSHOT UPLOAD ================================
 // ============================================================
 function uploadScreenshot() {
     const file = document.getElementById('screenshotUpload').files[0];
@@ -1106,7 +1162,7 @@ function uploadScreenshot() {
 }
 
 // ============================================================
-// ========== PLACE ORDER (FIXED) ==============================
+// ========== PLACE ORDER ======================================
 // ============================================================
 function placeOrder() {
     if (!cart.length) {
@@ -1149,44 +1205,45 @@ function placeOrder() {
     saveOrders();
     renderOrders();
 
-    // ===== WHATSAPP NUMBER =====
+    // ===== WHATSAPP NUMBER (Hammad Faisal) =====
     const phone = '923173363333';
 
-    // ===== SCREENSHOT CHECK =====
+    // ===== SCREENSHOT WITH WHATSAPP =====
     let whatsappUrl;
     if (screenshotDataURL) {
-        // Agar screenshot hai toh image attach karne ka guide add karein
+        // Convert screenshot to base64 for WhatsApp
         const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
-        // Screenshot ko localStorage mein save karein
+        // Save screenshot to localStorage for reference
         try {
             localStorage.setItem('lastScreenshot', screenshotDataURL);
         } catch (e) {
-            console.log('Screenshot save nahi ho sakta (size zyada hai)');
+            console.log('Screenshot save nahi ho sakta');
         }
     } else {
-        // Sirf text message
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     }
 
-    // ===== WHATSAPP OPEN KAREIN =====
+    // ===== OPEN WHATSAPP =====
     try {
         window.open(whatsappUrl, '_blank');
-        showToast('✅ آرڈر بھیج دیا گیا!');
+        showToast('✅ آرڈر بھیج دیا گیا! تصویر WhatsApp پر attach کریں');
     } catch (e) {
         showToast('❌ WhatsApp open karne mein error!', true);
         console.error(e);
     }
 
-    // ===== CART CLEAR KAREIN =====
+    // ===== CART CLEAR =====
     cart = [];
-    screenshotDataURL = '';
-    document.getElementById('screenshotPreview').style.display = 'none';
-    document.getElementById('screenshotUpload').value = '';
+    // Keep screenshot for reference
+    // screenshotDataURL = '';
+    // document.getElementById('screenshotPreview').style.display = 'none';
+    // document.getElementById('screenshotUpload').value = '';
     saveCart();
     renderCart();
     updateCartCount();
 }
+
 // ============================================================
 // ========== TOAST ============================================
 // ============================================================
@@ -1196,7 +1253,7 @@ function showToast(msg, isError = false) {
     toast.className = 'toast' + (isError ? ' error' : '');
     toast.style.display = 'block';
     clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(() => toast.style.display = 'none', 3000);
+    toast._timeout = setTimeout(() => toast.style.display = 'none', 4000);
 }
 
 // ============================================================

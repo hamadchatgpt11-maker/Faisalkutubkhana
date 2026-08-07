@@ -8,6 +8,7 @@
     <meta http-equiv="Expires" content="0" />
     <title>📚 Faisal Kutub Khana - Islamic Bookstore</title>
     <style>
+        /* ===== SAME STYLES AS BEFORE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Arial', sans-serif; }
         body { background: #f5f0e8; padding: 15px; direction: rtl; }
         .container { max-width: 1200px; margin: auto; }
@@ -92,6 +93,62 @@
             transition: 0.3s;
         }
         .search-section .btn-search:hover { background: #1a472a; transform: scale(1.02); }
+
+        /* ===== PASSWORD MODAL ===== */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .password-modal .modal-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        }
+        .password-modal .modal-box h2 {
+            color: #1a472a;
+            margin-bottom: 15px;
+        }
+        .password-modal .modal-box input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .password-modal .modal-box input:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+        .password-modal .modal-box .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+        }
+        .password-modal .modal-box .error-msg {
+            color: #c0392b;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        .password-modal .modal-box .hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
 
         .admin-panel {
             background: white;
@@ -290,6 +347,18 @@
 </head>
 <body>
 
+<!-- ===== PASSWORD MODAL ===== -->
+<div class="password-modal" id="passwordModal">
+    <div class="modal-box">
+        <h2>🔐 Admin Panel</h2>
+        <p style="color:#666;margin-bottom:10px;">براہ کرم پاس ورڈ درج کریں</p>
+        <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
+        <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
+        <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
+        <div class="hint">💡 پاس ورڈ: hamad123</div>
+    </div>
+</div>
+
 <div class="container">
     <!-- HEADER -->
     <div class="header">
@@ -301,7 +370,7 @@
         </div>
         <div>
             <a href="#" onclick="showCart()">🛒 Cart (<span id="cartCount">0</span>)</a>
-            <a href="#" onclick="toggleAdmin()">⚙️ Admin</a>
+            <a href="#" onclick="openAdmin()">⚙️ Admin</a>
             <a href="#" onclick="toggleOrders()">📦 Orders</a>
         </div>
     </div>
@@ -401,12 +470,19 @@
 <!-- ============================================================ -->
 <script>
 // ============================================================
+// ========== PASSWORD CONFIG ===================================
+// ============================================================
+// ⚡ CHANGE THIS PASSWORD TO YOUR OWN
+const ADMIN_PASSWORD = 'hamad123';
+
+// ============================================================
 // ========== DATA =============================================
 // ============================================================
 let products = JSON.parse(localStorage.getItem('faisalBooks')) || [];
 let cart = JSON.parse(localStorage.getItem('faisalCart')) || [];
 let orders = JSON.parse(localStorage.getItem('faisalOrders')) || [];
 let selectedPayment = 'whatsapp';
+let isAdminAuthenticated = false;
 
 // ============================================================
 // ========== SAVE FUNCTIONS ===================================
@@ -422,6 +498,45 @@ function updateCartCount() {
     const count = cart.reduce((s, i) => s + i.qty, 0);
     document.getElementById('cartCount').innerText = count;
 }
+
+// ============================================================
+// ========== ADMIN PASSWORD ===================================
+// ============================================================
+function openAdmin() {
+    if (isAdminAuthenticated) {
+        toggleAdmin();
+        return;
+    }
+    document.getElementById('passwordModal').style.display = 'flex';
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('passwordError').style.display = 'none';
+    document.getElementById('adminPassword').focus();
+}
+
+function checkPassword() {
+    const input = document.getElementById('adminPassword').value;
+    if (input === ADMIN_PASSWORD) {
+        isAdminAuthenticated = true;
+        document.getElementById('passwordModal').style.display = 'none';
+        toggleAdmin();
+        showToast('✅ Admin panel unlocked!');
+    } else {
+        document.getElementById('passwordError').style.display = 'block';
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPassword').focus();
+    }
+}
+
+function closePasswordModal() {
+    document.getElementById('passwordModal').style.display = 'none';
+}
+
+// Close modal on ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closePasswordModal();
+    }
+});
 
 // ============================================================
 // ========== TOGGLE FUNCTIONS =================================
@@ -461,6 +576,11 @@ function closeCart() {
 // ========== ADD PRODUCT ======================================
 // ============================================================
 function addProduct() {
+    if (!isAdminAuthenticated) {
+        showToast('❌ براہ کرم پہلے Admin پاس ورڈ درج کریں!', true);
+        openAdmin();
+        return;
+    }
     const name = document.getElementById('productName').value.trim();
     const price = document.getElementById('productPrice').value.trim();
     const oldPrice = document.getElementById('productOldPrice').value.trim();
@@ -514,6 +634,11 @@ function addProduct() {
 // ========== DELETE ===========================================
 // ============================================================
 function deleteProduct(id) {
+    if (!isAdminAuthenticated) {
+        showToast('❌ براہ کرم پہلے Admin پاس ورڈ درج کریں!', true);
+        openAdmin();
+        return;
+    }
     if (confirm('کیا آپ واقعی یہ کتاب حذف کرنا چاہتے ہیں؟')) {
         products = products.filter(p => p.id !== id);
         saveProducts();

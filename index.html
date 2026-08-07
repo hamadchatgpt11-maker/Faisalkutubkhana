@@ -445,23 +445,42 @@
 </div>
 
 <!-- CART SIDEBAR -->
+<!-- ===== CART SIDEBAR (UPDATED) ===== -->
 <div class="cart-sidebar" id="cartSidebar">
     <span class="close-cart" onclick="closeCart()">✕</span>
     <h2>🛒 آپ کی کارٹ (Your Cart)</h2>
     <div id="cartItems"></div>
     <div class="cart-total">کل (Total): Rs. <span id="cartTotal">0</span></div>
     
+    <!-- ===== PAYMENT OPTIONS WITH NUMBERS ===== -->
     <div class="payment-options">
         <button onclick="selectPayment('whatsapp')" id="pay-whatsapp" class="selected">📱 WhatsApp</button>
         <button onclick="selectPayment('jazzcash')" id="pay-jazzcash">💰 JazzCash</button>
         <button onclick="selectPayment('easypaisa')" id="pay-easypaisa">💰 EasyPaisa</button>
+        <button onclick="selectPayment('meezan')" id="pay-meezan">🏦 Meezan Bank</button>
     </div>
-    <p id="paymentInfo" style="font-size:13px;color:#666;margin:5px 0;">📱 آرڈر WhatsApp پر بھیجا جائے گا</p>
-    
+
+    <!-- ===== PAYMENT DETAILS ===== -->
+    <div id="paymentDetails" style="background:#f9f9f9;padding:15px;border-radius:10px;margin:10px 0;text-align:right;font-size:14px;border-right:3px solid #ffd700;">
+        <p id="paymentInfo">📱 آرڈر WhatsApp پر بھیجا جائے گا</p>
+    </div>
+
+    <!-- ===== SCREENSHOT UPLOAD ===== -->
+    <div style="margin:10px 0;text-align:center;">
+        <label for="screenshotUpload" style="display:block;background:#2d6a4f;color:white;padding:10px;border-radius:8px;cursor:pointer;font-weight:bold;">
+            📸 ادائیگی کی تصویر اپ لوڈ کریں
+        </label>
+        <input type="file" id="screenshotUpload" accept="image/*" style="display:none;" onchange="uploadScreenshot()">
+        <div id="screenshotPreview" style="margin-top:10px;display:none;">
+            <img id="screenshotImg" src="#" alt="Screenshot" style="max-width:100%;max-height:150px;border-radius:8px;border:2px solid #ffd700;">
+            <p style="font-size:12px;color:#27ae60;">✅ تصویر اپ لوڈ ہو گئی!</p>
+        </div>
+    </div>
+
+    <!-- ===== ORDER BUTTONS ===== -->
     <button class="btn btn-success" onclick="placeOrder()" style="width:100%;">📱 آرڈر کریں (Place Order)</button>
     <button class="btn btn-danger" onclick="clearCart()" style="width:100%;margin-top:10px;">🗑️ کارٹ صاف کریں</button>
 </div>
-
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -864,59 +883,108 @@ function clearCart() {
 }
 
 // ============================================================
-// ========== PAYMENT ==========================================
+// ========== PAYMENT WITH NUMBERS =============================
 // ============================================================
 function selectPayment(method) {
     selectedPayment = method;
     document.querySelectorAll('.payment-options button').forEach(b => b.classList.remove('selected'));
     document.getElementById(`pay-${method}`).classList.add('selected');
-    const info = {
+    
+    const details = {
         whatsapp: '📱 آرڈر WhatsApp پر بھیجا جائے گا',
-        jazzcash: '💰 JazzCash: 03XX-XXXXXXX پر پیسے بھیجیں',
-        easypaisa: '💰 EasyPaisa: 03XX-XXXXXXX پر پیسے بھیجیں'
+        jazzcash: `💰 JazzCash نمبر: <strong>0340-5194458</strong><br>نام: <strong>Hammad Faisal</strong>`,
+        easypaisa: `💰 EasyPaisa نمبر: <strong>0340-5194458</strong><br>نام: <strong>Hammad Faisal</strong>`,
+        meezan: `🏦 Meezan Bank<br>اکاؤنٹ نمبر: <strong>0781-0100230230</strong><br>نام: <strong>Shah Faisal</strong>`
     };
-    document.getElementById('paymentInfo').textContent = info[method];
+    document.getElementById('paymentInfo').innerHTML = details[method] || details.whatsapp;
 }
 
 // ============================================================
-// ========== PLACE ORDER ======================================
+// ========== SCREENSHOT UPLOAD ================================
+// ============================================================
+let screenshotDataURL = '';
+
+function uploadScreenshot() {
+    const file = document.getElementById('screenshotUpload').files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        screenshotDataURL = e.target.result;
+        document.getElementById('screenshotImg').src = screenshotDataURL;
+        document.getElementById('screenshotPreview').style.display = 'block';
+        showToast('✅ تصویر اپ لوڈ ہو گئی!');
+    };
+    reader.readAsDataURL(file);
+}
+
+// ============================================================
+// ========== PLACE ORDER (UPDATED) ============================
 // ============================================================
 function placeOrder() {
     if (!cart.length) { 
         showToast('❌ کارٹ خالی ہے!', true); 
         return; 
     }
+    
     const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
     let message = "📚 *فیصل کتب خانہ - نیا آرڈر!*\n\n";
     message += `🕌 ${new Date().toLocaleString('ur-PK')}\n\n`;
+    
     cart.forEach(item => {
         message += `📖 ${item.name} x ${item.qty} = Rs. ${(item.price * item.qty).toFixed(0)}\n`;
     });
+    
     message += `\n💰 *کل: Rs. ${total.toFixed(0)}*`;
-    message += `\n💳 ادائیگی: ${selectedPayment === 'whatsapp' ? 'WhatsApp پر تصدیق' : selectedPayment === 'jazzcash' ? 'JazzCash' : 'EasyPaisa'}`;
+    
+    // Payment details
+    if (selectedPayment === 'jazzcash') {
+        message += `\n💳 ادائیگی: JazzCash (0340-5194458)`;
+    } else if (selectedPayment === 'easypaisa') {
+        message += `\n💳 ادائیگی: EasyPaisa (0340-5194458)`;
+    } else if (selectedPayment === 'meezan') {
+        message += `\n💳 ادائیگی: Meezan Bank (0781-0100230230)`;
+    } else {
+        message += `\n💳 ادائیگی: WhatsApp پر تصدیق`;
+    }
+    
+    // Add screenshot if uploaded
+    if (screenshotDataURL) {
+        message += `\n📸 ادائیگی کی تصویر: (attach kar di gayi hai)`;
+    }
+    
     message += `\n\n📞 براہ کرم آرڈر کی تصدیق کریں۔`;
 
+    // Save order
     orders.push({
         id: Date.now().toString(),
         date: new Date().toISOString(),
         items: JSON.parse(JSON.stringify(cart)),
         total: total,
         payment: selectedPayment,
+        screenshot: screenshotDataURL || '',
         status: 'pending'
     });
     saveOrders();
     renderOrders();
 
-    const phone = '923173363333';
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    // WhatsApp link with screenshot
+    const phone = '923405194458'; // Your number
+    let whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Clear cart
     cart = [];
+    screenshotDataURL = '';
+    document.getElementById('screenshotPreview').style.display = 'none';
+    document.getElementById('screenshotUpload').value = '';
     saveCart();
     renderCart();
     updateCartCount();
     showToast('✅ آرڈر بھیج دیا گیا!');
 }
-
 // ============================================================
 // ========== TOAST ============================================
 // ============================================================

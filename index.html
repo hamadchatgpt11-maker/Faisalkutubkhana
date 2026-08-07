@@ -8,7 +8,6 @@
     <meta http-equiv="Expires" content="0" />
     <title>📚 Faisal Kutub Khana - Islamic Bookstore</title>
     <style>
-        /* ===== SAME STYLES AS BEFORE (space save karne ke liye nahi likh raha) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Arial', sans-serif; }
         body { background: #f5f0e8; padding: 15px; direction: rtl; }
         .container { max-width: 1200px; margin: auto; }
@@ -50,6 +49,23 @@
             font-weight: bold;
             margin-right: 10px;
         }
+        .contact-bar {
+            background: #1a472a;
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 14px;
+            border: 1px solid #ffd700;
+            text-align: center;
+        }
+        .contact-bar span { font-weight: bold; }
+        .contact-bar .name { color: #ffffff; }
+        .contact-bar .num { color: #ffd700; direction: ltr; display: inline-block; }
         .search-section {
             background: white;
             padding: 20px;
@@ -166,6 +182,8 @@
         .btn-success:hover { background: #1e8449; }
         .btn-edit { background: #f39c12; color: white; }
         .btn-edit:hover { background: #d68910; }
+        .btn-buy-now { background: #e67e22; color: white; }
+        .btn-buy-now:hover { background: #d35400; }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -198,9 +216,19 @@
         .product-card .price { color: #c0392b; font-size: 22px; font-weight: bold; margin: 8px 0; }
         .product-card .old-price { color: #999; font-size: 14px; text-decoration: line-through; margin-right: 8px; }
         .product-card .rating { color: #ffd700; font-size: 18px; margin: 5px 0; }
-        .product-card .btn { width: 100%; margin-top: 8px; font-size: 14px; }
         .product-card .stock { font-size: 12px; color: #27ae60; margin: 5px 0; }
         .product-card .stock.out { color: #c0392b; }
+        .product-card .button-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .product-card .button-group .btn {
+            flex: 1;
+            margin-top: 0;
+            font-size: 13px;
+            padding: 10px 5px;
+        }
         .cart-sidebar {
             position: fixed;
             left: -420px;
@@ -282,10 +310,14 @@
             display: block;
             background: #2d6a4f;
             color: white;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+            border: 2px solid #ffd700;
+            transition: 0.3s;
         }
         .screenshot-area label:hover { background: #1a472a; }
         .screenshot-preview {
@@ -321,6 +353,22 @@
             border-top: 2px solid #ffd700;
         }
         .footer .dua { font-size: 20px; color: #1a472a; margin-bottom: 10px; }
+        .footer .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: #1a472a;
+            margin: 10px 0;
+        }
+        .footer .contact-info .item {
+            background: #f5f0e8;
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid #ffd700;
+        }
+        .footer .contact-info .item .num { direction: ltr; display: inline-block; color: #c0392b; font-weight: bold; }
         .order-history {
             background: white;
             padding: 20px;
@@ -353,6 +401,9 @@
             .search-section { flex-direction: column; }
             .search-section input, .search-section select { width: 100%; }
             .payment-options button { min-width: 70px; font-size: 11px; padding: 8px 4px; }
+            .product-card .button-group { flex-direction: column; }
+            .contact-bar { flex-direction: column; align-items: center; }
+            .footer .contact-info { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -366,7 +417,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana</div>
+        <div class="hint">💡 پاس ورڈ: admin123</div>
     </div>
 </div>
 
@@ -384,6 +435,13 @@
             <a href="#" onclick="openAdmin()">⚙️ Admin</a>
             <a href="#" onclick="toggleOrders()">📦 Orders</a>
         </div>
+    </div>
+
+    <!-- ===== CONTACT BAR (UPDATED) ===== -->
+    <div class="contact-bar">
+        <span><span class="name">حمد فیصل</span> <span class="num">0317-3363333</span></span>
+        <span><span class="name">سعید رحمان</span> <span class="num">0316-1800312</span></span>
+        <span><span class="name">کاشف نمائنده (کابل)</span> <span class="num">+93 749 337 269</span></span>
     </div>
 
     <!-- SEARCH -->
@@ -450,6 +508,11 @@
     <!-- FOOTER -->
     <div class="footer">
         <div class="dua">🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</div>
+        <div class="contact-info">
+            <span class="item">📞 <span class="name">حمد فیصل</span> <span class="num">0317-3363333</span></span>
+            <span class="item">📞 <span class="name">سعید رحمان</span> <span class="num">0316-1800312</span></span>
+            <span class="item">📞 <span class="name">کاشف نمائنده (کابل)</span> <span class="num">+93 749 337 269</span></span>
+        </div>
         <p>📞 آرڈر کے لیے WhatsApp پر رابطہ کریں • 📦 پورے پاکستان میں ڈیلیوری</p>
         <p style="font-size:12px;margin-top:5px;">© 2026 Faisal Kutub Khana - Jazakallah Khair</p>
     </div>
@@ -474,7 +537,7 @@
     </div>
 
     <div class="screenshot-area">
-        <label for="screenshotUpload">📸 ادائیگی کی تصویر اپ لوڈ کریں</label>
+        <label for="screenshotUpload">📸 اپنی ادائیگی کی تصویر بھیجنے کے لیے اس بٹن پر کلک کریں</label>
         <input type="file" id="screenshotUpload" accept="image/*" style="display:none;" onchange="uploadScreenshot()">
         <div class="screenshot-preview" id="screenshotPreview">
             <img id="screenshotImg" src="#" alt="Screenshot">
@@ -493,7 +556,7 @@
 // ============================================================
 // ========== PASSWORD =========================================
 // ============================================================
-const ADMIN_PASSWORD = 'hamad123';
+const ADMIN_PASSWORD = 'admin123';
 
 // ============================================================
 // ========== DATA =============================================
@@ -591,7 +654,7 @@ function closeCart() {
 }
 
 // ============================================================
-// ========== DEFAULT IMAGE (WORKING) ==========================
+// ========== DEFAULT IMAGE ====================================
 // ============================================================
 const DEFAULT_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f5f0e8"/%3E%3Ctext x="150" y="100" font-family="Arial" font-size="18" fill="%23666" text-anchor="middle" dominant-baseline="central"%3E📚 Islamic Book%3C/text%3E%3C/svg%3E';
 
@@ -761,7 +824,6 @@ function renderProducts(filtered = null) {
     }
     grid.innerHTML = list.map(p => {
         const stars = '⭐'.repeat(Math.floor(p.rating || 0)) + (p.rating % 1 >= 0.5 ? '⭐' : '');
-        // Use DEFAULT_IMAGE if image is placeholder or broken
         const imgSrc = (p.image && !p.image.includes('via.placeholder.com')) ? p.image : DEFAULT_IMAGE;
         return `
             <div class="product-card">
@@ -772,9 +834,14 @@ function renderProducts(filtered = null) {
                 <div class="price">Rs. ${p.price} ${p.oldPrice ? `<span class="old-price">Rs. ${p.oldPrice}</span>` : ''}</div>
                 <div class="rating">${stars} ${p.rating || 0}</div>
                 <div class="stock ${p.stock < 5 ? 'out' : ''}">${p.stock > 0 ? `📦 ${p.stock} copies available` : '❌ Out of Stock'}</div>
-                <button class="btn btn-success" onclick="addToCart('${p.id}')" ${p.stock < 1 ? 'disabled style="opacity:0.5;"' : ''}>
-                    🛒 کارٹ میں شامل کریں
-                </button>
+                <div class="button-group">
+                    <button class="btn btn-success" onclick="addToCart('${p.id}')" ${p.stock < 1 ? 'disabled style="opacity:0.5;"' : ''}>
+                        🛒 کارٹ میں شامل کریں
+                    </button>
+                    <button class="btn btn-buy-now" onclick="buyNow('${p.id}')" ${p.stock < 1 ? 'disabled style="opacity:0.5;"' : ''}>
+                        ⚡ ابھی خریدیں
+                    </button>
+                </div>
             </div>
         `;
     }).join('');
@@ -830,6 +897,26 @@ function renderAll() {
     renderAdmin(); 
     renderOrders();
     updateCartCount();
+}
+
+// ============================================================
+// ========== BUY NOW ==========================================
+// ============================================================
+function buyNow(id) {
+    const product = products.find(p => p.id === id);
+    if (!product || product.stock < 1) {
+        showToast('❌ یہ کتاب دستیاب نہیں ہے!', true);
+        return;
+    }
+    
+    // Clear cart and add this product
+    cart = [];
+    cart.push({ ...product, qty: 1 });
+    saveCart();
+    renderCart();
+    updateCartCount();
+    showCart();
+    showToast(`✅ "${product.name}" کارٹ میں شامل کر دی گئی!`);
 }
 
 // ============================================================
@@ -1010,12 +1097,13 @@ function placeOrder() {
     renderOrders();
 
     const phone = '923173363333';
-    let whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    
+    let whatsappUrl;
     if (screenshotDataURL) {
         const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
         localStorage.setItem('lastScreenshot', screenshotDataURL);
+    } else {
+        whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     }
     
     window.open(whatsappUrl, '_blank');

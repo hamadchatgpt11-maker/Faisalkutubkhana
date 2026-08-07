@@ -354,6 +354,18 @@
             border: 2px solid #ffd700;
         }
         .screenshot-preview p { font-size: 12px; color: #27ae60; }
+        .screenshot-preview .copy-btn {
+            margin-top: 8px;
+            padding: 8px 15px;
+            background: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .screenshot-preview .copy-btn:hover { background: #6c3483; }
         .toast {
             position: fixed;
             bottom: 20px;
@@ -450,7 +462,7 @@
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-gold" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khana</div>
+        <div class="hint">💡 پاس ورڈ: Faisal Kutub Khan</div>
     </div>
 </div>
 
@@ -611,7 +623,8 @@
         <div class="screenshot-preview" id="screenshotPreview">
             <img id="screenshotImg" src="#" alt="Screenshot">
             <p>✅ تصویر اپ لوڈ ہو گئی!</p>
-            <p style="font-size:12px;color:#666;margin-top:5px;">💡 آرڈر کریں بٹن دبائیں، WhatsApp کھل جائے گا</p>
+            <button class="copy-btn" onclick="copyScreenshot()">📋 تصویر کاپی کریں (Copy Image)</button>
+            <p style="font-size:12px;color:#666;margin-top:5px;">💡 تصویر کاپی کرنے کے بعد WhatsApp پر Paste (Ctrl+V) کریں</p>
         </div>
     </div>
 
@@ -1153,12 +1166,40 @@ function uploadScreenshot() {
         screenshotDataURL = e.target.result;
         document.getElementById('screenshotImg').src = screenshotDataURL;
         document.getElementById('screenshotPreview').style.display = 'block';
-        showToast('✅ تصویر اپ لوڈ ہو گئی!');
+        showToast('✅ تصویر اپ لوڈ ہو گئی! اب تصویر کاپی کریں اور WhatsApp پر Paste کریں');
     };
     reader.onerror = function() {
         showToast('❌ تصویر اپ لوڈ کرنے میں خرابی!', true);
     };
     reader.readAsDataURL(file);
+}
+
+// ============================================================
+// ========== COPY SCREENSHOT ==================================
+// ============================================================
+function copyScreenshot() {
+    if (!screenshotDataURL) {
+        showToast('❌ پہلے تصویر اپ لوڈ کریں!', true);
+        return;
+    }
+
+    fetch(screenshotDataURL)
+        .then(res => res.blob())
+        .then(blob => {
+            const item = new ClipboardItem({
+                [blob.type]: blob
+            });
+            navigator.clipboard.write([item])
+                .then(() => {
+                    showToast('✅ تصویر کاپی ہو گئی! WhatsApp پر Paste (Ctrl+V) کریں');
+                })
+                .catch(() => {
+                    showToast('❌ تصویر کاپی کرنے میں خرابی!', true);
+                });
+        })
+        .catch(() => {
+            showToast('❌ تصویر کاپی کرنے میں خرابی!', true);
+        });
 }
 
 // ============================================================
@@ -1190,6 +1231,7 @@ function placeOrder() {
         message += `\n💳 ادائیگی: WhatsApp پر تصدیق`;
     }
 
+    message += `\n\n📸 *براہ کرم ادائیگی کی تصویر (Screenshot) ضرور attach کریں*`;
     message += `\n\n📞 براہ کرم آرڈر کی تصدیق کریں۔`;
 
     // ===== SAVE ORDER =====
@@ -1211,7 +1253,7 @@ function placeOrder() {
     // ===== CREATE WHATSAPP URL =====
     let whatsappUrl;
     if (screenshotDataURL) {
-        const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (نیچے attach کریں)";
+        const msgWithImage = message + "\n\n📸 ادائیگی کی تصویر: (اوپر Copy Image بٹن سے کاپی کریں اور یہاں Paste کریں)";
         whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msgWithImage)}`;
         try {
             localStorage.setItem('lastScreenshot', screenshotDataURL);
@@ -1225,7 +1267,7 @@ function placeOrder() {
     // ===== OPEN WHATSAPP =====
     try {
         window.open(whatsappUrl, '_blank');
-        showToast('✅ آرڈر بھیج دیا گیا!');
+        showToast('✅ آرڈر بھیج دیا گیا! تصویر کاپی کر کے WhatsApp پر Paste کریں');
     } catch (e) {
         showToast('❌ WhatsApp open karne mein error!', true);
         console.error(e);

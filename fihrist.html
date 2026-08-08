@@ -8,8 +8,13 @@
     <meta http-equiv="Expires" content="0" />
     <title>📋 Fihrist - Faisal Kutub Khana</title>
     
-    <!-- ===== FONT AWESOME ICONS (Lightweight) ===== -->
+    <!-- ===== FONTS ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- ===== LIBRARIES FOR DOWNLOAD ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -83,12 +88,8 @@
             font-size: 13px;
             color: #1a472a;
         }
-        .fihrist-info .actions {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
         
+        /* ===== DOWNLOAD BUTTONS ===== */
         .btn {
             border: none;
             padding: 8px 14px;
@@ -102,9 +103,12 @@
             align-items: center;
             gap: 5px;
             white-space: nowrap;
-            text-decoration: none;
         }
         .btn:hover { transform: scale(1.02); }
+        .btn-download-pdf { background: #e74c3c; }
+        .btn-download-pdf:hover { background: #c0392b; }
+        .btn-download-jpg { background: #8e44ad; }
+        .btn-download-jpg:hover { background: #6c3483; }
         .btn-print { background: #27ae60; }
         .btn-print:hover { background: #1e8449; }
         .btn-login { background: #2d6a4f; }
@@ -237,20 +241,6 @@
         }
         .toast.error { background: #c0392b; }
         
-        /* ===== PRINT STYLES ===== */
-        @media print {
-            body { background: white; padding: 0; margin: 0; }
-            .container { box-shadow: none; border-radius: 0; padding: 20px; max-width: 100%; }
-            .btn, .back-link, .fihrist-info .actions, .header-actions { display: none !important; }
-            .fihrist-info { border: none; background: none; padding: 0; }
-            .fihrist-info .date { font-size: 14px; }
-            table th { background: #1a472a !important; color: #ffd700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            table tr:nth-child(even) { background: #f9f9f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .total-books { background: #fff8e1 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .contact-info { background: #f5f0e8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .header { border-bottom-color: #ffd700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        }
-        
         @media (max-width: 640px) {
             body { padding: 6px; }
             .container { padding: 10px; border-radius: 10px; }
@@ -291,17 +281,26 @@
         </div>
     </div>
 
-    <!-- ===== INFO BAR ===== -->
+    <!-- ===== INFO BAR WITH DOWNLOAD BUTTONS ===== -->
     <div class="fihrist-info">
         <div class="date">
             <i class="fas fa-calendar-alt"></i>
             2026 - ماہ شعبان
         </div>
+        <!-- ===== YAHAN DOWNLOAD BUTTONS HAIN ===== -->
         <div class="actions">
-            <button class="btn btn-print" onclick="window.print()"><i class="fas fa-file-pdf"></i> ڈاؤن لوڈ فہرست PDF</button>
-            <button class="btn btn-print" onclick="window.print()"><i class="fas fa-image"></i> ڈاؤن لوڈ فہرست JPG</button>
-            <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> پرنٹ کریں</button>
-            <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;"><i class="fas fa-save"></i> محفوظ</button>
+            <button class="btn btn-download-pdf" onclick="downloadPDF()">
+                <i class="fas fa-file-pdf"></i> ڈاؤن لوڈ فہرست PDF
+            </button>
+            <button class="btn btn-download-jpg" onclick="downloadJPG()">
+                <i class="fas fa-image"></i> ڈاؤن لوڈ فہرست JPG
+            </button>
+            <button class="btn btn-print" onclick="window.print()">
+                <i class="fas fa-print"></i> پرنٹ کریں
+            </button>
+            <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;">
+                <i class="fas fa-save"></i> محفوظ
+            </button>
         </div>
     </div>
 
@@ -381,14 +380,60 @@
 
 <script>
 // ============================================================
-// ========== ADMIN PASSWORD ===================================
+// ========== DOWNLOAD PDF =====================================
 // ============================================================
-const ADMIN_PASSWORD = 'hamad123';
-let isAdmin = false;
+function downloadPDF() {
+    const element = document.getElementById('mainTable');
+    const opt = {
+        margin: [10, 10, 10, 10],
+        filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 2, 
+            useCORS: true,
+            logging: false,
+            letterRendering: true
+        },
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait' 
+        }
+    };
+    html2pdf().set(opt).from(element).save();
+    showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
+}
+
+// ============================================================
+// ========== DOWNLOAD JPG =====================================
+// ============================================================
+function downloadJPG() {
+    const element = document.getElementById('mainTable');
+    html2canvas(element, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+        logging: false,
+        allowTaint: false,
+        useCORS: false,
+        letterRendering: true
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
+        link.href = canvas.toDataURL('image/jpeg', 0.92);
+        link.click();
+        showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
+    }).catch(err => {
+        showToast('⚠️ JPG ڈاؤن لوڈ میں خرابی!', true);
+        console.error(err);
+    });
+}
 
 // ============================================================
 // ========== ADMIN LOGIN ======================================
 // ============================================================
+const ADMIN_PASSWORD = 'hamad123';
+let isAdmin = false;
+
 function openLogin() {
     document.getElementById('passwordModal').style.display = 'flex';
     document.getElementById('adminPassword').value = '';

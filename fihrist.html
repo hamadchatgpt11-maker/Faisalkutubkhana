@@ -10,7 +10,7 @@
     <!-- ===== FONT AWESOME ICONS ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- ===== html2pdf for PDF Download (Urdu Support) ===== -->
+    <!-- ===== html2pdf for PDF Download ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- ===== html2canvas for Image Download ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -243,13 +243,8 @@
             cursor: not-allowed;
         }
         
-        /* ===== JPG RENDER CONTAINER (Hidden) ===== */
-        #jpgRenderContainer {
-            display: none;
-        }
-        
-        /* ===== PDF RENDER CONTAINER ===== */
-        #pdfContent {
+        /* ===== HIDDEN RENDER CONTAINERS ===== */
+        #renderContainer {
             display: none;
         }
         
@@ -353,7 +348,7 @@
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div>
-            <h1>📋فہرست  <span>فیصل کتب خانہ</span></h1>
+            <h1>📋 فہرست کتاباں <span>فیصل کتب خانہ</span></h1>
             <div style="font-size:13px;color:#666;margin-top:2px;">📚 تمام کتابوں کی مکمل فہرست</div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -415,9 +410,9 @@
     </div>
 </div>
 
-<!-- ===== HIDDEN JPG RENDER CONTAINER ===== -->
-<div id="jpgRenderContainer" style="padding:30px;font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif;direction:rtl;background:white;max-width:1100px;margin:auto;">
-    <h1 style="text-align:center;color:#1a472a;border-bottom:3px solid #ffd700;padding-bottom:15px;margin-bottom:20px;">📋 فہرست کتاباں - فیصل کتب خانہ</h1>
+<!-- ===== HIDDEN RENDER CONTAINER ===== -->
+<div id="renderContainer" style="padding:30px;font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif;direction:rtl;background:white;max-width:1100px;margin:auto;">
+    <div style="text-align:center;color:#1a472a;font-size:22px;font-weight:bold;border-bottom:3px solid #ffd700;padding-bottom:15px;margin-bottom:20px;">📋 فہرست کتاباں</div>
     <div style="text-align:center;color:#666;margin-bottom:20px;">2026 - ماہ شعبان</div>
     <table style="width:100%;border-collapse:collapse;font-size:14px;direction:rtl;">
         <thead>
@@ -427,39 +422,10 @@
                 <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">قیمت (Rs.)</th>
             </tr>
         </thead>
-        <tbody id="jpgBody">
+        <tbody id="renderBody">
         </tbody>
     </table>
-    <div style="text-align:center;margin-top:20px;padding:10px;background:#fff8e1;border-radius:10px;font-size:16px;color:#1a472a;border:1px solid #ffd700;" id="jpgTotal">کل کتابیں: 0</div>
-    <div style="text-align:center;margin-top:20px;padding:15px;background:#f5f0e8;border-radius:10px;font-size:14px;border:1px solid #ffd700;line-height:2;">
-        <strong>📞 رابطہ کریں:</strong>
-        حماد فیصل: 0317-3363333 &nbsp;|&nbsp;
-        سعید رحمان: 0316-1800312 &nbsp;|&nbsp;
-        کاشف (کابل): +93 749 337 269 &nbsp;|&nbsp;
-        EasyPaisa/JazzCash: 0340-5194458 (حماد)
-    </div>
-    <div style="text-align:center;margin-top:20px;padding-top:12px;border-top:2px solid #ffd700;color:#666;font-size:12px;">
-        🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)<br>
-        © 2026 Faisal Kutub Khana - Jazakallah Khair
-    </div>
-</div>
-
-<!-- ===== HIDDEN PDF RENDER CONTAINER ===== -->
-<div id="pdfContent" style="padding:30px;font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif;direction:rtl;background:white;max-width:1100px;margin:auto;">
-    <h1 style="text-align:center;color:#1a472a;border-bottom:3px solid #ffd700;padding-bottom:15px;margin-bottom:20px;">📋 فہرست کتاباں - فیصل کتب خانہ</h1>
-    <div style="text-align:center;color:#666;margin-bottom:20px;">2026 - ماہ شعبان</div>
-    <table style="width:100%;border-collapse:collapse;font-size:14px;direction:rtl;">
-        <thead>
-            <tr>
-                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">شمار</th>
-                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">کتاب کا نام</th>
-                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">قیمت (Rs.)</th>
-            </tr>
-        </thead>
-        <tbody id="pdfBody">
-        </tbody>
-    </table>
-    <div style="text-align:center;margin-top:20px;padding:10px;background:#fff8e1;border-radius:10px;font-size:16px;color:#1a472a;border:1px solid #ffd700;" id="pdfTotal">کل کتابیں: 0</div>
+    <div style="text-align:center;margin-top:20px;padding:10px;background:#fff8e1;border-radius:10px;font-size:16px;color:#1a472a;border:1px solid #ffd700;" id="renderTotal">کل کتابیں: 0</div>
     <div style="text-align:center;margin-top:20px;padding:15px;background:#f5f0e8;border-radius:10px;font-size:14px;border:1px solid #ffd700;line-height:2;">
         <strong>📞 رابطہ کریں:</strong>
         حماد فیصل: 0317-3363333 &nbsp;|&nbsp;
@@ -589,7 +555,6 @@ function updateLoginUI() {
     const loginBtn = document.getElementById('loginBtn');
     const logoutBtn = document.getElementById('logoutBtn');
     const saveBtn = document.getElementById('saveBtn');
-    
     const editHeader = document.getElementById('editHeader');
     const editCells = document.querySelectorAll('.edit-column');
     
@@ -703,11 +668,11 @@ function saveAllPrices() {
 }
 
 // ============================================================
-// ========== GENERATE JPG BODY ===============================
+// ========== GENERATE RENDER BODY =============================
 // ============================================================
-function generateJPGBody() {
-    const tbody = document.getElementById('jpgBody');
-    const totalSpan = document.getElementById('jpgTotal');
+function generateRenderBody() {
+    const tbody = document.getElementById('renderBody');
+    const totalSpan = document.getElementById('renderTotal');
     
     if (!products.length) {
         tbody.innerHTML = `<tr><td colspan="3" style="padding:30px;color:#999;">کوئی کتاب دستیاب نہیں</td></tr>`;
@@ -731,40 +696,12 @@ function generateJPGBody() {
 }
 
 // ============================================================
-// ========== GENERATE PDF BODY ===============================
-// ============================================================
-function generatePDFBody() {
-    const tbody = document.getElementById('pdfBody');
-    const totalSpan = document.getElementById('pdfTotal');
-    
-    if (!products.length) {
-        tbody.innerHTML = `<tr><td colspan="3" style="padding:30px;color:#999;">کوئی کتاب دستیاب نہیں</td></tr>`;
-        totalSpan.textContent = 'کل کتابیں: 0';
-        return;
-    }
-
-    let html = '';
-    products.forEach((book, index) => {
-        const savedPrice = fihristPrices[book.id] || book.price;
-        html += `
-            <tr>
-                <td style="padding:8px;border:1px solid #ddd;text-align:center;">${index + 1}</td>
-                <td style="padding:8px;border:1px solid #ddd;text-align:right;">${book.name}</td>
-                <td style="padding:8px;border:1px solid #ddd;text-align:center;font-family:'Segoe UI',Arial,sans-serif;">${savedPrice}</td>
-            </tr>
-        `;
-    });
-    tbody.innerHTML = html;
-    totalSpan.textContent = `کل کتابیں: ${products.length}`;
-}
-
-// ============================================================
 // ========== DOWNLOAD PDF =====================================
 // ============================================================
 function downloadPDF() {
     try {
-        generatePDFBody();
-        const element = document.getElementById('pdfContent');
+        generateRenderBody();
+        const element = document.getElementById('renderContainer');
         const opt = {
             margin: [10, 10, 10, 10],
             filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
@@ -795,17 +732,18 @@ function downloadPDF() {
 // ============================================================
 function downloadJPG() {
     try {
-        // Generate fresh JPG content with current prices
-        generateJPGBody();
-        
-        const element = document.getElementById('jpgRenderContainer');
+        generateRenderBody();
+        const element = document.getElementById('renderContainer');
         html2canvas(element, {
             scale: 2,
             useCORS: true,
             backgroundColor: '#ffffff',
             logging: false,
-            letterRendering: true
+            letterRendering: true,
+            allowTaint: true,
+            useCORS: true
         }).then(canvas => {
+            // Convert to JPEG with high quality
             const link = document.createElement('a');
             link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
             link.href = canvas.toDataURL('image/jpeg', 0.95);

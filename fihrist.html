@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>📋 Fihrist - Faisal Kutub Khana</title>
+    
+    <!-- ===== JAMEEL NOORI KASHIDA FONT ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <!-- ===== FONT AWESOME ICONS ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Jameel Noori Kashida', 'Segoe UI', Arial, sans-serif;
+            background: #f5f0e8;
+            padding: 20px;
+            direction: rtl;
+        }
+        .num, .price, .btn, input[type="number"] {
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #ffd700;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #1a472a;
+            font-size: 28px;
+        }
+        .header h1 span {
+            font-size: 16px;
+            color: #666;
+        }
+        .header .back-link {
+            background: #2d6a4f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .header .back-link:hover {
+            background: #1a472a;
+            transform: scale(1.02);
+        }
+        .fihrist-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff8e1;
+            border-radius: 12px;
+            border-right: 5px solid #ffd700;
+        }
+        .fihrist-info .date {
+            font-size: 16px;
+            color: #1a472a;
+        }
+        .fihrist-info .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.3s;
+            color: white;
+        }
+        .btn:hover {
+            transform: scale(1.02);
+        }
+        .btn-download {
+            background: #8e44ad;
+        }
+        .btn-download:hover {
+            background: #6c3483;
+        }
+        .btn-save {
+            background: #2980b9;
+        }
+        .btn-save:hover {
+            background: #1f618d;
+        }
+        .btn-print {
+            background: #27ae60;
+        }
+        .btn-print:hover {
+            background: #1e8449;
+        }
+        .btn-edit-price {
+            background: #f39c12;
+            padding: 4px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-edit-price:hover {
+            background: #d68910;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+        table th {
+            background: #1a472a;
+            color: #ffd700;
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid #2d6a4f;
+        }
+        table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        table tr:hover {
+            background: #fff8e1;
+        }
+        table .price-input {
+            width: 80px;
+            padding: 6px 8px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        table .price-input:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+        .total-books {
+            margin-top: 20px;
+            padding: 12px;
+            background: #fff8e1;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 17px;
+            color: #1a472a;
+            border: 1px solid #ffd700;
+        }
+        .contact-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f0e8;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 15px;
+            border: 1px solid #ffd700;
+            line-height: 2;
+        }
+        .contact-info .num {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px solid #ffd700;
+            color: #666;
+            font-size: 13px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #2d6a4f;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 2000;
+            font-weight: bold;
+        }
+        .toast.error { background: #c0392b; }
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .header { flex-direction: column; text-align: center; gap: 10px; }
+            .fihrist-info { flex-direction: column; align-items: stretch; text-align: center; }
+            .fihrist-info .actions { justify-content: center; }
+            table { font-size: 12px; }
+            table th, table td { padding: 6px 4px; }
+            table .price-input { width: 60px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <div>
+            <h1>📋 فہرست کتاباں <span>فیصل کتب خانہ</span></h1>
+            <div style="font-size:14px;color:#666;margin-top:4px;">📚 تمام کتابوں کی مکمل فہرست</div>
+        </div>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> واپس اسٹور پر
+        </a>
+    </div>
+
+    <!-- ===== INFO BAR ===== -->
+    <div class="fihrist-info">
+        <div class="date">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="fihristDate">2026 - ماہ شعبان</span>
+        </div>
+        <div class="actions">
+            <button class="btn btn-save" onclick="saveAllPrices()">
+                <i class="fas fa-save"></i> قیمتیں محفوظ کریں
+            </button>
+            <button class="btn btn-download" onclick="downloadFihrist()">
+                <i class="fas fa-download"></i> ڈاؤن لوڈ (HTML)
+            </button>
+            <button class="btn btn-print" onclick="printFihrist()">
+                <i class="fas fa-print"></i> پرنٹ کریں
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== TABLE ===== -->
+    <div style="overflow-x:auto;">
+        <table id="fihristTable">
+            <thead>
+                <tr>
+                    <th style="width:60px;">شمار</th>
+                    <th>کتاب کا نام</th>
+                    <th style="width:120px;">قیمت (Rs.)</th>
+                    <th style="width:100px;">زمرہ</th>
+                    <th style="width:80px;">ترمیم</th>
+                </tr>
+            </thead>
+            <tbody id="fihristBody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ===== TOTAL ===== -->
+    <div class="total-books" id="fihristTotal">
+        کل کتابیں: 0
+    </div>
+
+    <!-- ===== CONTACT INFO ===== -->
+    <div class="contact-info">
+        <strong>📞 رابطہ کریں:</strong><br>
+        <span>حماد فیصل: <span class="num">0317-3363333</span></span> &nbsp;|&nbsp;
+        <span>سعید رحمان: <span class="num">0316-1800312</span></span> &nbsp;|&nbsp;
+        <span>کاشف نمائنده (کابل): <span class="num">+93 749 337 269</span></span>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        <p>🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</p>
+        <p style="margin-top:5px;">© 2026 Faisal Kutub Khana - Jazakallah Khair</p>
+    </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// ========== DATA =============================================
+// ============================================================
+let products = JSON.parse(localStorage.getItem('faisalBooks')) || [];
+let fihristPrices = JSON.parse(localStorage.getItem('fihristPrices')) || {};
+
+// ============================================================
+// ========== DEFAULT BOOKS (33 BOOKS) ========================
+// ============================================================
+const allBooks = [
+    { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450, category: "fiqa" },
+    { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350, category: "fiqa" },
+    { name: "تسہیل الہدایہ زرد (فی حصہ، 4 حصے)", price: 1350, category: "fiqa" },
+    { name: "تسہیل الہدایہ فارسی (8 جلد)", price: 5450, category: "fiqa" },
+    { name: "ریاض الصالحین", price: 900, category: "dua" },
+    { name: "منهاج الصالحین", price: 2000, category: "dua" },
+    { name: "تفسیر خیر کثیر سفید", price: 4250, category: "quran" },
+    { name: "تفسیر خیر کثیر زرد", price: 4000, category: "quran" },
+    { name: "معارف القرآن زرد", price: 6700, category: "quran" },
+    { name: "معارف القرآن سفید", price: 6700, category: "quran" },
+    { name: "سیرت خاتم الانبیاء", price: 200, category: "seerat" },
+    { name: "فوز المبتدی", price: 1800, category: "fiqa" },
+    { name: "د نوې مسئلو فتاوی", price: 400, category: "fiqa" },
+    { name: "فہم القرآن (اورنج)", price: 950, category: "quran" },
+    { name: "فہم القرآن سفید", price: 1100, category: "quran" },
+    { name: "فقہی عجائبات", price: 350, category: "fiqa" },
+    { name: "سراج الطالبین (پشتو)", price: 200, category: "other" },
+    { name: "شرح مشکاة", price: 7250, category: "hadith" },
+    { name: "انوار الہلالین", price: 2000, category: "other" },
+    { name: "فتاوی عالمگیری", price: 7800, category: "fiqa" },
+    { name: "کشف الباری مکمل (24 جلد)", price: 16700, category: "hadith" },
+    { name: "کشف الباری (فی جلد)", price: 700, category: "hadith" },
+    { name: "معلم الحجاج", price: 300, category: "dua" },
+    { name: "حدیث دورہ", price: 3150, category: "hadith" },
+    { name: "سراج المنتہی", price: 6700, category: "hadith" },
+    { name: "سراج الطالبین اردو", price: 200, category: "other" },
+    { name: "مرقاة", price: 7800, category: "hadith" },
+    { name: "فتاوی شامی", price: 8900, category: "fiqa" },
+    { name: "صفوة التفاسیر", price: 1800, category: "quran" },
+    { name: "تسہیل الہدایہ صلاۃ", price: 1400, category: "fiqa" },
+    { name: "تسہیل الہدایہ نکاح", price: 1400, category: "fiqa" },
+    { name: "تسہیل الہدایہ بیوع", price: 1450, category: "fiqa" },
+    { name: "تسہیل الہدایہ شفعہ", price: 1450, category: "fiqa" }
+];
+
+// ============================================================
+// ========== INIT =============================================
+// ============================================================
+function initFihrist() {
+    // Agar products empty hain toh default books add karein
+    if (products.length === 0) {
+        allBooks.forEach((book, index) => {
+            products.push({
+                id: Date.now().toString() + index,
+                name: book.name,
+                price: book.price,
+                oldPrice: null,
+                desc: `📚 ${book.name}`,
+                category: book.category || 'other',
+                stock: 99,
+                rating: 4.5,
+                image: ''
+            });
+        });
+        localStorage.setItem('faisalBooks', JSON.stringify(products));
+    }
+    renderFihrist();
+}
+
+// ============================================================
+// ========== RENDER ===========================================
+// ============================================================
+function renderFihrist() {
+    const tbody = document.getElementById('fihristBody');
+    const totalSpan = document.getElementById('fihristTotal');
+    
+    if (!products.length) {
+        tbody.innerHTML = `<tr><td colspan="5" style="padding:30px;color:#999;">کوئی کتاب دستیاب نہیں</td></tr>`;
+        totalSpan.textContent = 'کل کتابیں: 0';
+        return;
+    }
+
+    let html = '';
+    products.forEach((book, index) => {
+        const savedPrice = fihristPrices[book.id] || book.price;
+        html += `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="text-align:right;">${book.name}</td>
+                <td>
+                    <input type="number" class="price-input" id="price_${book.id}" 
+                           value="${savedPrice}" step="50" min="0"
+                           onchange="updatePrice('${book.id}')">
+                </td>
+                <td>${getCategoryName(book.category)}</td>
+                <td>
+                    <button class="btn-edit-price" onclick="resetPrice('${book.id}')">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+    tbody.innerHTML = html;
+    totalSpan.textContent = `کل کتابیں: ${products.length}`;
+}
+
+// ============================================================
+// ========== CATEGORY NAME ====================================
+// ============================================================
+function getCategoryName(cat) {
+    const names = {
+        quran: '📖 قرآن',
+        hadith: '🕌 حدیث',
+        fiqa: '⚖️ فقہ',
+        seerat: '🌙 سیرت',
+        history: '📜 تاریخ',
+        dua: '🤲 دعا',
+        other: '📘 دیگر'
+    };
+    return names[cat] || cat;
+}
+
+// ============================================================
+// ========== PRICE FUNCTIONS ==================================
+// ============================================================
+function updatePrice(id) {
+    const input = document.getElementById(`price_${id}`);
+    const value = parseFloat(input.value);
+    if (!isNaN(value) && value >= 0) {
+        fihristPrices[id] = value;
+        localStorage.setItem('fihristPrices', JSON.stringify(fihristPrices));
+        showToast('✅ قیمت محفوظ ہو گئی!');
+    } else {
+        showToast('❌ قیمت درست کریں!', true);
+    }
+}
+
+function resetPrice(id) {
+    const book = products.find(p => p.id === id);
+    if (book) {
+        delete fihristPrices[id];
+        localStorage.setItem('fihristPrices', JSON.stringify(fihristPrices));
+        const input = document.getElementById(`price_${id}`);
+        if (input) input.value = book.price;
+        showToast('✅ قیمت ڈیفالٹ ہو گئی!');
+    }
+}
+
+function saveAllPrices() {
+    // Save all current prices from inputs
+    products.forEach(book => {
+        const input = document.getElementById(`price_${book.id}`);
+        if (input) {
+            const value = parseFloat(input.value);
+            if (!isNaN(value) && value >= 0) {
+                fihristPrices[book.id] = value;
+            }
+        }
+    });
+    localStorage.setItem('fihristPrices', JSON.stringify(fihristPrices));
+    showToast('✅ تمام قیمتیں محفوظ ہو گئیں!');
+}
+
+// ============================================================
+// ========== DOWNLOAD =========================================
+// ============================================================
+function downloadFihrist() {
+    const date = document.getElementById('fihristDate').textContent;
+    let html = `
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>فہرست کتاباں - فیصل کتب خانہ</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', Arial, sans-serif;
+            background: white;
+            padding: 30px;
+            direction: rtl;
+        }
+        .num { font-family: 'Segoe UI', Arial, sans-serif; }
+        h1 { text-align: center; color: #1a472a; border-bottom: 3px solid #ffd700; padding-bottom: 15px; margin-bottom: 20px; }
+        .date { text-align: center; color: #666; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #1a472a; color: #ffd700; padding: 10px; border: 1px solid #2d6a4f; text-align: center; }
+        td { padding: 8px 10px; border: 1px solid #ddd; text-align: center; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .total { text-align: center; margin-top: 20px; padding: 10px; background: #fff8e1; border-radius: 10px; }
+        .contact { text-align: center; margin-top: 20px; padding: 15px; background: #f5f0e8; border-radius: 10px; line-height: 2; }
+        .footer { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 2px solid #ffd700; color: #666; font-size: 13px; }
+        @media print {
+            body { padding: 15px; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <h1>📋 فہرست کتاباں - فیصل کتب خانہ</h1>
+    <div class="date">${date}</div>
+    <table>
+        <thead>
+            <tr><th>شمار</th><th>کتاب کا نام</th><th>قیمت (Rs.)</th><th>زمرہ</th></tr>
+        </thead>
+        <tbody>
+`;
+
+    products.forEach((book, index) => {
+        const price = fihristPrices[book.id] || book.price;
+        html += `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="text-align:right;">${book.name}</td>
+                <td class="num">${price}</td>
+                <td>${getCategoryName(book.category)}</td>
+            </tr>
+        `;
+    });
+
+    html += `
+        </tbody>
+    </table>
+    <div class="total">کل کتابیں: ${products.length}</div>
+    <div class="contact">
+        <strong>📞 رابطہ کریں:</strong><br>
+        حماد فیصل: <span class="num">0317-3363333</span> &nbsp;|&nbsp;
+        سعید رحمان: <span class="num">0316-1800312</span> &nbsp;|&nbsp;
+        کاشف نمائنده (کابل): <span class="num">+93 749 337 269</span>
+    </div>
+    <div class="footer">
+        🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)<br>
+        © 2026 Faisal Kutub Khana - Jazakallah Khair
+    </div>
+    <script>
+        window.print();
+    <\/script>
+</body>
+</html>`;
+
+    // Download as HTML file
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Fihrist_Faisal_Kutub_Khana_${new Date().toISOString().slice(0,10)}.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('✅ فہرست ڈاؤن لوڈ ہو گئی!');
+}
+
+// ============================================================
+// ========== PRINT ============================================
+// ============================================================
+function printFihrist() {
+    window.print();
+}
+
+// ============================================================
+// ========== TOAST ============================================
+// ============================================================
+function showToast(msg, isError = false) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast' + (isError ? ' error' : '');
+    toast.style.display = 'block';
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => toast.style.display = 'none', 3000);
+}
+
+// ============================================================
+// ========== INIT =============================================
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    initFihrist();
+    console.log('✅ Fihrist Maker Loaded Successfully!');
+    console.log(`📚 Total Books: ${products.length}`);
+});
+</script>
+</body>
+</html>

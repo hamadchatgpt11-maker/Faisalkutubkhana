@@ -122,15 +122,6 @@
         .btn-login:hover { background: #1a472a; }
         .btn-logout { background: #c0392b; }
         .btn-logout:hover { background: #a93226; }
-        .btn-edit-price {
-            background: #f39c12;
-            padding: 3px 8px;
-            font-size: 10px;
-            border-radius: 4px;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
         
         .password-modal {
             position: fixed;
@@ -167,7 +158,6 @@
         .password-modal .modal-box input:focus { outline: none; border-color: #ffd700; }
         .password-modal .modal-box .btn { width: 100%; padding: 10px; font-size: 15px; justify-content: center; }
         .password-modal .modal-box .error-msg { color: #c0392b; font-size: 12px; margin-top: 6px; display: none; }
-        .password-modal .modal-box .hint { font-size: 11px; color: #999; margin-top: 6px; }
         
         /* ===== TABLE ===== */
         table {
@@ -191,22 +181,6 @@
             font-size: 12px;
         }
         table tr:nth-child(even) { background: #f9f9f9; }
-        table .price-input {
-            width: 60px;
-            padding: 4px 4px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            font-size: 11px;
-            text-align: center;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            max-width: 70px;
-        }
-        table .price-input:focus { outline: none; border-color: #ffd700; }
-        table .price-input:disabled {
-            background: #f0f0f0;
-            color: #666;
-            cursor: not-allowed;
-        }
         
         /* ===== STATIC CONTENT ===== */
         .static-content table {
@@ -277,13 +251,6 @@
             text-align: center;
         }
         .toast.error { background: #c0392b; }
-        
-        .edit-column {
-            display: none;
-        }
-        .edit-column.show {
-            display: table-cell;
-        }
         
         /* ===== RENDER CONTAINER FOR DOWNLOAD ===== */
         #renderContainer {
@@ -362,7 +329,6 @@
             table { font-size: 10px; }
             table th { font-size: 10px; padding: 5px 3px; }
             table td { font-size: 10px; padding: 4px 2px; }
-            table .price-input { width: 50px; font-size: 10px; padding: 3px 2px; }
             .total-books { font-size: 12px; padding: 6px; }
             .contact-info { font-size: 11px; padding: 8px; }
             .static-content table { font-size: 10px; }
@@ -409,7 +375,7 @@
         </div>
     </div>
 
-    <!-- ===== STATIC CONTENT ===== -->
+    <!-- ===== STATIC CONTENT (Always Visible - No JavaScript Required) ===== -->
     <div id="staticContent" class="static-content">
         <table>
             <thead>
@@ -420,9 +386,42 @@
                 </tr>
             </thead>
             <tbody id="staticBody">
+                <tr><td>1</td><td style="text-align:right;">تسہیل الہدایہ سفید (8 جلد)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">5450</td></tr>
+                <tr><td>2</td><td style="text-align:right;">تسہیل الہدایہ زرد (8 جلد)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">5350</td></tr>
+                <tr><td>3</td><td style="text-align:right;">تسہیل الہدایہ زرد (فی حصہ، 4 حصے)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1350</td></tr>
+                <tr><td>4</td><td style="text-align:right;">تسہیل الہدایہ فارسی (8 جلد)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">5450</td></tr>
+                <tr><td>5</td><td style="text-align:right;">ریاض الصالحین</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">900</td></tr>
+                <tr><td>6</td><td style="text-align:right;">منهاج الصالحین</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">2000</td></tr>
+                <tr><td>7</td><td style="text-align:right;">تفسیر خیر کثیر سفید</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">4250</td></tr>
+                <tr><td>8</td><td style="text-align:right;">تفسیر خیر کثیر زرد</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">4000</td></tr>
+                <tr><td>9</td><td style="text-align:right;">معارف القرآن زرد</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">6700</td></tr>
+                <tr><td>10</td><td style="text-align:right;">معارف القرآن سفید</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">6700</td></tr>
+                <tr><td>11</td><td style="text-align:right;">سیرت خاتم الانبیاء</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">200</td></tr>
+                <tr><td>12</td><td style="text-align:right;">فوز المبتدی</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1800</td></tr>
+                <tr><td>13</td><td style="text-align:right;">د نوې مسئلو فتاوی</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">400</td></tr>
+                <tr><td>14</td><td style="text-align:right;">فہم القرآن (اورنج)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">950</td></tr>
+                <tr><td>15</td><td style="text-align:right;">فہم القرآن سفید</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1100</td></tr>
+                <tr><td>16</td><td style="text-align:right;">فقہی عجائبات</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">350</td></tr>
+                <tr><td>17</td><td style="text-align:right;">سراج الطالبین (پشتو)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">200</td></tr>
+                <tr><td>18</td><td style="text-align:right;">شرح مشکاة</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">7250</td></tr>
+                <tr><td>19</td><td style="text-align:right;">انوار الہلالین</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">2000</td></tr>
+                <tr><td>20</td><td style="text-align:right;">فتاوی عالمگیری</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">7800</td></tr>
+                <tr><td>21</td><td style="text-align:right;">کشف الباری مکمل (24 جلد)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">16700</td></tr>
+                <tr><td>22</td><td style="text-align:right;">کشف الباری (فی جلد)</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">700</td></tr>
+                <tr><td>23</td><td style="text-align:right;">معلم الحجاج</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">300</td></tr>
+                <tr><td>24</td><td style="text-align:right;">حدیث دورہ</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">3150</td></tr>
+                <tr><td>25</td><td style="text-align:right;">سراج المنتہی</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">6700</td></tr>
+                <tr><td>26</td><td style="text-align:right;">سراج الطالبین اردو</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">200</td></tr>
+                <tr><td>27</td><td style="text-align:right;">مرقاة</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">7800</td></tr>
+                <tr><td>28</td><td style="text-align:right;">فتاوی شامی</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">8900</td></tr>
+                <tr><td>29</td><td style="text-align:right;">صفوة التفاسیر</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1800</td></tr>
+                <tr><td>30</td><td style="text-align:right;">تسہیل الہدایہ صلاۃ</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1400</td></tr>
+                <tr><td>31</td><td style="text-align:right;">تسہیل الہدایہ نکاح</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1400</td></tr>
+                <tr><td>32</td><td style="text-align:right;">تسہیل الہدایہ بیوع</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1450</td></tr>
+                <tr><td>33</td><td style="text-align:right;">تسہیل الہدایہ شفعہ</td><td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">1450</td></tr>
             </tbody>
         </table>
-        <div class="total-books" id="staticTotal">کل کتابیں: 0</div>
+        <div class="total-books">کل کتابیں: 33</div>
         <div class="contact-info">
             <strong>📞 رابطہ کریں:</strong>
             حماد فیصل: <span class="num">0317-3363333</span> &nbsp;|&nbsp;
@@ -440,7 +439,6 @@
             <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
             <button class="btn btn-login" onclick="checkPassword()">✅ تصدیق کریں</button>
             <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-            <div class="hint">💡 پاس ورڈ: </div>
         </div>
     </div>
 </div>
@@ -475,9 +473,15 @@
 
 <script>
 // ============================================================
-// ========== STATIC BOOKS DATA ================================
+// ========== ADMIN PASSWORD ===================================
 // ============================================================
-const staticBooks = [
+const ADMIN_PASSWORD = 'hamad123';
+let isAdmin = false;
+
+// ============================================================
+// ========== GENERATE RENDER BODY =============================
+// ============================================================
+const renderBooks = [
     { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450 },
     { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350 },
     { name: "تسہیل الہدایہ زرد (فی حصہ، 4 حصے)", price: 1350 },
@@ -513,36 +517,12 @@ const staticBooks = [
     { name: "تسہیل الہدایہ شفعہ", price: 1450 }
 ];
 
-// ============================================================
-// ========== RENDER STATIC CONTENT ============================
-// ============================================================
-function renderStaticContent() {
-    const tbody = document.getElementById('staticBody');
-    const totalSpan = document.getElementById('staticTotal');
-    
-    let html = '';
-    staticBooks.forEach((book, index) => {
-        html += `
-            <tr>
-                <td>${index + 1}</td>
-                <td style="text-align:right;">${book.name}</td>
-                <td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">${book.price}</td>
-            </tr>
-        `;
-    });
-    tbody.innerHTML = html;
-    totalSpan.textContent = `کل کتابیں: ${staticBooks.length}`;
-}
-
-// ============================================================
-// ========== GENERATE RENDER BODY =============================
-// ============================================================
 function generateRenderBody() {
     const tbody = document.getElementById('renderBody');
     const totalSpan = document.getElementById('renderTotal');
     
     let html = '';
-    staticBooks.forEach((book, index) => {
+    renderBooks.forEach((book, index) => {
         html += `
             <tr>
                 <td>${index + 1}</td>
@@ -552,7 +532,7 @@ function generateRenderBody() {
         `;
     });
     tbody.innerHTML = html;
-    totalSpan.textContent = `کل کتابیں: ${staticBooks.length}`;
+    totalSpan.textContent = `کل کتابیں: ${renderBooks.length}`;
 }
 
 // ============================================================
@@ -620,9 +600,6 @@ function downloadJPG() {
 // ============================================================
 // ========== ADMIN LOGIN ======================================
 // ============================================================
-const ADMIN_PASSWORD = 'hamad123';
-let isAdmin = false;
-
 function openLogin() {
     document.getElementById('passwordModal').style.display = 'flex';
     document.getElementById('adminPassword').value = '';
@@ -657,7 +634,7 @@ function logout() {
 }
 
 // ============================================================
-// ========== SAVE PRICES (Admin Only) ========================
+// ========== SAVE PRICES ======================================
 // ============================================================
 function saveAllPrices() {
     if (!isAdmin) {
@@ -692,9 +669,8 @@ document.addEventListener('keydown', function(e) {
 // ========== INIT =============================================
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    renderStaticContent();
     console.log('✅ Fihrist Loaded Successfully!');
-    console.log(`📚 Total Books: ${staticBooks.length}`);
+    console.log(`📚 Total Books: ${renderBooks.length}`);
 });
 </script>
 </body>

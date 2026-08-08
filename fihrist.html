@@ -8,10 +8,6 @@
     <meta http-equiv="Expires" content="0" />
     <title>📋 Fihrist - Faisal Kutub Khana</title>
     
-    <!-- ===== LIBRARIES FOR DOWNLOAD ===== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
@@ -105,10 +101,6 @@
             white-space: nowrap;
         }
         .btn:hover { transform: scale(1.02); }
-        .btn-download-pdf { background: #e74c3c; }
-        .btn-download-pdf:hover { background: #c0392b; }
-        .btn-download-jpg { background: #8e44ad; }
-        .btn-download-jpg:hover { background: #6c3483; }
         .btn-print { background: #27ae60; }
         .btn-print:hover { background: #1e8449; }
         .btn-login { background: #2d6a4f; }
@@ -167,7 +159,7 @@
         .password-modal .modal-box .btn { width: 100%; padding: 10px; font-size: 15px; justify-content: center; }
         .password-modal .modal-box .error-msg { color: #c0392b; font-size: 12px; margin-top: 6px; display: none; }
         
-        /* ===== TABLE - BOOK NAMES BOLD ===== */
+        /* ===== TABLE ===== */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -241,74 +233,16 @@
         }
         .toast.error { background: #c0392b; }
         
-        /* ===== DOWNLOAD CONTAINER ===== */
-        #downloadContainer {
-            position: absolute;
-            left: -9999px;
-            top: 0;
-            width: 800px;
-            padding: 30px;
-            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
-            direction: rtl;
-            background: white;
-            z-index: -1;
-        }
-        #downloadContainer table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-        #downloadContainer table th {
-            background: #1a472a;
-            color: #ffd700;
-            padding: 8px;
-            border: 1px solid #2d6a4f;
-            text-align: center;
-        }
-        #downloadContainer table td {
-            padding: 6px 8px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        #downloadContainer table td.book-name {
-            text-align: right;
-            font-weight: bold;
-        }
-        #downloadContainer table tr:nth-child(even) { background: #f9f9f9; }
-        #downloadContainer .d-title {
-            text-align: center;
-            color: #1a472a;
-            font-size: 20px;
-            font-weight: bold;
-            border-bottom: 3px solid #ffd700;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
-        }
-        #downloadContainer .d-date {
-            text-align: center;
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
-        #downloadContainer .d-total {
-            text-align: center;
-            margin-top: 15px;
-            padding: 8px;
-            background: #fff8e1;
-            border-radius: 8px;
-            font-size: 15px;
-            color: #1a472a;
-            border: 1px solid #ffd700;
-        }
-        #downloadContainer .d-contact {
-            text-align: center;
-            margin-top: 15px;
-            padding: 10px;
-            background: #f5f0e8;
-            border-radius: 8px;
-            font-size: 12px;
-            border: 1px solid #ffd700;
-            line-height: 2;
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; padding: 20px; }
+            .btn, .back-link, .fihrist-info .actions, .header-actions { display: none !important; }
+            .fihrist-info { border: none; background: none; }
+            table th { background: #1a472a !important; color: #ffd700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            table tr:nth-child(even) { background: #f9f9f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .total-books { background: #fff8e1 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .contact-info { background: #f5f0e8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
         
         @media (max-width: 640px) {
@@ -358,9 +292,7 @@
             2026 - ماہ شعبان
         </div>
         <div class="actions">
-            <button class="btn btn-download-pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> ڈاؤن لوڈ فہرست PDF</button>
-            <button class="btn btn-download-jpg" onclick="downloadJPG()"><i class="fas fa-image"></i> ڈاؤن لوڈ فہرست JPG</button>
-            <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> پرنٹ کریں</button>
+            <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> PDF / پرنٹ</button>
             <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;"><i class="fas fa-save"></i> محفوظ</button>
         </div>
     </div>
@@ -375,7 +307,7 @@
                     <th style="width:80px;">قیمت (Rs.)</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
+            <tbody>
                 <tr><td>1</td><td class="book-name">تسہیل الہدایہ سفید (8 جلد)</td><td style="font-weight:bold;">5450</td></tr>
                 <tr><td>2</td><td class="book-name">تسہیل الہدایہ زرد (8 جلد)</td><td style="font-weight:bold;">5350</td></tr>
                 <tr><td>3</td><td class="book-name">تسہیل الہدایہ زرد (فی حصہ، 4 حصے)</td><td style="font-weight:bold;">1350</td></tr>
@@ -424,31 +356,6 @@
     </div>
 </div>
 
-<!-- ===== DOWNLOAD CONTAINER ===== -->
-<div id="downloadContainer">
-    <div class="d-title">📋 فہرست - فیصل کتب خانہ</div>
-    <div class="d-date">2026 - ماہ شعبان</div>
-    <table>
-        <thead>
-            <tr>
-                <th>شمار</th>
-                <th>کتاب کا نام</th>
-                <th>قیمت (Rs.)</th>
-            </tr>
-        </thead>
-        <tbody id="downloadBody">
-        </tbody>
-    </table>
-    <div class="d-total" id="downloadTotal">کل کتابیں: 0</div>
-    <div class="d-contact">
-        <strong>📞 رابطہ کریں:</strong>
-        حماد فیصل: 0317-3363333 &nbsp;|&nbsp;
-        سعید رحمان: 0316-1800312 &nbsp;|&nbsp;
-        کاشف (کابل): +93 749 337 269 &nbsp;|&nbsp;
-        EasyPaisa/JazzCash: 0340-5194458 (حماد)
-    </div>
-</div>
-
 <!-- ===== PASSWORD MODAL ===== -->
 <div class="password-modal" id="passwordModal">
     <div class="modal-box">
@@ -466,133 +373,14 @@
 
 <script>
 // ============================================================
-// ========== BOOKS DATA =======================================
-// ============================================================
-const booksData = [
-    { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450 },
-    { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350 },
-    { name: "تسہیل الہدایہ زرد (فی حصہ، 4 حصے)", price: 1350 },
-    { name: "تسہیل الہدایہ فارسی (8 جلد)", price: 5450 },
-    { name: "ریاض الصالحین", price: 900 },
-    { name: "منهاج الصالحین", price: 2000 },
-    { name: "تفسیر خیر کثیر سفید", price: 4250 },
-    { name: "تفسیر خیر کثیر زرد", price: 4000 },
-    { name: "معارف القرآن زرد", price: 6700 },
-    { name: "معارف القرآن سفید", price: 6700 },
-    { name: "سیرت خاتم الانبیاء", price: 200 },
-    { name: "فوز المبتدی", price: 1800 },
-    { name: "د نوې مسئلو فتاوی", price: 400 },
-    { name: "فہم القرآن (اورنج)", price: 950 },
-    { name: "فہم القرآن سفید", price: 1100 },
-    { name: "فقہی عجائبات", price: 350 },
-    { name: "سراج الطالبین (پشتو)", price: 200 },
-    { name: "تسہیلات شرح مشکاة", price: 7250 },
-    { name: "انوار الہلالین", price: 2000 },
-    { name: "فتاوی عالمگیری", price: 7800 },
-    { name: "کشف الباری مکمل (24 جلد)", price: 16700 },
-    { name: "کشف الباری (فی جلد)", price: 700 },
-    { name: "معلم الحجاج", price: 300 },
-    { name: "حدیث دورہ", price: 3150 },
-    { name: "سراج المنتہی", price: 6700 },
-    { name: "سراج الطالبین اردو", price: 200 },
-    { name: "مرقاة", price: 7800 },
-    { name: "فتاوی شامی", price: 8900 },
-    { name: "صفوة التفاسیر", price: 1800 },
-    { name: "تسہیل الہدایہ صلاۃ", price: 1400 },
-    { name: "تسہیل الہدایہ نکاح", price: 1400 },
-    { name: "تسہیل الہدایہ بیوع", price: 1450 },
-    { name: "تسہیل الہدایہ شفعہ", price: 1450 }
-];
-
-// ============================================================
-// ========== GENERATE DOWNLOAD BODY ===========================
-// ============================================================
-function generateDownloadBody() {
-    const tbody = document.getElementById('downloadBody');
-    const totalSpan = document.getElementById('downloadTotal');
-    
-    let html = '';
-    booksData.forEach((book, index) => {
-        html += `
-            <tr>
-                <td>${index + 1}</td>
-                <td style="text-align:right;font-weight:bold;">${book.name}</td>
-                <td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">${book.price}</td>
-            </tr>
-        `;
-    });
-    tbody.innerHTML = html;
-    totalSpan.textContent = `کل کتابیں: ${booksData.length}`;
-}
-
-// ============================================================
-// ========== DOWNLOAD PDF =====================================
-// ============================================================
-function downloadPDF() {
-    try {
-        generateDownloadBody();
-        const element = document.getElementById('downloadContainer');
-        const opt = {
-            margin: [10, 10, 10, 10],
-            filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { 
-                scale: 2, 
-                useCORS: true,
-                logging: false,
-                letterRendering: true
-            },
-            jsPDF: { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait' 
-            }
-        };
-        html2pdf().set(opt).from(element).save();
-        showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
-    } catch(e) {
-        showToast('❌ PDF ڈاؤن لوڈ میں خرابی!', true);
-        console.error(e);
-    }
-}
-
-// ============================================================
-// ========== DOWNLOAD JPG =====================================
-// ============================================================
-function downloadJPG() {
-    try {
-        generateDownloadBody();
-        const element = document.getElementById('downloadContainer');
-        
-        html2canvas(element, {
-            scale: 2,
-            backgroundColor: '#ffffff',
-            logging: false,
-            allowTaint: false,
-            useCORS: false,
-            letterRendering: true
-        }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
-            link.href = canvas.toDataURL('image/jpeg', 0.92);
-            link.click();
-            showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
-        }).catch(err => {
-            showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
-            console.error(err);
-        });
-    } catch(e) {
-        showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
-        console.error(e);
-    }
-}
-
-// ============================================================
-// ========== ADMIN LOGIN ======================================
+// ========== ADMIN PASSWORD ===================================
 // ============================================================
 const ADMIN_PASSWORD = 'hamad123';
 let isAdmin = false;
 
+// ============================================================
+// ========== ADMIN LOGIN ======================================
+// ============================================================
 function openLogin() {
     document.getElementById('passwordModal').style.display = 'flex';
     document.getElementById('adminPassword').value = '';
@@ -605,7 +393,7 @@ function closeLogin() {
 }
 
 function checkPassword() {
-    const input = document.getElementById('adminPassword').value;
+    var input = document.getElementById('adminPassword').value;
     if (input === ADMIN_PASSWORD) {
         isAdmin = true;
         document.getElementById('passwordModal').style.display = 'none';
@@ -641,13 +429,16 @@ function saveAllPrices() {
 // ============================================================
 // ========== TOAST ============================================
 // ============================================================
-function showToast(msg, isError = false) {
-    const toast = document.getElementById('toast');
+function showToast(msg, isError) {
+    if (isError === undefined) isError = false;
+    var toast = document.getElementById('toast');
     toast.textContent = msg;
     toast.className = 'toast' + (isError ? ' error' : '');
     toast.style.display = 'block';
     clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(() => toast.style.display = 'none', 3000);
+    toast._timeout = setTimeout(function() {
+        toast.style.display = 'none';
+    }, 3000);
 }
 
 // ============================================================
@@ -660,7 +451,6 @@ document.addEventListener('keydown', function(e) {
 });
 
 console.log('✅ Fihrist Loaded Successfully!');
-console.log('📚 Total Books: 33');
 </script>
 </body>
 </html>

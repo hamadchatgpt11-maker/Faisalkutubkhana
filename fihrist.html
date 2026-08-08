@@ -10,8 +10,8 @@
     <!-- ===== FONT AWESOME ICONS ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- ===== jsPDF for PDF Download ===== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- ===== html2pdf for PDF Download (Urdu Support) ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- ===== html2canvas for Image Download ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
@@ -243,6 +243,16 @@
             cursor: not-allowed;
         }
         
+        /* ===== JPG RENDER CONTAINER (Hidden) ===== */
+        #jpgRenderContainer {
+            display: none;
+        }
+        
+        /* ===== PDF RENDER CONTAINER ===== */
+        #pdfContent {
+            display: none;
+        }
+        
         /* ===== OTHER ===== */
         .total-books {
             margin-top: 15px;
@@ -295,6 +305,14 @@
         }
         .toast.error { background: #c0392b; }
         
+        /* ===== HIDE EDIT COLUMN FOR PUBLIC ===== */
+        .edit-column {
+            display: none;
+        }
+        .edit-column.show {
+            display: table-cell;
+        }
+        
         @media (max-width: 768px) {
             .container { padding: 12px; }
             .header { flex-direction: column; text-align: center; gap: 8px; }
@@ -335,7 +353,7 @@
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div>
-            <h1>📋 فہرست کتاباں <span>فیصل کتب خانہ</span></h1>
+            <h1>📋فہرست  <span>فیصل کتب خانہ</span></h1>
             <div style="font-size:13px;color:#666;margin-top:2px;">📚 تمام کتابوں کی مکمل فہرست</div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -368,7 +386,7 @@
                     <th style="width:50px;">شمار</th>
                     <th>کتاب کا نام</th>
                     <th style="width:110px;">قیمت (Rs.)</th>
-                    <th style="width:70px;">ترمیم</th>
+                    <th style="width:70px;" class="edit-column" id="editHeader">ترمیم</th>
                 </tr>
             </thead>
             <tbody id="fihristBody">
@@ -394,6 +412,64 @@
     <div class="footer">
         <p>🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</p>
         <p style="margin-top:4px;">© 2026 Faisal Kutub Khana - Jazakallah Khair</p>
+    </div>
+</div>
+
+<!-- ===== HIDDEN JPG RENDER CONTAINER ===== -->
+<div id="jpgRenderContainer" style="padding:30px;font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif;direction:rtl;background:white;max-width:1100px;margin:auto;">
+    <h1 style="text-align:center;color:#1a472a;border-bottom:3px solid #ffd700;padding-bottom:15px;margin-bottom:20px;">📋 فہرست کتاباں - فیصل کتب خانہ</h1>
+    <div style="text-align:center;color:#666;margin-bottom:20px;">2026 - ماہ شعبان</div>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;direction:rtl;">
+        <thead>
+            <tr>
+                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">شمار</th>
+                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">کتاب کا نام</th>
+                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">قیمت (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody id="jpgBody">
+        </tbody>
+    </table>
+    <div style="text-align:center;margin-top:20px;padding:10px;background:#fff8e1;border-radius:10px;font-size:16px;color:#1a472a;border:1px solid #ffd700;" id="jpgTotal">کل کتابیں: 0</div>
+    <div style="text-align:center;margin-top:20px;padding:15px;background:#f5f0e8;border-radius:10px;font-size:14px;border:1px solid #ffd700;line-height:2;">
+        <strong>📞 رابطہ کریں:</strong>
+        حماد فیصل: 0317-3363333 &nbsp;|&nbsp;
+        سعید رحمان: 0316-1800312 &nbsp;|&nbsp;
+        کاشف (کابل): +93 749 337 269 &nbsp;|&nbsp;
+        EasyPaisa/JazzCash: 0340-5194458 (حماد)
+    </div>
+    <div style="text-align:center;margin-top:20px;padding-top:12px;border-top:2px solid #ffd700;color:#666;font-size:12px;">
+        🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)<br>
+        © 2026 Faisal Kutub Khana - Jazakallah Khair
+    </div>
+</div>
+
+<!-- ===== HIDDEN PDF RENDER CONTAINER ===== -->
+<div id="pdfContent" style="padding:30px;font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq',serif;direction:rtl;background:white;max-width:1100px;margin:auto;">
+    <h1 style="text-align:center;color:#1a472a;border-bottom:3px solid #ffd700;padding-bottom:15px;margin-bottom:20px;">📋 فہرست کتاباں - فیصل کتب خانہ</h1>
+    <div style="text-align:center;color:#666;margin-bottom:20px;">2026 - ماہ شعبان</div>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;direction:rtl;">
+        <thead>
+            <tr>
+                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">شمار</th>
+                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">کتاب کا نام</th>
+                <th style="background:#1a472a;color:#ffd700;padding:10px;border:1px solid #2d6a4f;text-align:center;">قیمت (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody id="pdfBody">
+        </tbody>
+    </table>
+    <div style="text-align:center;margin-top:20px;padding:10px;background:#fff8e1;border-radius:10px;font-size:16px;color:#1a472a;border:1px solid #ffd700;" id="pdfTotal">کل کتابیں: 0</div>
+    <div style="text-align:center;margin-top:20px;padding:15px;background:#f5f0e8;border-radius:10px;font-size:14px;border:1px solid #ffd700;line-height:2;">
+        <strong>📞 رابطہ کریں:</strong>
+        حماد فیصل: 0317-3363333 &nbsp;|&nbsp;
+        سعید رحمان: 0316-1800312 &nbsp;|&nbsp;
+        کاشف (کابل): +93 749 337 269 &nbsp;|&nbsp;
+        EasyPaisa/JazzCash: 0340-5194458 (حماد)
+    </div>
+    <div style="text-align:center;margin-top:20px;padding-top:12px;border-top:2px solid #ffd700;color:#666;font-size:12px;">
+        🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)<br>
+        © 2026 Faisal Kutub Khana - Jazakallah Khair
     </div>
 </div>
 
@@ -514,16 +590,21 @@ function updateLoginUI() {
     const logoutBtn = document.getElementById('logoutBtn');
     const saveBtn = document.getElementById('saveBtn');
     
+    const editHeader = document.getElementById('editHeader');
+    const editCells = document.querySelectorAll('.edit-column');
+    
     if (isAdmin) {
         status.style.display = 'inline-block';
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'inline-block';
         saveBtn.style.display = 'inline-block';
+        editCells.forEach(el => el.classList.add('show'));
     } else {
         status.style.display = 'none';
         loginBtn.style.display = 'inline-block';
         logoutBtn.style.display = 'none';
         saveBtn.style.display = 'none';
+        editCells.forEach(el => el.classList.remove('show'));
     }
 }
 
@@ -544,6 +625,11 @@ function renderFihrist() {
     products.forEach((book, index) => {
         const savedPrice = fihristPrices[book.id] || book.price;
         const disabled = !isAdmin ? 'disabled' : '';
+        const editBtn = isAdmin ? 
+            `<button class="btn-edit-price" onclick="resetPrice('${book.id}')">
+                <i class="fas fa-undo"></i>
+            </button>` : '';
+        
         html += `
             <tr>
                 <td>${index + 1}</td>
@@ -553,16 +639,15 @@ function renderFihrist() {
                            value="${savedPrice}" step="50" min="0"
                            onchange="updatePrice('${book.id}')" ${disabled}>
                 </td>
-                <td>
-                    <button class="btn-edit-price" onclick="resetPrice('${book.id}')" ${!isAdmin ? 'disabled' : ''}>
-                        <i class="fas fa-undo"></i>
-                    </button>
+                <td class="edit-column">
+                    ${editBtn}
                 </td>
             </tr>
         `;
     });
     tbody.innerHTML = html;
     totalSpan.textContent = `کل کتابیں: ${products.length}`;
+    updateLoginUI();
 }
 
 // ============================================================
@@ -618,63 +703,87 @@ function saveAllPrices() {
 }
 
 // ============================================================
+// ========== GENERATE JPG BODY ===============================
+// ============================================================
+function generateJPGBody() {
+    const tbody = document.getElementById('jpgBody');
+    const totalSpan = document.getElementById('jpgTotal');
+    
+    if (!products.length) {
+        tbody.innerHTML = `<tr><td colspan="3" style="padding:30px;color:#999;">کوئی کتاب دستیاب نہیں</td></tr>`;
+        totalSpan.textContent = 'کل کتابیں: 0';
+        return;
+    }
+
+    let html = '';
+    products.forEach((book, index) => {
+        const savedPrice = fihristPrices[book.id] || book.price;
+        html += `
+            <tr>
+                <td style="padding:8px;border:1px solid #ddd;text-align:center;">${index + 1}</td>
+                <td style="padding:8px;border:1px solid #ddd;text-align:right;">${book.name}</td>
+                <td style="padding:8px;border:1px solid #ddd;text-align:center;font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">${savedPrice}</td>
+            </tr>
+        `;
+    });
+    tbody.innerHTML = html;
+    totalSpan.textContent = `کل کتابیں: ${products.length}`;
+}
+
+// ============================================================
+// ========== GENERATE PDF BODY ===============================
+// ============================================================
+function generatePDFBody() {
+    const tbody = document.getElementById('pdfBody');
+    const totalSpan = document.getElementById('pdfTotal');
+    
+    if (!products.length) {
+        tbody.innerHTML = `<tr><td colspan="3" style="padding:30px;color:#999;">کوئی کتاب دستیاب نہیں</td></tr>`;
+        totalSpan.textContent = 'کل کتابیں: 0';
+        return;
+    }
+
+    let html = '';
+    products.forEach((book, index) => {
+        const savedPrice = fihristPrices[book.id] || book.price;
+        html += `
+            <tr>
+                <td style="padding:8px;border:1px solid #ddd;text-align:center;">${index + 1}</td>
+                <td style="padding:8px;border:1px solid #ddd;text-align:right;">${book.name}</td>
+                <td style="padding:8px;border:1px solid #ddd;text-align:center;font-family:'Segoe UI',Arial,sans-serif;">${savedPrice}</td>
+            </tr>
+        `;
+    });
+    tbody.innerHTML = html;
+    totalSpan.textContent = `کل کتابیں: ${products.length}`;
+}
+
+// ============================================================
 // ========== DOWNLOAD PDF =====================================
 // ============================================================
 function downloadPDF() {
     try {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('p', 'mm', 'a4');
-        const pageWidth = 210;
-        const margin = 15;
-        let y = 20;
-        
-        doc.setFontSize(18);
-        doc.text('فہرست کتاباں - فیصل کتب خانہ', pageWidth/2, y, { align: 'center' });
-        y += 10;
-        doc.setFontSize(12);
-        doc.text('2026 - ماہ شعبان', pageWidth/2, y, { align: 'center' });
-        y += 10;
-        
-        doc.setFontSize(11);
-        const headers = ['شمار', 'کتاب کا نام', 'قیمت (Rs.)'];
-        const colWidths = [15, 100, 30];
-        let x = margin;
-        doc.setFillColor(26, 71, 42);
-        doc.setTextColor(255, 215, 0);
-        headers.forEach((h, i) => {
-            doc.rect(x, y, colWidths[i], 8, 'F');
-            doc.text(h, x + colWidths[i]/2, y + 6, { align: 'center' });
-            x += colWidths[i];
-        });
-        y += 8;
-        doc.setTextColor(0);
-        
-        products.forEach((book, index) => {
-            const price = fihristPrices[book.id] || book.price;
-            x = margin;
-            const row = [String(index + 1), book.name, String(price)];
-            row.forEach((text, i) => {
-                doc.text(text, x + colWidths[i]/2, y + 5, { align: 'center' });
-                x += colWidths[i];
-            });
-            y += 8;
-            if (y > 270) {
-                doc.addPage();
-                y = 20;
-            }
-        });
-        
-        y += 5;
-        doc.setFontSize(12);
-        doc.text(`کل کتابیں: ${products.length}`, margin, y);
-        y += 10;
-        doc.setFontSize(10);
-        doc.text('رابطہ: حماد فیصل 0317-3363333 | سعید رحمان 0316-1800312 | کاشف +93 749 337 269', pageWidth/2, y, { align: 'center' });
-        y += 6;
-        doc.text('EasyPaisa/JazzCash: 0340-5194458 (حماد فیصل)', pageWidth/2, y, { align: 'center' });
-        
-        doc.save('Fihrist_Faisal_Kutub_Khana.pdf');
-        showToast('✅ PDF ڈاؤن لوڈ ہو گئی!');
+        generatePDFBody();
+        const element = document.getElementById('pdfContent');
+        const opt = {
+            margin: [10, 10, 10, 10],
+            filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, 
+                useCORS: true,
+                logging: false,
+                letterRendering: true
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait' 
+            },
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+        html2pdf().set(opt).from(element).save();
+        showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
     } catch(e) {
         showToast('❌ PDF ڈاؤن لوڈ میں خرابی!', true);
         console.error(e);
@@ -686,31 +795,16 @@ function downloadPDF() {
 // ============================================================
 function downloadJPG() {
     try {
-        // First update all prices in the table to show current values
-        const element = document.getElementById('fihristContent');
+        // Generate fresh JPG content with current prices
+        generateJPGBody();
         
-        // Ensure all price inputs show current values
-        products.forEach(book => {
-            const input = document.getElementById(`price_${book.id}`);
-            if (input) {
-                const price = fihristPrices[book.id] || book.price;
-                input.value = price;
-            }
-        });
-        
+        const element = document.getElementById('jpgRenderContainer');
         html2canvas(element, {
             scale: 2,
             useCORS: true,
             backgroundColor: '#ffffff',
             logging: false,
-            onclone: function(clonedDoc) {
-                // Ensure prices are visible in the cloned document
-                const clonedInputs = clonedDoc.querySelectorAll('.price-input');
-                clonedInputs.forEach(input => {
-                    input.style.color = '#000';
-                    input.style.fontWeight = 'bold';
-                });
-            }
+            letterRendering: true
         }).then(canvas => {
             const link = document.createElement('a');
             link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';

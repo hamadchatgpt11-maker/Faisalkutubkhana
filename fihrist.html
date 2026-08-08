@@ -2,7 +2,10 @@
 <html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>📋 Fihrist - Faisal Kutub Khana</title>
     
     <!-- ===== JAMEEL NOORI KASHIDA FONT ===== -->
@@ -17,11 +20,16 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
         body {
             font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Jameel Noori Kashida', 'Segoe UI', Arial, sans-serif;
             background: #f5f0e8;
-            padding: 20px;
+            padding: 10px;
             direction: rtl;
+            min-height: 100vh;
         }
         .num, .price, .btn, input[type="number"] {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -30,9 +38,10 @@
             max-width: 1100px;
             margin: auto;
             background: white;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 15px;
+            border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 100%;
         }
         
         /* ===== HEADER ===== */
@@ -42,40 +51,47 @@
             align-items: center;
             flex-wrap: wrap;
             border-bottom: 3px solid #ffd700;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            gap: 10px;
         }
         .header h1 {
             color: #1a472a;
-            font-size: 26px;
+            font-size: 20px;
         }
         .header h1 span {
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
         }
         .header .back-link {
             background: #2d6a4f;
             color: white;
-            padding: 8px 18px;
-            border-radius: 10px;
+            padding: 6px 14px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
-            font-size: 14px;
+            font-size: 12px;
         }
         .header .back-link:hover {
             background: #1a472a;
             transform: scale(1.02);
         }
         .header .login-status {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 20px;
         }
         .header .login-status.admin {
             background: #d4edda;
             color: #155724;
+        }
+        .header .header-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
         }
         
         /* ===== FI HRIST INFO ===== */
@@ -84,36 +100,37 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding: 12px 15px;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding: 10px 12px;
             background: #fff8e1;
-            border-radius: 12px;
-            border-right: 5px solid #ffd700;
+            border-radius: 10px;
+            border-right: 4px solid #ffd700;
         }
         .fihrist-info .date {
-            font-size: 15px;
+            font-size: 13px;
             color: #1a472a;
         }
         .fihrist-info .actions {
             display: flex;
-            gap: 8px;
+            gap: 5px;
             flex-wrap: wrap;
         }
         
         /* ===== BUTTONS ===== */
         .btn {
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: bold;
             transition: 0.3s;
             color: white;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
+            white-space: nowrap;
         }
         .btn:hover { transform: scale(1.02); }
         .btn-download-pdf { background: #e74c3c; }
@@ -130,9 +147,9 @@
         .btn-logout:hover { background: #a93226; }
         .btn-edit-price {
             background: #f39c12;
-            padding: 4px 10px;
-            font-size: 11px;
-            border-radius: 6px;
+            padding: 3px 8px;
+            font-size: 10px;
+            border-radius: 4px;
             color: white;
             border: none;
             cursor: pointer;
@@ -155,60 +172,64 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            padding: 20px;
         }
         .password-modal .modal-box {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 25px;
+            border-radius: 16px;
             text-align: center;
-            max-width: 380px;
-            width: 90%;
+            max-width: 360px;
+            width: 100%;
             box-shadow: 0 10px 50px rgba(0,0,0,0.3);
         }
-        .password-modal .modal-box h2 { color: #1a472a; margin-bottom: 10px; font-size: 22px; }
+        .password-modal .modal-box h2 { color: #1a472a; margin-bottom: 8px; font-size: 20px; }
         .password-modal .modal-box input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 15px;
+            margin: 8px 0;
             text-align: center;
         }
         .password-modal .modal-box input:focus { outline: none; border-color: #ffd700; }
-        .password-modal .modal-box .btn { width: 100%; padding: 12px; font-size: 16px; }
-        .password-modal .modal-box .error-msg { color: #c0392b; font-size: 13px; margin-top: 8px; display: none; }
-        .password-modal .modal-box .hint { font-size: 12px; color: #999; margin-top: 8px; }
+        .password-modal .modal-box .btn { width: 100%; padding: 10px; font-size: 15px; justify-content: center; }
+        .password-modal .modal-box .error-msg { color: #c0392b; font-size: 12px; margin-top: 6px; display: none; }
+        .password-modal .modal-box .hint { font-size: 11px; color: #999; margin-top: 6px; }
         
         /* ===== TABLE ===== */
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
-            margin-top: 10px;
+            font-size: 12px;
+            margin-top: 8px;
         }
         table th {
             background: #1a472a;
             color: #ffd700;
-            padding: 10px 8px;
+            padding: 8px 5px;
             text-align: center;
             border: 1px solid #2d6a4f;
+            font-size: 12px;
         }
         table td {
-            padding: 8px;
+            padding: 6px 4px;
             text-align: center;
             border: 1px solid #ddd;
+            font-size: 12px;
         }
         table tr:nth-child(even) { background: #f9f9f9; }
         table tr:hover { background: #fff8e1; }
         table .price-input {
-            width: 75px;
-            padding: 5px 6px;
+            width: 60px;
+            padding: 4px 4px;
             border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 4px;
+            font-size: 11px;
             text-align: center;
             font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 70px;
         }
         table .price-input:focus { outline: none; border-color: #ffd700; }
         table .price-input:disabled {
@@ -285,24 +306,24 @@
         
         /* ===== OTHER ===== */
         .total-books {
-            margin-top: 15px;
-            padding: 10px;
+            margin-top: 12px;
+            padding: 8px;
             background: #fff8e1;
-            border-radius: 10px;
+            border-radius: 8px;
             text-align: center;
-            font-size: 16px;
+            font-size: 14px;
             color: #1a472a;
             border: 1px solid #ffd700;
         }
         .contact-info {
-            margin-top: 15px;
-            padding: 12px;
+            margin-top: 12px;
+            padding: 10px;
             background: #f5f0e8;
-            border-radius: 10px;
+            border-radius: 8px;
             text-align: center;
-            font-size: 14px;
+            font-size: 12px;
             border: 1px solid #ffd700;
-            line-height: 2;
+            line-height: 1.8;
         }
         .contact-info .num {
             direction: ltr;
@@ -314,16 +335,19 @@
         .toast {
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background: #2d6a4f;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             display: none;
             z-index: 2000;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
+            max-width: 90%;
+            text-align: center;
         }
         .toast.error { background: #c0392b; }
         
@@ -335,15 +359,30 @@
             display: table-cell;
         }
         
-        @media (max-width: 768px) {
-            .container { padding: 12px; }
-            .header { flex-direction: column; text-align: center; gap: 8px; }
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            body { padding: 6px; }
+            .container { padding: 10px; border-radius: 10px; }
+            .header h1 { font-size: 17px; }
+            .header .back-link { font-size: 11px; padding: 4px 10px; }
+            .fihrist-info { padding: 8px 10px; }
+            .fihrist-info .date { font-size: 12px; }
+            .btn { font-size: 10px; padding: 5px 8px; }
+            table { font-size: 10px; }
+            table th { font-size: 10px; padding: 5px 3px; }
+            table td { font-size: 10px; padding: 4px 2px; }
+            table .price-input { width: 50px; font-size: 10px; padding: 3px 2px; }
+            .total-books { font-size: 12px; padding: 6px; }
+            .contact-info { font-size: 11px; padding: 8px; }
+            .contact-info .num { font-size: 11px; }
+        }
+        
+        @media (max-width: 400px) {
+            .header { flex-direction: column; align-items: stretch; text-align: center; }
+            .header .header-actions { justify-content: center; }
             .fihrist-info { flex-direction: column; align-items: stretch; text-align: center; }
             .fihrist-info .actions { justify-content: center; }
-            table { font-size: 11px; }
-            table th, table td { padding: 4px 3px; }
-            table .price-input { width: 55px; font-size: 11px; }
-            .btn { font-size: 11px; padding: 6px 12px; }
+            table .price-input { width: 45px; font-size: 9px; }
         }
     </style>
 </head>
@@ -353,7 +392,7 @@
 <div class="password-modal" id="passwordModal">
     <div class="modal-box">
         <h2>🔐 Admin Access</h2>
-        <p style="color:#666;margin-bottom:10px;">براہ کرم پاس ورڈ درج کریں</p>
+        <p style="color:#666;margin-bottom:6px;font-size:14px;">براہ کرم پاس ورڈ درج کریں</p>
         <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
         <button class="btn btn-login" onclick="checkPassword()">✅ تصدیق کریں</button>
         <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
@@ -366,11 +405,11 @@
     <div class="header">
         <div>
             <h1>📋 فہرست - فیصل کتب خانہ</h1>
-            <div style="font-size:13px;color:#666;margin-top:2px;">📚 تمام کتابوں کی مکمل فہرست</div>
+            <div style="font-size:11px;color:#666;margin-top:1px;">📚 تمام کتابوں کی مکمل فہرست</div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <div class="header-actions">
             <span class="login-status admin" id="loginStatus" style="display:none;">🔓 ایڈمن</span>
-            <button class="btn btn-login" id="loginBtn" onclick="openLogin()">🔐 ایڈمن لاگ ان</button>
+            <button class="btn btn-login" id="loginBtn" onclick="openLogin()">🔐 ایڈمن</button>
             <button class="btn btn-logout" id="logoutBtn" onclick="logout()" style="display:none;">🚪 لاگ آؤٹ</button>
             <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> واپس</a>
         </div>
@@ -386,19 +425,19 @@
             <button class="btn btn-download-pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
             <button class="btn btn-download-jpg" onclick="downloadJPG()"><i class="fas fa-image"></i> JPG</button>
             <button class="btn btn-print" onclick="printFihrist()"><i class="fas fa-print"></i> پرنٹ</button>
-            <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;"><i class="fas fa-save"></i> محفوظ کریں</button>
+            <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;"><i class="fas fa-save"></i> محفوظ</button>
         </div>
     </div>
 
     <!-- ===== TABLE ===== -->
-    <div id="fihristContent" style="overflow-x:auto;">
+    <div id="fihristContent" style="overflow-x:auto; -webkit-overflow-scrolling: touch;">
         <table id="fihristTable">
             <thead>
                 <tr>
-                    <th style="width:50px;">شمار</th>
+                    <th style="width:40px;">شمار</th>
                     <th>کتاب کا نام</th>
-                    <th style="width:110px;">قیمت (Rs.)</th>
-                    <th style="width:70px;" class="edit-column" id="editHeader">ترمیم</th>
+                    <th style="width:80px;">قیمت (Rs.)</th>
+                    <th style="width:55px;" class="edit-column" id="editHeader">ترمیم</th>
                 </tr>
             </thead>
             <tbody id="fihristBody">
@@ -411,7 +450,7 @@
         کل کتابیں: 0
     </div>
 
-    <!-- ===== CONTACT INFO (Only at bottom) ===== -->
+    <!-- ===== CONTACT INFO ===== -->
     <div class="contact-info">
         <strong>📞 رابطہ کریں:</strong>
         حماد فیصل: <span class="num">0317-3363333</span> &nbsp;|&nbsp;
@@ -542,7 +581,7 @@ function checkPassword() {
         document.getElementById('passwordModal').style.display = 'none';
         renderFihrist();
         updateLoginUI();
-        showToast('✅ ایڈمن موڈ آن! اب آپ قیمتیں تبدیل کر سکتے ہیں');
+        showToast('✅ ایڈمن موڈ آن!');
     } else {
         document.getElementById('passwordError').style.display = 'block';
         document.getElementById('adminPassword').value = '';
@@ -568,11 +607,11 @@ function updateLoginUI() {
         status.style.display = 'inline-block';
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'inline-block';
-        saveBtn.style.display = 'inline-block';
+        saveBtn.style.display = 'inline-flex';
         editCells.forEach(el => el.classList.add('show'));
     } else {
         status.style.display = 'none';
-        loginBtn.style.display = 'inline-block';
+        loginBtn.style.display = 'inline-flex';
         logoutBtn.style.display = 'none';
         saveBtn.style.display = 'none';
         editCells.forEach(el => el.classList.remove('show'));
@@ -587,7 +626,7 @@ function renderFihrist() {
     const totalSpan = document.getElementById('fihristTotal');
     
     if (!products.length) {
-        tbody.innerHTML = `<tr><td colspan="4" style="padding:30px;color:#999;">کوئی کتاب دستیاب نہیں</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" style="padding:20px;color:#999;font-size:13px;">کوئی کتاب دستیاب نہیں</td></tr>`;
         totalSpan.textContent = 'کل کتابیں: 0';
         return;
     }
@@ -626,7 +665,7 @@ function renderFihrist() {
 // ============================================================
 function updatePrice(id) {
     if (!isAdmin) {
-        showToast('❌ براہ کرم پہلے ایڈمن لاگ ان کریں!', true);
+        showToast('❌ پہلے ایڈمن لاگ ان کریں!', true);
         return;
     }
     const input = document.getElementById(`price_${id}`);
@@ -642,7 +681,7 @@ function updatePrice(id) {
 
 function resetPrice(id) {
     if (!isAdmin) {
-        showToast('❌ براہ کرم پہلے ایڈمن لاگ ان کریں!', true);
+        showToast('❌ پہلے ایڈمن لاگ ان کریں!', true);
         return;
     }
     const book = products.find(p => p.id === id);
@@ -657,7 +696,7 @@ function resetPrice(id) {
 
 function saveAllPrices() {
     if (!isAdmin) {
-        showToast('❌ براہ کرم پہلے ایڈمن لاگ ان کریں!', true);
+        showToast('❌ پہلے ایڈمن لاگ ان کریں!', true);
         return;
     }
     products.forEach(book => {
@@ -784,7 +823,7 @@ function showToast(msg, isError = false) {
     toast.className = 'toast' + (isError ? ' error' : '');
     toast.style.display = 'block';
     clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(() => toast.style.display = 'none', 3000);
+    toast._timeout = setTimeout(() => toast.style.display = 'none', 2500);
 }
 
 // ============================================================

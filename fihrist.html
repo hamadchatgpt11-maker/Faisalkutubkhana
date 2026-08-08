@@ -241,6 +241,41 @@
         }
         .toast.error { background: #c0392b; }
         
+        /* ===== DOWNLOAD CONTAINER (SIRF TABLE) ===== */
+        #downloadContainer {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            width: 800px;
+            padding: 30px;
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Alvi Nastaleeq', serif;
+            direction: rtl;
+            background: white;
+            z-index: -1;
+        }
+        #downloadContainer table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        #downloadContainer table th {
+            background: #1a472a;
+            color: #ffd700;
+            padding: 8px;
+            border: 1px solid #2d6a4f;
+            text-align: center;
+        }
+        #downloadContainer table td {
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        #downloadContainer table td.book-name {
+            text-align: right;
+            font-weight: bold;
+        }
+        #downloadContainer table tr:nth-child(even) { background: #f9f9f9; }
+        
         @media (max-width: 640px) {
             body { padding: 6px; }
             .container { padding: 10px; border-radius: 10px; }
@@ -287,7 +322,6 @@
             <i class="fas fa-calendar-alt"></i>
             2026 - ماہ شعبان
         </div>
-        <!-- ===== YAHAN DOWNLOAD BUTTONS HAIN ===== -->
         <div class="actions">
             <button class="btn btn-download-pdf" onclick="downloadPDF()">
                 <i class="fas fa-file-pdf"></i> ڈاؤن لوڈ فہرست PDF
@@ -363,6 +397,21 @@
     </div>
 </div>
 
+<!-- ===== DOWNLOAD CONTAINER (SIRF TABLE) ===== -->
+<div id="downloadContainer">
+    <table>
+        <thead>
+            <tr>
+                <th>شمار</th>
+                <th>کتاب کا نام</th>
+                <th>قیمت (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody id="downloadBody">
+        </tbody>
+    </table>
+</div>
+
 <!-- ===== PASSWORD MODAL ===== -->
 <div class="password-modal" id="passwordModal">
     <div class="modal-box">
@@ -380,52 +429,123 @@
 
 <script>
 // ============================================================
+// ========== BOOKS DATA =======================================
+// ============================================================
+const booksData = [
+    { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450 },
+    { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350 },
+    { name: "تسہیل الہدایہ زرد (فی حصہ، 4 حصے)", price: 1350 },
+    { name: "تسہیل الہدایہ فارسی (8 جلد)", price: 5450 },
+    { name: "ریاض الصالحین", price: 900 },
+    { name: "منهاج الصالحین", price: 2000 },
+    { name: "تفسیر خیر کثیر سفید", price: 4250 },
+    { name: "تفسیر خیر کثیر زرد", price: 4000 },
+    { name: "معارف القرآن زرد", price: 6700 },
+    { name: "معارف القرآن سفید", price: 6700 },
+    { name: "سیرت خاتم الانبیاء", price: 200 },
+    { name: "فوز المبتدی", price: 1800 },
+    { name: "د نوې مسئلو فتاوی", price: 400 },
+    { name: "فہم القرآن (اورنج)", price: 950 },
+    { name: "فہم القرآن سفید", price: 1100 },
+    { name: "فقہی عجائبات", price: 350 },
+    { name: "سراج الطالبین (پشتو)", price: 200 },
+    { name: "تسہیلات شرح مشکاة", price: 7250 },
+    { name: "انوار الہلالین", price: 2000 },
+    { name: "فتاوی عالمگیری", price: 7800 },
+    { name: "کشف الباری مکمل (24 جلد)", price: 16700 },
+    { name: "کشف الباری (فی جلد)", price: 700 },
+    { name: "معلم الحجاج", price: 300 },
+    { name: "حدیث دورہ", price: 3150 },
+    { name: "سراج المنتہی", price: 6700 },
+    { name: "سراج الطالبین اردو", price: 200 },
+    { name: "مرقاة", price: 7800 },
+    { name: "فتاوی شامی", price: 8900 },
+    { name: "صفوة التفاسیر", price: 1800 },
+    { name: "تسہیل الہدایہ صلاۃ", price: 1400 },
+    { name: "تسہیل الہدایہ نکاح", price: 1400 },
+    { name: "تسہیل الہدایہ بیوع", price: 1450 },
+    { name: "تسہیل الہدایہ شفعہ", price: 1450 }
+];
+
+// ============================================================
+// ========== GENERATE DOWNLOAD BODY ===========================
+// ============================================================
+function generateDownloadBody() {
+    const tbody = document.getElementById('downloadBody');
+    
+    let html = '';
+    booksData.forEach((book, index) => {
+        html += `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="text-align:right;font-weight:bold;">${book.name}</td>
+                <td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">${book.price}</td>
+            </tr>
+        `;
+    });
+    tbody.innerHTML = html;
+}
+
+// ============================================================
 // ========== DOWNLOAD PDF =====================================
 // ============================================================
 function downloadPDF() {
-    const element = document.getElementById('mainTable');
-    const opt = {
-        margin: [10, 10, 10, 10],
-        filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2, 
-            useCORS: true,
-            logging: false,
-            letterRendering: true
-        },
-        jsPDF: { 
-            unit: 'mm', 
-            format: 'a4', 
-            orientation: 'portrait' 
-        }
-    };
-    html2pdf().set(opt).from(element).save();
-    showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
+    try {
+        generateDownloadBody();
+        const element = document.getElementById('downloadContainer');
+        const opt = {
+            margin: [10, 10, 10, 10],
+            filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, 
+                useCORS: true,
+                logging: false,
+                letterRendering: true
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait' 
+            }
+        };
+        html2pdf().set(opt).from(element).save();
+        showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
+    } catch(e) {
+        showToast('❌ PDF ڈاؤن لوڈ میں خرابی!', true);
+        console.error(e);
+    }
 }
 
 // ============================================================
 // ========== DOWNLOAD JPG =====================================
 // ============================================================
 function downloadJPG() {
-    const element = document.getElementById('mainTable');
-    html2canvas(element, {
-        scale: 2,
-        backgroundColor: '#ffffff',
-        logging: false,
-        allowTaint: false,
-        useCORS: false,
-        letterRendering: true
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
-        link.href = canvas.toDataURL('image/jpeg', 0.92);
-        link.click();
-        showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
-    }).catch(err => {
-        showToast('⚠️ JPG ڈاؤن لوڈ میں خرابی!', true);
-        console.error(err);
-    });
+    try {
+        generateDownloadBody();
+        const element = document.getElementById('downloadContainer');
+        
+        html2canvas(element, {
+            scale: 2,
+            backgroundColor: '#ffffff',
+            logging: false,
+            allowTaint: false,
+            useCORS: false,
+            letterRendering: true
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.92);
+            link.click();
+            showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
+        }).catch(err => {
+            showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
+            console.error(err);
+        });
+    } catch(e) {
+        showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
+        console.error(e);
+    }
 }
 
 // ============================================================

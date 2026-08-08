@@ -39,24 +39,24 @@
         .top-contact {
             background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 100%);
             color: #ffd700;
-            padding: 15px 20px;
+            padding: 12px 20px;
             border-radius: 12px;
             margin-bottom: 20px;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            font-size: 15px;
+            gap: 15px 25px;
+            font-size: 14px;
             border: 1px solid #ffd700;
             text-align: center;
         }
-        .top-contact span { font-weight: bold; display: flex; align-items: center; gap: 8px; }
+        .top-contact span { font-weight: bold; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
         .top-contact .name { color: #ffffff; }
         .top-contact .num { color: #ffd700; direction: ltr; display: inline-block; font-family: 'Segoe UI', Arial, sans-serif; }
         .top-contact .wa-link {
             color: #25D366;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             transition: 0.3s;
         }
         .top-contact .wa-link:hover { transform: scale(1.2); color: #1da851; }
@@ -73,29 +73,30 @@
         }
         .header h1 {
             color: #1a472a;
-            font-size: 28px;
+            font-size: 26px;
         }
         .header h1 span {
-            font-size: 16px;
+            font-size: 14px;
             color: #666;
         }
         .header .back-link {
             background: #2d6a4f;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
+            font-size: 14px;
         }
         .header .back-link:hover {
             background: #1a472a;
             transform: scale(1.02);
         }
         .header .login-status {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 20px;
         }
         .header .login-status.public {
@@ -115,31 +116,34 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 12px 15px;
             background: #fff8e1;
             border-radius: 12px;
             border-right: 5px solid #ffd700;
         }
         .fihrist-info .date {
-            font-size: 16px;
+            font-size: 15px;
             color: #1a472a;
         }
         .fihrist-info .actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         
         /* ===== BUTTONS ===== */
         .btn {
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             transition: 0.3s;
             color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         .btn:hover { transform: scale(1.02); }
         .btn-download-pdf { background: #e74c3c; }
@@ -156,8 +160,8 @@
         .btn-logout:hover { background: #a93226; }
         .btn-edit-price {
             background: #f39c12;
-            padding: 4px 12px;
-            font-size: 12px;
+            padding: 4px 10px;
+            font-size: 11px;
             border-radius: 6px;
             color: white;
             border: none;
@@ -184,55 +188,55 @@
         }
         .password-modal .modal-box {
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             text-align: center;
-            max-width: 400px;
+            max-width: 380px;
             width: 90%;
             box-shadow: 0 10px 50px rgba(0,0,0,0.3);
         }
-        .password-modal .modal-box h2 { color: #1a472a; margin-bottom: 15px; }
+        .password-modal .modal-box h2 { color: #1a472a; margin-bottom: 10px; font-size: 22px; }
         .password-modal .modal-box input {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: 2px solid #ddd;
             border-radius: 10px;
-            font-size: 18px;
-            margin: 15px 0;
+            font-size: 16px;
+            margin: 10px 0;
             text-align: center;
         }
         .password-modal .modal-box input:focus { outline: none; border-color: #ffd700; }
-        .password-modal .modal-box .btn { width: 100%; padding: 14px; font-size: 18px; }
-        .password-modal .modal-box .error-msg { color: #c0392b; font-size: 14px; margin-top: 10px; display: none; }
-        .password-modal .modal-box .hint { font-size: 12px; color: #999; margin-top: 10px; }
+        .password-modal .modal-box .btn { width: 100%; padding: 12px; font-size: 16px; }
+        .password-modal .modal-box .error-msg { color: #c0392b; font-size: 13px; margin-top: 8px; display: none; }
+        .password-modal .modal-box .hint { font-size: 12px; color: #999; margin-top: 8px; }
         
         /* ===== TABLE ===== */
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 15px;
+            font-size: 14px;
             margin-top: 10px;
         }
         table th {
             background: #1a472a;
             color: #ffd700;
-            padding: 12px 10px;
+            padding: 10px 8px;
             text-align: center;
             border: 1px solid #2d6a4f;
         }
         table td {
-            padding: 10px;
+            padding: 8px;
             text-align: center;
             border: 1px solid #ddd;
         }
         table tr:nth-child(even) { background: #f9f9f9; }
         table tr:hover { background: #fff8e1; }
         table .price-input {
-            width: 80px;
-            padding: 6px 8px;
+            width: 75px;
+            padding: 5px 6px;
             border: 2px solid #ddd;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
             font-family: 'Segoe UI', Arial, sans-serif;
         }
@@ -245,22 +249,22 @@
         
         /* ===== OTHER ===== */
         .total-books {
-            margin-top: 20px;
-            padding: 12px;
+            margin-top: 15px;
+            padding: 10px;
             background: #fff8e1;
             border-radius: 10px;
             text-align: center;
-            font-size: 17px;
+            font-size: 16px;
             color: #1a472a;
             border: 1px solid #ffd700;
         }
         .contact-info {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             background: #f5f0e8;
             border-radius: 10px;
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             border: 1px solid #ffd700;
             line-height: 2;
         }
@@ -273,11 +277,11 @@
         }
         .footer {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 15px;
+            margin-top: 20px;
+            padding-top: 12px;
             border-top: 2px solid #ffd700;
             color: #666;
-            font-size: 13px;
+            font-size: 12px;
         }
         .toast {
             position: fixed;
@@ -285,24 +289,27 @@
             left: 20px;
             background: #2d6a4f;
             color: white;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             display: none;
             z-index: 2000;
             font-weight: bold;
+            font-size: 14px;
         }
         .toast.error { background: #c0392b; }
         
         @media (max-width: 768px) {
-            .container { padding: 15px; }
-            .header { flex-direction: column; text-align: center; gap: 10px; }
+            .container { padding: 12px; }
+            .header { flex-direction: column; text-align: center; gap: 8px; }
             .fihrist-info { flex-direction: column; align-items: stretch; text-align: center; }
             .fihrist-info .actions { justify-content: center; }
-            .top-contact { flex-direction: column; align-items: center; }
-            table { font-size: 12px; }
-            table th, table td { padding: 6px 4px; }
-            table .price-input { width: 60px; font-size: 12px; }
+            .top-contact { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px 15px; font-size: 12px; }
+            .top-contact span { white-space: normal; }
+            table { font-size: 11px; }
+            table th, table td { padding: 4px 3px; }
+            table .price-input { width: 55px; font-size: 11px; }
+            .btn { font-size: 11px; padding: 6px 12px; }
         }
     </style>
 </head>
@@ -323,41 +330,19 @@
 <div class="container">
     <!-- ===== TOP CONTACT BAR ===== -->
     <div class="top-contact">
-        <span>
-            <span class="name">حماد فیصل</span>
-            <span class="num">0317-3363333</span>
-            <a href="https://wa.me/923173363333" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        </span>
-        <span>
-            <span class="name">سعید رحمان</span>
-            <span class="num">0316-1800312</span>
-            <a href="https://wa.me/923161800312" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        </span>
-        <span>
-            <span class="name">کاشف نمائنده (کابل)</span>
-            <span class="num">+93 749 337 269</span>
-            <a href="https://wa.me/93749337269" target="_blank" class="wa-link" title="WhatsApp پر رابطہ کریں">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-        </span>
-        <span>
-            <span class="name">EasyPaisa / JazzCash</span>
-            <span class="num">0340-5194458</span>
-            <span style="color:#27ae60;font-size:12px;">(حماد فیصل)</span>
-        </span>
+        <span><span class="name">حماد فیصل</span> <span class="num">0317-3363333</span> <a href="https://wa.me/923173363333" target="_blank" class="wa-link"><i class="fab fa-whatsapp"></i></a></span>
+        <span><span class="name">سعید رحمان</span> <span class="num">0316-1800312</span> <a href="https://wa.me/923161800312" target="_blank" class="wa-link"><i class="fab fa-whatsapp"></i></a></span>
+        <span><span class="name">کاشف (کابل)</span> <span class="num">+93 749 337 269</span> <a href="https://wa.me/93749337269" target="_blank" class="wa-link"><i class="fab fa-whatsapp"></i></a></span>
+        <span><span class="name">EasyPaisa/JazzCash</span> <span class="num">0340-5194458</span> <span style="color:#27ae60;font-size:11px;">(حماد)</span></span>
     </div>
 
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div>
             <h1>📋 فہرست کتاباں <span>فیصل کتب خانہ</span></h1>
-            <div style="font-size:14px;color:#666;margin-top:4px;">📚 تمام کتابوں کی مکمل فہرست</div>
+            <div style="font-size:13px;color:#666;margin-top:2px;">📚 تمام کتابوں کی مکمل فہرست</div>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <span class="login-status public" id="loginStatus">🔒 عوام (صرف دیکھیں)</span>
             <button class="btn btn-login" id="loginBtn" onclick="openLogin()">🔐 ایڈمن لاگ ان</button>
             <button class="btn btn-logout" id="logoutBtn" onclick="logout()" style="display:none;">🚪 لاگ آؤٹ</button>
@@ -365,27 +350,17 @@
         </div>
     </div>
 
-    <!-- ===== INFO BAR (PUBLIC DOWNLOAD BUTTONS) ===== -->
+    <!-- ===== INFO BAR ===== -->
     <div class="fihrist-info">
         <div class="date">
             <i class="fas fa-calendar-alt"></i>
             <span id="fihristDate">2026 - ماہ شعبان</span>
         </div>
         <div class="actions">
-            <!-- ===== PUBLIC DOWNLOAD BUTTONS ===== -->
-            <button class="btn btn-download-pdf" onclick="downloadPDF()">
-                <i class="fas fa-file-pdf"></i> PDF
-            </button>
-            <button class="btn btn-download-jpg" onclick="downloadJPG()">
-                <i class="fas fa-image"></i> JPG
-            </button>
-            <button class="btn btn-print" onclick="printFihrist()">
-                <i class="fas fa-print"></i> پرنٹ
-            </button>
-            <!-- ===== ADMIN SAVE BUTTON ===== -->
-            <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;">
-                <i class="fas fa-save"></i> قیمتیں محفوظ کریں
-            </button>
+            <button class="btn btn-download-pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+            <button class="btn btn-download-jpg" onclick="downloadJPG()"><i class="fas fa-image"></i> JPG</button>
+            <button class="btn btn-print" onclick="printFihrist()"><i class="fas fa-print"></i> پرنٹ</button>
+            <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;"><i class="fas fa-save"></i> محفوظ کریں</button>
         </div>
     </div>
 
@@ -394,11 +369,11 @@
         <table id="fihristTable">
             <thead>
                 <tr>
-                    <th style="width:60px;">شمار</th>
+                    <th style="width:50px;">شمار</th>
                     <th>کتاب کا نام</th>
-                    <th style="width:120px;">قیمت (Rs.)</th>
-                    <th style="width:100px;">زمرہ</th>
-                    <th style="width:80px;">ترمیم</th>
+                    <th style="width:110px;">قیمت (Rs.)</th>
+                    <th style="width:90px;">زمرہ</th>
+                    <th style="width:70px;">ترمیم</th>
                 </tr>
             </thead>
             <tbody id="fihristBody">
@@ -413,17 +388,17 @@
 
     <!-- ===== CONTACT INFO ===== -->
     <div class="contact-info">
-        <strong>📞 رابطہ کریں:</strong><br>
-        <span>حماد فیصل: <span class="num">0317-3363333</span></span> &nbsp;|&nbsp;
-        <span>سعید رحمان: <span class="num">0316-1800312</span></span> &nbsp;|&nbsp;
-        <span>کاشف نمائنده (کابل): <span class="num">+93 749 337 269</span></span> &nbsp;|&nbsp;
-        <span>EasyPaisa/JazzCash: <span class="num">0340-5194458</span> (حماد فیصل)</span>
+        <strong>📞 رابطہ کریں:</strong>
+        حماد فیصل: <span class="num">0317-3363333</span> &nbsp;|&nbsp;
+        سعید رحمان: <span class="num">0316-1800312</span> &nbsp;|&nbsp;
+        کاشف (کابل): <span class="num">+93 749 337 269</span> &nbsp;|&nbsp;
+        EasyPaisa/JazzCash: <span class="num">0340-5194458</span> (حماد)
     </div>
 
     <!-- ===== FOOTER ===== -->
     <div class="footer">
         <p>🤲 "اور کہو: میرے رب! مجھے علم میں ترقی دے" (سورہ طہ، 114)</p>
-        <p style="margin-top:5px;">© 2026 Faisal Kutub Khana - Jazakallah Khair</p>
+        <p style="margin-top:4px;">© 2026 Faisal Kutub Khana - Jazakallah Khair</p>
     </div>
 </div>
 
@@ -444,7 +419,7 @@ let fihristPrices = JSON.parse(localStorage.getItem('fihristPrices')) || {};
 let isAdmin = false;
 
 // ============================================================
-// ========== DEFAULT BOOKS (33 BOOKS) ========================
+// ========== DEFAULT BOOKS ====================================
 // ============================================================
 const allBooks = [
     { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450, category: "fiqa" },
@@ -615,7 +590,7 @@ function getCategoryName(cat) {
 }
 
 // ============================================================
-// ========== PRICE FUNCTIONS (ADMIN ONLY) ====================
+// ========== PRICE FUNCTIONS ==================================
 // ============================================================
 function updatePrice(id) {
     if (!isAdmin) {
@@ -667,100 +642,106 @@ function saveAllPrices() {
 }
 
 // ============================================================
-// ========== DOWNLOAD PDF (PUBLIC) ============================
+// ========== DOWNLOAD PDF =====================================
 // ============================================================
 function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'mm', 'a4');
-    const pageWidth = 210;
-    const margin = 15;
-    let y = 20;
-    
-    // Title
-    doc.setFontSize(18);
-    doc.text('فہرست کتاباں - فیصل کتب خانہ', pageWidth/2, y, { align: 'center' });
-    y += 10;
-    
-    // Date
-    doc.setFontSize(12);
-    doc.text('2026 - ماہ شعبان', pageWidth/2, y, { align: 'center' });
-    y += 10;
-    
-    // Table Headers
-    doc.setFontSize(11);
-    const headers = ['شمار', 'کتاب کا نام', 'قیمت (Rs.)', 'زمرہ'];
-    const colWidths = [15, 80, 30, 25];
-    let x = margin;
-    
-    doc.setFillColor(26, 71, 42);
-    doc.setTextColor(255, 215, 0);
-    headers.forEach((h, i) => {
-        doc.rect(x, y, colWidths[i], 8, 'F');
-        doc.text(h, x + colWidths[i]/2, y + 6, { align: 'center' });
-        x += colWidths[i];
-    });
-    y += 8;
-    doc.setTextColor(0);
-    
-    // Rows
-    products.forEach((book, index) => {
-        const price = fihristPrices[book.id] || book.price;
-        x = margin;
-        const row = [String(index + 1), book.name, String(price), getCategoryName(book.category)];
-        row.forEach((text, i) => {
-            doc.text(text, x + colWidths[i]/2, y + 5, { align: 'center' });
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+        const pageWidth = 210;
+        const margin = 15;
+        let y = 20;
+        
+        doc.setFontSize(18);
+        doc.text('فہرست کتاباں - فیصل کتب خانہ', pageWidth/2, y, { align: 'center' });
+        y += 10;
+        doc.setFontSize(12);
+        doc.text('2026 - ماہ شعبان', pageWidth/2, y, { align: 'center' });
+        y += 10;
+        
+        doc.setFontSize(11);
+        const headers = ['شمار', 'کتاب کا نام', 'قیمت (Rs.)', 'زمرہ'];
+        const colWidths = [15, 80, 30, 25];
+        let x = margin;
+        doc.setFillColor(26, 71, 42);
+        doc.setTextColor(255, 215, 0);
+        headers.forEach((h, i) => {
+            doc.rect(x, y, colWidths[i], 8, 'F');
+            doc.text(h, x + colWidths[i]/2, y + 6, { align: 'center' });
             x += colWidths[i];
         });
         y += 8;
-        if (y > 270) {
-            doc.addPage();
-            y = 20;
-        }
-    });
-    
-    // Total
-    y += 5;
-    doc.setFontSize(12);
-    doc.text(`کل کتابیں: ${products.length}`, margin, y);
-    
-    // Contact
-    y += 10;
-    doc.setFontSize(10);
-    doc.text('رابطہ: حماد فیصل 0317-3363333 | سعید رحمان 0316-1800312 | کاشف نمائنده +93 749 337 269', pageWidth/2, y, { align: 'center' });
-    y += 6;
-    doc.text('EasyPaisa/JazzCash: 0340-5194458 (حماد فیصل)', pageWidth/2, y, { align: 'center' });
-    
-    doc.save('Fihrist_Faisal_Kutub_Khana.pdf');
-    showToast('✅ PDF ڈاؤن لوڈ ہو گئی!');
+        doc.setTextColor(0);
+        
+        products.forEach((book, index) => {
+            const price = fihristPrices[book.id] || book.price;
+            x = margin;
+            const row = [String(index + 1), book.name, String(price), getCategoryName(book.category)];
+            row.forEach((text, i) => {
+                doc.text(text, x + colWidths[i]/2, y + 5, { align: 'center' });
+                x += colWidths[i];
+            });
+            y += 8;
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+        });
+        
+        y += 5;
+        doc.setFontSize(12);
+        doc.text(`کل کتابیں: ${products.length}`, margin, y);
+        y += 10;
+        doc.setFontSize(10);
+        doc.text('رابطہ: حماد فیصل 0317-3363333 | سعید رحمان 0316-1800312 | کاشف +93 749 337 269', pageWidth/2, y, { align: 'center' });
+        y += 6;
+        doc.text('EasyPaisa/JazzCash: 0340-5194458 (حماد فیصل)', pageWidth/2, y, { align: 'center' });
+        
+        doc.save('Fihrist_Faisal_Kutub_Khana.pdf');
+        showToast('✅ PDF ڈاؤن لوڈ ہو گئی!');
+    } catch(e) {
+        showToast('❌ PDF ڈاؤن لوڈ میں خرابی!', true);
+        console.error(e);
+    }
 }
 
 // ============================================================
-// ========== DOWNLOAD JPG (PUBLIC) ============================
+// ========== DOWNLOAD JPG =====================================
 // ============================================================
 function downloadJPG() {
-    const element = document.getElementById('fihristContent');
-    html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: '#ffffff',
-        logging: false
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
-        link.href = canvas.toDataURL('image/jpeg', 0.95);
-        link.click();
-        showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
-    }).catch(err => {
+    try {
+        const element = document.getElementById('fihristContent');
+        html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            link.click();
+            showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
+        }).catch(err => {
+            showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
+            console.error(err);
+        });
+    } catch(e) {
         showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
-        console.error(err);
-    });
+        console.error(e);
+    }
 }
 
 // ============================================================
-// ========== PRINT (PUBLIC) ===================================
+// ========== PRINT ============================================
 // ============================================================
 function printFihrist() {
-    window.print();
+    try {
+        window.print();
+    } catch(e) {
+        showToast('❌ پرنٹ میں خرابی!', true);
+        console.error(e);
+    }
 }
 
 // ============================================================
@@ -789,4 +770,9 @@ document.addEventListener('keydown', function(e) {
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     initFihrist();
-   
+    console.log('✅ Fihrist Maker Loaded Successfully!');
+    console.log(`📚 Total Books: ${products.length}`);
+});
+</script>
+</body>
+</html>

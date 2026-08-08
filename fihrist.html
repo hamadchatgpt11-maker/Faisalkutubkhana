@@ -8,11 +8,9 @@
     <meta http-equiv="Expires" content="0" />
     <title>📋 Fihrist - Faisal Kutub Khana</title>
     
-    <!-- ===== FONTS ===== -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- ===== LIBRARIES FOR DOWNLOAD ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
@@ -24,7 +22,7 @@
             min-height: 100vh;
         }
         body {
-            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Jameel Noori Kashida', 'Alvi Nastaleeq', 'Segoe UI', Arial, sans-serif;
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', Arial, sans-serif;
             background: #f5f0e8;
             padding: 10px;
             direction: rtl;
@@ -89,7 +87,6 @@
             color: #1a472a;
         }
         
-        /* ===== DOWNLOAD BUTTONS ===== */
         .btn {
             border: none;
             padding: 8px 14px;
@@ -106,17 +103,11 @@
         }
         .btn:hover { transform: scale(1.02); }
         .btn-download-pdf { background: #e74c3c; }
-        .btn-download-pdf:hover { background: #c0392b; }
         .btn-download-jpg { background: #8e44ad; }
-        .btn-download-jpg:hover { background: #6c3483; }
         .btn-print { background: #27ae60; }
-        .btn-print:hover { background: #1e8449; }
         .btn-login { background: #2d6a4f; }
-        .btn-login:hover { background: #1a472a; }
         .btn-logout { background: #c0392b; }
-        .btn-logout:hover { background: #a93226; }
         .btn-save { background: #2980b9; }
-        .btn-save:hover { background: #1f618d; }
         
         .password-modal {
             position: fixed;
@@ -152,7 +143,6 @@
             border: none;
             font-weight: bold;
         }
-        .password-modal .modal-box .close-modal:hover { color: #c0392b; }
         .password-modal .modal-box h2 { color: #1a472a; margin-bottom: 8px; font-size: 20px; }
         .password-modal .modal-box input {
             width: 100%;
@@ -163,11 +153,9 @@
             margin: 8px 0;
             text-align: center;
         }
-        .password-modal .modal-box input:focus { outline: none; border-color: #ffd700; }
         .password-modal .modal-box .btn { width: 100%; padding: 10px; font-size: 15px; justify-content: center; }
         .password-modal .modal-box .error-msg { color: #c0392b; font-size: 12px; margin-top: 6px; display: none; }
         
-        /* ===== TABLE ===== */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -193,6 +181,18 @@
             font-weight: bold;
         }
         table tr:nth-child(even) { background: #f9f9f9; }
+        
+        /* Admin Mode Input Box */
+        .admin-price-input {
+            width: 70px;
+            padding: 4px;
+            border: 2px solid #2980b9;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            display: none; /* Pehle chupa hua */
+        }
         
         .total-books {
             margin-top: 12px;
@@ -245,21 +245,9 @@
             body { padding: 6px; }
             .container { padding: 10px; border-radius: 10px; }
             .header h1 { font-size: 17px; }
-            .header .back-link { font-size: 11px; padding: 4px 10px; }
-            .fihrist-info { padding: 8px 10px; }
-            .fihrist-info .date { font-size: 12px; }
             .btn { font-size: 10px; padding: 5px 10px; }
             table { font-size: 10px; }
-            table th { font-size: 10px; padding: 5px 3px; }
-            table td { font-size: 10px; padding: 4px 2px; }
-            .total-books { font-size: 12px; padding: 6px; }
-            .contact-info { font-size: 11px; padding: 8px; }
-        }
-        @media (max-width: 400px) {
-            .header { flex-direction: column; align-items: stretch; text-align: center; }
-            .header .header-actions { justify-content: center; }
-            .fihrist-info { flex-direction: column; align-items: stretch; text-align: center; }
-            .fihrist-info .actions { justify-content: center; }
+            .admin-price-input { width: 55px; font-size: 10px; }
         }
     </style>
 </head>
@@ -267,7 +255,6 @@
 
 <div class="container">
     
-    <!-- ===== HEADER ===== -->
     <div class="header">
         <div>
             <h1>📋 فہرست - فیصل کتب خانہ</h1>
@@ -281,13 +268,11 @@
         </div>
     </div>
 
-    <!-- ===== INFO BAR WITH DOWNLOAD BUTTONS ===== -->
     <div class="fihrist-info">
         <div class="date">
             <i class="fas fa-calendar-alt"></i>
             2026 - ماہ شعبان
         </div>
-        <!-- ===== YAHAN DOWNLOAD BUTTONS HAIN ===== -->
         <div class="actions">
             <button class="btn btn-download-pdf" onclick="downloadPDF()">
                 <i class="fas fa-file-pdf"></i> ڈاؤن لوڈ فہرست PDF
@@ -304,55 +289,22 @@
         </div>
     </div>
 
-    <!-- ===== TABLE ===== -->
     <div id="mainTable" style="overflow-x:auto; -webkit-overflow-scrolling: touch;">
         <table>
             <thead>
                 <tr>
                     <th style="width:40px;">شمار</th>
                     <th>کتاب کا نام</th>
-                    <th style="width:80px;">قیمت (Rs.)</th>
+                    <th style="width:90px;">قیمت (Rs.)</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr><td>1</td><td class="book-name">تسہیل الہدایہ سفید (8 جلد)</td><td style="font-weight:bold;">5450</td></tr>
-                <tr><td>2</td><td class="book-name">تسہیل الہدایہ زرد (8 جلد)</td><td style="font-weight:bold;">5350</td></tr>
-                <tr><td>3</td><td class="book-name">تسہیل الہدایہ زرد (فی حصہ، 4 حصے)</td><td style="font-weight:bold;">1350</td></tr>
-                <tr><td>4</td><td class="book-name">تسہیل الہدایہ فارسی (8 جلد)</td><td style="font-weight:bold;">5450</td></tr>
-                <tr><td>5</td><td class="book-name"> ﺭياض الصالحين پشتو متﺭجم 2 جلد </td><td style="font-weight:bold;">900</td></tr>
-                <tr><td>6</td><td class="book-name">منهاج الصالحين 5 جلد پشتو </td><td style="font-weight:bold;">2000</td></tr>
-                <tr><td>7</td><td class="book-name">تفسیر خیر کثیر سفید</td><td style="font-weight:bold;">4250</td></tr>
-                <tr><td>8</td><td class="book-name">تفسیر خیر کثیر زرد</td><td style="font-weight:bold;">4000</td></tr>
-                <tr><td>9</td><td class="book-name">معارف القرآن زرد</td><td style="font-weight:bold;">6700</td></tr>
-                <tr><td>10</td><td class="book-name">معارف القرآن سفید</td><td style="font-weight:bold;">6700</td></tr>
-                <tr><td>11</td><td class="book-name">سیرت خاتم الانبیاء</td><td style="font-weight:bold;">200</td></tr>
-                <tr><td>12</td><td class="book-name">فوز المبتدی</td><td style="font-weight:bold;">1800</td></tr>
-                <tr><td>13</td><td class="book-name">د نوې مسئلو فتاوی</td><td style="font-weight:bold;">400</td></tr>
-                <tr><td>14</td><td class="book-name">فہم القرآن (اورنج)</td><td style="font-weight:bold;">950</td></tr>
-                <tr><td>15</td><td class="book-name">فہم القرآن سفید</td><td style="font-weight:bold;">1100</td></tr>
-                <tr><td>16</td><td class="book-name">فقہی عجائبات</td><td style="font-weight:bold;">350</td></tr>
-                <tr><td>17</td><td class="book-name">سراج الطالبین (پشتو)</td><td style="font-weight:bold;">200</td></tr>
-                <tr><td>18</td><td class="book-name">تسہیلات شرح مشکاة</td><td style="font-weight:bold;">7250</td></tr>
-                <tr><td>19</td><td class="book-name">انوار الہلالین</td><td style="font-weight:bold;">2000</td></tr>
-                <tr><td>20</td><td class="book-name">فتاوی عالمگیری</td><td style="font-weight:bold;">7800</td></tr>
-                <tr><td>21</td><td class="book-name">کشف الباری مکمل (24 جلد)</td><td style="font-weight:bold;">16700</td></tr>
-                <tr><td>22</td><td class="book-name">کشف الباری (فی جلد)</td><td style="font-weight:bold;">700</td></tr>
-                <tr><td>23</td><td class="book-name">معلم الحجاج</td><td style="font-weight:bold;">300</td></tr>
-                <tr><td>24</td><td class="book-name">حدیث دورہ</td><td style="font-weight:bold;">3150</td></tr>
-                <tr><td>25</td><td class="book-name">سراج المنتہی</td><td style="font-weight:bold;">6700</td></tr>
-                <tr><td>26</td><td class="book-name">سراج الطالبین اردو</td><td style="font-weight:bold;">200</td></tr>
-                <tr><td>27</td><td class="book-name">مرقاة المفاتيح</td><td style="font-weight:bold;">7800</td></tr>
-                <tr><td>28</td><td class="book-name">فتاوی شامی</td><td style="font-weight:bold;">8900</td></tr>
-                <tr><td>29</td><td class="book-name">صفوة التفاسیر</td><td style="font-weight:bold;">1800</td></tr>
-                <tr><td>30</td><td class="book-name">تسہیل الہدایہ صلاۃ</td><td style="font-weight:bold;">1400</td></tr>
-                <tr><td>31</td><td class="book-name">تسہیل الہدایہ نکاح</td><td style="font-weight:bold;">1400</td></tr>
-                <tr><td>32</td><td class="book-name">تسہیل الہدایہ بیوع</td><td style="font-weight:bold;">1450</td></tr>
-                <tr><td>33</td><td class="book-name">تسہیل الہدایہ شفعہ</td><td style="font-weight:bold;">1450</td></tr>
+            <tbody id="bookTableBody">
+                <!-- JavaScript se fill hoga -->
             </tbody>
         </table>
     </div>
     
-    <div class="total-books">کل کتابیں: 33</div>
+
     
     <div class="contact-info">
         <strong>📞 رابطہ کریں:</strong>
@@ -363,7 +315,6 @@
     </div>
 </div>
 
-<!-- ===== PASSWORD MODAL ===== -->
 <div class="password-modal" id="passwordModal">
     <div class="modal-box">
         <button class="close-modal" onclick="closeLogin()">✕</button>
@@ -375,65 +326,86 @@
     </div>
 </div>
 
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ============================================================
-// ========== DOWNLOAD PDF =====================================
+// 📚 UPDATED BOOK LIST (33 Books with NEW NAMES)
 // ============================================================
-function downloadPDF() {
-    const element = document.getElementById('mainTable');
-    const opt = {
-        margin: [10, 10, 10, 10],
-        filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2, 
-            useCORS: true,
-            logging: false,
-            letterRendering: true
-        },
-        jsPDF: { 
-            unit: 'mm', 
-            format: 'a4', 
-            orientation: 'portrait' 
-        }
-    };
-    html2pdf().set(opt).from(element).save();
-    showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
-}
+let books = [
+    { id: 1, name: 'تسهیل الهدایه شرح هدایه سفید (8 جلد)', price: 5450 },
+    { id: 2, name: 'تسهیل الهدایه شرح هدایه زرد (8 جلد)', price: 5350 },
+    { id: 3, name: 'تسهیل الهدایه شرح هدایه زرد (فی حصہ، 4 حصے)', price: 1350 },
+    { id: 4, name: 'تسهیل الهدایه شرح هدایه فارسی (8 جلد)', price: 5450 },
+    { id: 5, name: 'ریاض الصالحین پشتو مترجم (2 جلد)', price: 900 },
+    { id: 6, name: 'منهاج الصالحین پشتو (5 جلد)', price: 2000 },
+    { id: 7, name: 'تفسیر خیر کثیر ترجمه تفسیر ابن کثیر سفید کاغذ (6 جلد)', price: 4250 },
+    { id: 8, name: 'تفسیر خیر کثیر ترجمه تفسیر ابن کثیر زرد کاغذ (6 جلد)', price: 4000 },
+    { id: 9, name: 'معارف القرآن پشتو مع آسان ترجمه قرآن زرد (11 جلد)', price: 6700 },
+    { id: 10, name: 'معارف القرآن پشتو مع آسان ترجمه قرآن سفید (11 جلد)', price: 6700 },
+    { id: 11, name: 'سیرت خاتم الانبیاء پشتو', price: 200 },
+    { id: 12, name: 'فوز المبتدی بشرح مختصر القدوری پشتو (3 جلد)', price: 1800 },
+    { id: 13, name: 'د نوې مسئلو فتاوی (1 جلد)', price: 400 },
+    { id: 14, name: 'فهم القرآن (اورنج) ٹکی په ٹکی او روانه ترجمه', price: 950 },
+    { id: 15, name: 'فهم القرآن مترجم قرآن (سفید هاف وائٹ کاغذ)', price: 1100 },
+    { id: 16, name: 'فقهی عجائبات', price: 350 },
+    { id: 17, name: 'سراج الطالبین شرح زاد الطالبین (پشتو)', price: 200 },
+    { id: 18, name: 'تسهیلات شرح مشکاة پشتو زرد/سفید (12 جلد)', price: 7250 },
+    { id: 19, name: 'انوار الهلالین پشتو شرح جلالین زرد او سفید (4 جلد)', price: 2000 },
+    { id: 20, name: 'فتاوی عالمگیری مع الخصائص الجدیدة (عربی 12 جلد)', price: 7800 },
+    { id: 21, name: 'کشف الباری مکمل څلورویشت جلدونه (24 جلد)', price: 16700 },
+    { id: 22, name: 'کشف الباری (فی جلد)', price: 700 },
+    { id: 23, name: 'معلم الحجاج پشتو', price: 300 },
+    { id: 24, name: 'د دوره حدیث د اختلافی مسئلو او مشکلو احادیثو آسان حل', price: 3150 },
+    { id: 25, name: 'سراج المنتهی شرح جامع الترمذی زرد او سپین (13 جلد)', price: 6700 },
+    { id: 26, name: 'سراج الطالبین اردو (اردو شروحات کا مجموعه اور اضافات کے ساتھ)', price: 200 },
+    { id: 27, name: 'تسهیل مرقاة المفاتیح شرح مشکاة المصابیح', price: 7800 },
+    { id: 28, name: 'فتاوی شامی زرد کاغذ (12 جلد)', price: 8900 },
+    { id: 29, name: 'صفوة التفاسیر (عربی سفید کاغذ)', price: 1800 },
+    { id: 30, name: 'تسهیل الهدایه صلاۃ (2 جلد) زرد کاغذ', price: 1400 },
+    { id: 31, name: 'تسهیل الهدایه نکاح (2 جلد) زرد کاغذ', price: 1400 },
+    { id: 32, name: 'تسهیل الهدایه بیوع (2 جلد) زرد کاغذ', price: 1450 },
+    { id: 33, name: 'تسهیل الهدایه شفعہ (2 جلد) زرد کاغذ', price: 1450 }
+];
 
 // ============================================================
-// ========== DOWNLOAD JPG =====================================
-// ============================================================
-function downloadJPG() {
-    const element = document.getElementById('mainTable');
-    html2canvas(element, {
-        scale: 2,
-        backgroundColor: '#ffffff',
-        logging: false,
-        allowTaint: false,
-        useCORS: false,
-        letterRendering: true
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
-        link.href = canvas.toDataURL('image/jpeg', 0.92);
-        link.click();
-        showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
-    }).catch(err => {
-        showToast('⚠️ JPG ڈاؤن لوڈ میں خرابی!', true);
-        console.error(err);
-    });
-}
-
-// ============================================================
-// ========== ADMIN LOGIN ======================================
+// ADMIN LOGIN VARS
 // ============================================================
 const ADMIN_PASSWORD = 'hamad123';
 let isAdmin = false;
 
+// ============================================================
+// INIT: LOAD TABLE ON START
+// ============================================================
+window.onload = function() {
+    renderTable();
+};
+
+function renderTable() {
+    const tbody = document.getElementById('bookTableBody');
+    tbody.innerHTML = '';
+    
+    books.forEach(book => {
+        let row = `
+            <tr>
+                <td>${book.id}</td>
+                <td class="book-name">${book.name}</td>
+                <td>
+                    <span class="price-display" id="display_${book.id}">${book.price}</span>
+                    <input type="number" class="admin-price-input" id="input_${book.id}" value="${book.price}">
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML += row;
+    });
+    
+    document.getElementById('totalCount').innerText = books.length;
+    toggleAdminMode();
+}
+
+// ============================================================
+// LOGIN FUNCTIONS
+// ============================================================
 function openLogin() {
     document.getElementById('passwordModal').style.display = 'flex';
     document.getElementById('adminPassword').value = '';
@@ -454,6 +426,7 @@ function checkPassword() {
         document.getElementById('logoutBtn').style.display = 'inline-flex';
         document.getElementById('loginStatus').style.display = 'inline';
         document.getElementById('saveBtn').style.display = 'inline-flex';
+        toggleAdminMode();
         showToast('✅ ایڈمن موڈ آن!');
     } else {
         document.getElementById('passwordError').style.display = 'block';
@@ -468,22 +441,81 @@ function logout() {
     document.getElementById('logoutBtn').style.display = 'none';
     document.getElementById('loginStatus').style.display = 'none';
     document.getElementById('saveBtn').style.display = 'none';
+    toggleAdminMode();
     showToast('🔒 ایڈمن موڈ آف');
 }
 
+function toggleAdminMode() {
+    const displays = document.querySelectorAll('.price-display');
+    const inputs = document.querySelectorAll('.admin-price-input');
+    
+    if (isAdmin) {
+        displays.forEach(el => el.style.display = 'none');
+        inputs.forEach(el => el.style.display = 'inline-block');
+    } else {
+        displays.forEach(el => el.style.display = 'inline');
+        inputs.forEach(el => el.style.display = 'none');
+    }
+}
+
+// ============================================================
+// SAVE PRICES FUNCTION
+// ============================================================
 function saveAllPrices() {
     if (!isAdmin) {
         showToast('❌ پہلے ایڈمن لاگ ان کریں!', true);
         return;
     }
-    showToast('✅ قیمتیں محفوظ ہو گئیں!');
+    
+    books.forEach(book => {
+        let inputVal = document.getElementById(`input_${book.id}`).value;
+        if (inputVal !== '' && !isNaN(inputVal)) {
+            book.price = parseFloat(inputVal);
+        }
+    });
+    
+    renderTable(); // Refresh table with new prices
+    showToast('✅ قیمتیں کامیابی سے محفوظ ہو گئیں!');
 }
 
 // ============================================================
-// ========== TOAST ============================================
+// DOWNLOAD FUNCTIONS (PDF & JPG)
+// ============================================================
+function downloadPDF() {
+    const element = document.getElementById('mainTable');
+    const opt = {
+        margin: [10, 10, 10, 10],
+        filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+    showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
+}
+
+function downloadJPG() {
+    const element = document.getElementById('mainTable');
+    html2canvas(element, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+        logging: false,
+        letterRendering: true
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
+        link.href = canvas.toDataURL('image/jpeg', 0.92);
+        link.click();
+        showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
+    }).catch(err => {
+        showToast('⚠️ JPG ڈاؤن لوڈ میں خرابی!', true);
+    });
+}
+
+// ============================================================
+// TOAST NOTIFICATIONS
 // ============================================================
 function showToast(msg, isError) {
-    if (isError === undefined) isError = false;
     var toast = document.getElementById('toast');
     toast.textContent = msg;
     toast.className = 'toast' + (isError ? ' error' : '');
@@ -494,17 +526,10 @@ function showToast(msg, isError) {
     }, 3000);
 }
 
-// ============================================================
-// ========== CLOSE MODAL ON ESC ===============================
-// ============================================================
+// ESC key to close modal
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeLogin();
-    }
+    if (e.key === 'Escape') closeLogin();
 });
-
-console.log('✅ Fihrist Loaded Successfully!');
-console.log('📚 Total Books: 33');
 </script>
 </body>
 </html>

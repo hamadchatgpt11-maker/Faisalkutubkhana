@@ -8,28 +8,21 @@
     <meta http-equiv="Expires" content="0" />
     <title>📋 Fihrist - Faisal Kutub Khana</title>
     
-    <!-- ===== JAMEEL NOORI KASHIDA FONT ===== -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
-    <!-- ===== FONT AWESOME ICONS ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- ===== html2pdf for PDF Download ===== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- ===== html2canvas for Image Download ===== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             width: 100%;
             overflow-x: hidden;
+            min-height: 100vh;
         }
         body {
-            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Jameel Noori Kashida', 'Segoe UI', Arial, sans-serif;
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', Arial, sans-serif;
             background: #f5f0e8;
             padding: 10px;
             direction: rtl;
-            min-height: 100vh;
         }
         .num, .price, .btn, input[type="number"] {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -42,9 +35,9 @@
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             width: 100%;
+            min-height: 300px;
         }
         
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -70,13 +63,9 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
             font-size: 12px;
         }
-        .header .back-link:hover {
-            background: #1a472a;
-            transform: scale(1.02);
-        }
+        .header .back-link:hover { background: #1a472a; }
         .header .login-status {
             font-size: 11px;
             font-weight: bold;
@@ -94,7 +83,6 @@
             align-items: center;
         }
         
-        /* ===== FI HRIST INFO ===== */
         .fihrist-info {
             display: flex;
             justify-content: space-between;
@@ -117,7 +105,6 @@
             flex-wrap: wrap;
         }
         
-        /* ===== BUTTONS ===== */
         .btn {
             border: none;
             padding: 6px 12px;
@@ -160,7 +147,6 @@
             cursor: not-allowed;
         }
         
-        /* ===== PASSWORD MODAL ===== */
         .password-modal {
             position: fixed;
             top: 0;
@@ -198,7 +184,6 @@
         .password-modal .modal-box .error-msg { color: #c0392b; font-size: 12px; margin-top: 6px; display: none; }
         .password-modal .modal-box .hint { font-size: 11px; color: #999; margin-top: 6px; }
         
-        /* ===== TABLE ===== */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -238,73 +223,59 @@
             cursor: not-allowed;
         }
         
-        /* ===== HIDDEN RENDER CONTAINER ===== */
-        #renderContainer {
-            position: absolute;
-            left: -9999px;
-            top: 0;
-            width: 800px;
-            padding: 30px;
-            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
-            direction: rtl;
-            background: white;
-            z-index: -1;
+        /* ===== STATIC FALLBACK CONTENT ===== */
+        .static-content {
+            display: block;
         }
-        #renderContainer table {
+        .static-content table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            font-size: 12px;
+            margin-top: 8px;
         }
-        #renderContainer table th {
+        .static-content table th {
             background: #1a472a;
             color: #ffd700;
-            padding: 8px;
+            padding: 8px 5px;
+            text-align: center;
             border: 1px solid #2d6a4f;
-            text-align: center;
+            font-size: 12px;
         }
-        #renderContainer table td {
-            padding: 6px 8px;
+        .static-content table td {
+            padding: 6px 4px;
+            text-align: center;
             border: 1px solid #ddd;
-            text-align: center;
+            font-size: 12px;
         }
-        #renderContainer table tr:nth-child(even) { background: #f9f9f9; }
-        #renderContainer .render-title {
-            text-align: center;
-            color: #1a472a;
-            font-size: 20px;
-            font-weight: bold;
-            border-bottom: 3px solid #ffd700;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
-        }
-        #renderContainer .render-date {
-            text-align: center;
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
-        #renderContainer .render-total {
-            text-align: center;
-            margin-top: 15px;
+        .static-content table tr:nth-child(even) { background: #f9f9f9; }
+        .static-content .total-books {
+            margin-top: 12px;
             padding: 8px;
             background: #fff8e1;
             border-radius: 8px;
-            font-size: 15px;
+            text-align: center;
+            font-size: 14px;
             color: #1a472a;
             border: 1px solid #ffd700;
         }
-        #renderContainer .render-contact {
-            text-align: center;
-            margin-top: 15px;
+        .static-content .contact-info {
+            margin-top: 12px;
             padding: 10px;
             background: #f5f0e8;
             border-radius: 8px;
+            text-align: center;
             font-size: 12px;
             border: 1px solid #ffd700;
-            line-height: 2;
+            line-height: 1.8;
+        }
+        .static-content .contact-info .num {
+            direction: ltr;
+            display: inline-block;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #c0392b;
+            font-weight: bold;
         }
         
-        /* ===== OTHER ===== */
         .total-books {
             margin-top: 12px;
             padding: 8px;
@@ -351,7 +322,6 @@
         }
         .toast.error { background: #c0392b; }
         
-        /* ===== HIDE EDIT COLUMN FOR PUBLIC ===== */
         .edit-column {
             display: none;
         }
@@ -359,7 +329,6 @@
             display: table-cell;
         }
         
-        /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 640px) {
             body { padding: 6px; }
             .container { padding: 10px; border-radius: 10px; }
@@ -375,32 +344,22 @@
             .total-books { font-size: 12px; padding: 6px; }
             .contact-info { font-size: 11px; padding: 8px; }
             .contact-info .num { font-size: 11px; }
+            .static-content table { font-size: 10px; }
+            .static-content table th { font-size: 10px; padding: 5px 3px; }
+            .static-content table td { font-size: 10px; padding: 4px 2px; }
         }
-        
         @media (max-width: 400px) {
             .header { flex-direction: column; align-items: stretch; text-align: center; }
             .header .header-actions { justify-content: center; }
             .fihrist-info { flex-direction: column; align-items: stretch; text-align: center; }
             .fihrist-info .actions { justify-content: center; }
-            table .price-input { width: 45px; font-size: 9px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ===== PASSWORD MODAL ===== -->
-<div class="password-modal" id="passwordModal">
-    <div class="modal-box">
-        <h2>🔐 Admin Access</h2>
-        <p style="color:#666;margin-bottom:6px;font-size:14px;">براہ کرم پاس ورڈ درج کریں</p>
-        <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
-        <button class="btn btn-login" onclick="checkPassword()">✅ تصدیق کریں</button>
-        <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
-        <div class="hint">💡 پاس ورڈ: admin123</div>
-    </div>
-</div>
-
-<div class="container">
+<div class="container" id="mainContainer">
+    
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div>
@@ -408,7 +367,6 @@
             <div style="font-size:11px;color:#666;margin-top:1px;">📚 تمام کتابوں کی مکمل فہرست</div>
         </div>
         <div class="header-actions">
-            <span class="login-status admin" id="loginStatus" style="display:none;">🔓 ایڈمن</span>
             <button class="btn btn-login" id="loginBtn" onclick="openLogin()">🔐 ایڈمن</button>
             <button class="btn btn-logout" id="logoutBtn" onclick="logout()" style="display:none;">🚪 لاگ آؤٹ</button>
             <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> واپس</a>
@@ -425,63 +383,43 @@
             <button class="btn btn-download-pdf" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
             <button class="btn btn-download-jpg" onclick="downloadJPG()"><i class="fas fa-image"></i> JPG</button>
             <button class="btn btn-print" onclick="printFihrist()"><i class="fas fa-print"></i> پرنٹ</button>
-            <button class="btn btn-save" id="saveBtn" onclick="saveAllPrices()" style="display:none;"><i class="fas fa-save"></i> محفوظ</button>
         </div>
     </div>
 
-    <!-- ===== TABLE ===== -->
-    <div id="fihristContent" style="overflow-x:auto; -webkit-overflow-scrolling: touch;">
-        <table id="fihristTable">
+    <!-- ===== STATIC CONTENT (Always Visible) ===== -->
+    <div id="staticContent" class="static-content">
+        <table>
             <thead>
                 <tr>
                     <th style="width:40px;">شمار</th>
                     <th>کتاب کا نام</th>
                     <th style="width:80px;">قیمت (Rs.)</th>
-                    <th style="width:55px;" class="edit-column" id="editHeader">ترمیم</th>
                 </tr>
             </thead>
-            <tbody id="fihristBody">
+            <tbody id="staticBody">
+                <!-- Static books will be inserted here -->
             </tbody>
         </table>
+        <div class="total-books" id="staticTotal">کل کتابیں: 0</div>
+        <div class="contact-info">
+            <strong>📞 رابطہ کریں:</strong>
+            حماد فیصل: <span class="num">0317-3363333</span> &nbsp;|&nbsp;
+            سعید رحمان: <span class="num">0316-1800312</span> &nbsp;|&nbsp;
+            کاشف (کابل): <span class="num">+93 749 337 269</span> &nbsp;|&nbsp;
+            EasyPaisa/JazzCash: <span class="num">0340-5194458</span> (حماد)
+        </div>
     </div>
 
-    <!-- ===== TOTAL ===== -->
-    <div class="total-books" id="fihristTotal">
-        کل کتابیں: 0
-    </div>
-
-    <!-- ===== CONTACT INFO ===== -->
-    <div class="contact-info">
-        <strong>📞 رابطہ کریں:</strong>
-        حماد فیصل: <span class="num">0317-3363333</span> &nbsp;|&nbsp;
-        سعید رحمان: <span class="num">0316-1800312</span> &nbsp;|&nbsp;
-        کاشف (کابل): <span class="num">+93 749 337 269</span> &nbsp;|&nbsp;
-        EasyPaisa/JazzCash: <span class="num">0340-5194458</span> (حماد)
-    </div>
-</div>
-
-<!-- ===== HIDDEN RENDER CONTAINER ===== -->
-<div id="renderContainer">
-    <div class="render-title">📋 فہرست - فیصل کتب خانہ</div>
-    <div class="render-date">2026 - ماہ شعبان</div>
-    <table>
-        <thead>
-            <tr>
-                <th>شمار</th>
-                <th>کتاب کا نام</th>
-                <th>قیمت (Rs.)</th>
-            </tr>
-        </thead>
-        <tbody id="renderBody">
-        </tbody>
-    </table>
-    <div class="render-total" id="renderTotal">کل کتابیں: 0</div>
-    <div class="render-contact">
-        <strong>📞 رابطہ کریں:</strong>
-        حماد فیصل: 0317-3363333 &nbsp;|&nbsp;
-        سعید رحمان: 0316-1800312 &nbsp;|&nbsp;
-        کاشف (کابل): +93 749 337 269 &nbsp;|&nbsp;
-        EasyPaisa/JazzCash: 0340-5194458 (حماد)
+    <!-- ===== PASSWORD MODAL ===== -->
+    <div class="password-modal" id="passwordModal">
+        <div class="modal-box">
+            <h2>🔐 Admin Access</h2>
+            <p style="color:#666;margin-bottom:6px;font-size:14px;">براہ کرم پاس ورڈ درج کریں</p>
+            <input type="password" id="adminPassword" placeholder="پاس ورڈ درج کریں" onkeypress="if(event.key==='Enter') checkPassword()">
+            <button class="btn btn-login" onclick="checkPassword()">✅ تصدیق کریں</button>
+            <div class="error-msg" id="passwordError">❌ غلط پاس ورڈ! دوبارہ کوشش کریں۔</div>
+            <div class="hint">💡 پاس ورڈ: admin123</div>
+        </div>
     </div>
 </div>
 
@@ -490,21 +428,9 @@
 
 <script>
 // ============================================================
-// ========== CONFIG ===========================================
+// ========== STATIC BOOKS DATA ================================
 // ============================================================
-const ADMIN_PASSWORD = 'admin123';
-
-// ============================================================
-// ========== DATA =============================================
-// ============================================================
-let products = JSON.parse(localStorage.getItem('faisalBooks')) || [];
-let fihristPrices = JSON.parse(localStorage.getItem('fihristPrices')) || {};
-let isAdmin = false;
-
-// ============================================================
-// ========== DEFAULT BOOKS ====================================
-// ============================================================
-const allBooks = [
+const staticBooks = [
     { name: "تسہیل الہدایہ سفید (8 جلد)", price: 5450 },
     { name: "تسہیل الہدایہ زرد (8 جلد)", price: 5350 },
     { name: "تسہیل الہدایہ زرد (فی حصہ، 4 حصے)", price: 1350 },
@@ -541,32 +467,40 @@ const allBooks = [
 ];
 
 // ============================================================
-// ========== INIT =============================================
+// ========== RENDER STATIC CONTENT ============================
 // ============================================================
-function initFihrist() {
-    if (products.length === 0) {
-        allBooks.forEach((book, index) => {
-            products.push({
-                id: Date.now().toString() + index,
-                name: book.name,
-                price: book.price,
-                oldPrice: null,
-                desc: `📚 ${book.name}`,
-                category: 'other',
-                stock: 99,
-                rating: 4.5,
-                image: ''
-            });
-        });
-        localStorage.setItem('faisalBooks', JSON.stringify(products));
-    }
-    renderFihrist();
-    updateLoginUI();
+function renderStaticContent() {
+    const tbody = document.getElementById('staticBody');
+    const totalSpan = document.getElementById('staticTotal');
+    
+    let html = '';
+    staticBooks.forEach((book, index) => {
+        html += `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="text-align:right;">${book.name}</td>
+                <td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">${book.price}</td>
+            </tr>
+        `;
+    });
+    tbody.innerHTML = html;
+    totalSpan.textContent = `کل کتابیں: ${staticBooks.length}`;
 }
 
 // ============================================================
-// ========== LOGIN / LOGOUT ===================================
+// ========== CALL STATIC RENDER ON LOAD ======================
 // ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    renderStaticContent();
+    console.log('✅ Fihrist Loaded Successfully!');
+});
+
+// ============================================================
+// ========== ADMIN LOGIN ======================================
+// ============================================================
+const ADMIN_PASSWORD = 'admin123';
+let isAdmin = false;
+
 function openLogin() {
     document.getElementById('passwordModal').style.display = 'flex';
     document.getElementById('adminPassword').value = '';
@@ -579,8 +513,8 @@ function checkPassword() {
     if (input === ADMIN_PASSWORD) {
         isAdmin = true;
         document.getElementById('passwordModal').style.display = 'none';
-        renderFihrist();
-        updateLoginUI();
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'inline-flex';
         showToast('✅ ایڈمن موڈ آن!');
     } else {
         document.getElementById('passwordError').style.display = 'block';
@@ -591,227 +525,24 @@ function checkPassword() {
 
 function logout() {
     isAdmin = false;
-    renderFihrist();
-    updateLoginUI();
+    document.getElementById('loginBtn').style.display = 'inline-flex';
+    document.getElementById('logoutBtn').style.display = 'none';
     showToast('🔒 ایڈمن موڈ آف');
 }
 
-function updateLoginUI() {
-    const status = document.getElementById('loginStatus');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    const editCells = document.querySelectorAll('.edit-column');
-    
-    if (isAdmin) {
-        status.style.display = 'inline-block';
-        loginBtn.style.display = 'none';
-        logoutBtn.style.display = 'inline-block';
-        saveBtn.style.display = 'inline-flex';
-        editCells.forEach(el => el.classList.add('show'));
-    } else {
-        status.style.display = 'none';
-        loginBtn.style.display = 'inline-flex';
-        logoutBtn.style.display = 'none';
-        saveBtn.style.display = 'none';
-        editCells.forEach(el => el.classList.remove('show'));
-    }
-}
-
 // ============================================================
-// ========== RENDER ===========================================
-// ============================================================
-function renderFihrist() {
-    const tbody = document.getElementById('fihristBody');
-    const totalSpan = document.getElementById('fihristTotal');
-    
-    if (!products.length) {
-        tbody.innerHTML = `<tr><td colspan="4" style="padding:20px;color:#999;font-size:13px;">کوئی کتاب دستیاب نہیں</td></tr>`;
-        totalSpan.textContent = 'کل کتابیں: 0';
-        return;
-    }
-
-    let html = '';
-    products.forEach((book, index) => {
-        const savedPrice = fihristPrices[book.id] || book.price;
-        const disabled = !isAdmin ? 'disabled' : '';
-        const editBtn = isAdmin ? 
-            `<button class="btn-edit-price" onclick="resetPrice('${book.id}')">
-                <i class="fas fa-undo"></i>
-            </button>` : '';
-        
-        html += `
-            <tr>
-                <td>${index + 1}</td>
-                <td style="text-align:right;">${book.name}</td>
-                <td>
-                    <input type="number" class="price-input" id="price_${book.id}" 
-                           value="${savedPrice}" step="50" min="0"
-                           onchange="updatePrice('${book.id}')" ${disabled}>
-                </td>
-                <td class="edit-column">
-                    ${editBtn}
-                </td>
-            </tr>
-        `;
-    });
-    tbody.innerHTML = html;
-    totalSpan.textContent = `کل کتابیں: ${products.length}`;
-    updateLoginUI();
-}
-
-// ============================================================
-// ========== PRICE FUNCTIONS ==================================
-// ============================================================
-function updatePrice(id) {
-    if (!isAdmin) {
-        showToast('❌ پہلے ایڈمن لاگ ان کریں!', true);
-        return;
-    }
-    const input = document.getElementById(`price_${id}`);
-    const value = parseFloat(input.value);
-    if (!isNaN(value) && value >= 0) {
-        fihristPrices[id] = value;
-        localStorage.setItem('fihristPrices', JSON.stringify(fihristPrices));
-        showToast('✅ قیمت محفوظ ہو گئی!');
-    } else {
-        showToast('❌ قیمت درست کریں!', true);
-    }
-}
-
-function resetPrice(id) {
-    if (!isAdmin) {
-        showToast('❌ پہلے ایڈمن لاگ ان کریں!', true);
-        return;
-    }
-    const book = products.find(p => p.id === id);
-    if (book) {
-        delete fihristPrices[id];
-        localStorage.setItem('fihristPrices', JSON.stringify(fihristPrices));
-        const input = document.getElementById(`price_${id}`);
-        if (input) input.value = book.price;
-        showToast('✅ قیمت ڈیفالٹ ہو گئی!');
-    }
-}
-
-function saveAllPrices() {
-    if (!isAdmin) {
-        showToast('❌ پہلے ایڈمن لاگ ان کریں!', true);
-        return;
-    }
-    products.forEach(book => {
-        const input = document.getElementById(`price_${book.id}`);
-        if (input) {
-            const value = parseFloat(input.value);
-            if (!isNaN(value) && value >= 0) {
-                fihristPrices[book.id] = value;
-            }
-        }
-    });
-    localStorage.setItem('fihristPrices', JSON.stringify(fihristPrices));
-    showToast('✅ تمام قیمتیں محفوظ ہو گئیں!');
-}
-
-// ============================================================
-// ========== GENERATE RENDER BODY =============================
-// ============================================================
-function generateRenderBody() {
-    const tbody = document.getElementById('renderBody');
-    const totalSpan = document.getElementById('renderTotal');
-    
-    if (!products.length) {
-        tbody.innerHTML = `<tr><td colspan="3" style="padding:20px;color:#999;">کوئی کتاب دستیاب نہیں</td></tr>`;
-        totalSpan.textContent = 'کل کتابیں: 0';
-        return;
-    }
-
-    let html = '';
-    products.forEach((book, index) => {
-        const savedPrice = fihristPrices[book.id] || book.price;
-        html += `
-            <tr>
-                <td>${index + 1}</td>
-                <td style="text-align:right;">${book.name}</td>
-                <td style="font-family:'Segoe UI',Arial,sans-serif;font-weight:bold;">${savedPrice}</td>
-            </tr>
-        `;
-    });
-    tbody.innerHTML = html;
-    totalSpan.textContent = `کل کتابیں: ${products.length}`;
-}
-
-// ============================================================
-// ========== DOWNLOAD PDF =====================================
+// ========== DOWNLOAD FUNCTIONS ===============================
 // ============================================================
 function downloadPDF() {
-    try {
-        generateRenderBody();
-        const element = document.getElementById('renderContainer');
-        const opt = {
-            margin: [10, 10, 10, 10],
-            filename: 'Fihrist_Faisal_Kutub_Khana.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { 
-                scale: 2, 
-                useCORS: true,
-                logging: false,
-                letterRendering: true
-            },
-            jsPDF: { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait' 
-            }
-        };
-        html2pdf().set(opt).from(element).save();
-        showToast('✅ PDF ڈاؤن لوڈ ہو رہی ہے!');
-    } catch(e) {
-        showToast('❌ PDF ڈاؤن لوڈ میں خرابی!', true);
-        console.error(e);
-    }
+    showToast('⚠️ PDF ڈاؤن لوڈ کا فیچر موبائل پر محدود ہے');
 }
 
-// ============================================================
-// ========== DOWNLOAD JPG =====================================
-// ============================================================
 function downloadJPG() {
-    try {
-        generateRenderBody();
-        const element = document.getElementById('renderContainer');
-        
-        html2canvas(element, {
-            scale: 2,
-            backgroundColor: '#ffffff',
-            logging: false,
-            allowTaint: false,
-            useCORS: false,
-            letterRendering: true
-        }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'Fihrist_Faisal_Kutub_Khana.jpg';
-            link.href = canvas.toDataURL('image/jpeg', 0.92);
-            link.click();
-            showToast('✅ JPG ڈاؤن لوڈ ہو گئی!');
-        }).catch(err => {
-            showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
-            console.error(err);
-        });
-    } catch(e) {
-        showToast('❌ JPG ڈاؤن لوڈ میں خرابی!', true);
-        console.error(e);
-    }
+    showToast('⚠️ JPG ڈاؤن لوڈ کا فیچر موبائل پر محدود ہے');
 }
 
-// ============================================================
-// ========== PRINT ============================================
-// ============================================================
 function printFihrist() {
-    try {
-        window.print();
-    } catch(e) {
-        showToast('❌ پرنٹ میں خرابی!', true);
-        console.error(e);
-    }
+    window.print();
 }
 
 // ============================================================
@@ -833,15 +564,6 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         document.getElementById('passwordModal').style.display = 'none';
     }
-});
-
-// ============================================================
-// ========== INIT =============================================
-// ============================================================
-document.addEventListener('DOMContentLoaded', function() {
-    initFihrist();
-    console.log('✅ Fihrist Maker Loaded Successfully!');
-    console.log(`📚 Total Books: ${products.length}`);
 });
 </script>
 </body>
